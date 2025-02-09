@@ -13,7 +13,12 @@ from ckanext.comments.model.dictize import get_dictizer
 from ckanext.pages import db
 from ckanext.pages.db import MainPage, Page, Event, News, HeaderMainMenu, HeaderLogo, HeaderSecondaryMenu
 from ckanext.pages.logic.schema import main_page_schema, header_logo_upload_schema
-from ckanext.pages.logic.schema import update_events_schema, update_pages_schema, update_news_schema
+from ckanext.pages.logic.schema import (
+    default_news_schema,
+    update_events_schema,
+    update_pages_schema,
+    update_news_schema
+)
 
 from .logic.schema import header_menu_schema
 
@@ -748,31 +753,40 @@ def events_edit(context, data_dict):
     return event.as_dict()
 
 
-def news_edit(context, data_dict):
-    news_id = data_dict.get('id')
-    if news_id:
-        # Fetch the news entry from the database
-        news = model.Session.query(News).filter(News.id == news_id).first()
-        if not news:
-            raise p.toolkit.ObjectNotFound(f"News with ID {news_id} not found.")
-    else:
-        # Creating a new news entry
-        news = News()
+def news_create(context, data_dict):
+    data, errors = tk.navl_validate(
+        data_dict,
+        default_news_schema(),
+        context
+    )
 
-    # Update the fields
-    news.title_en = data_dict.get('title_en', news.title_en)
-    news.title_ar = data_dict.get('title_ar', news.title_ar)
-    news.news_date = data_dict.get('news_date', news.news_date)
-    news.brief_en = data_dict.get('brief_en', news.brief_en)
-    news.brief_ar = data_dict.get('brief_ar', news.brief_ar)
-    news.content_en = data_dict.get('content_en', news.content_en)
-    news.content_ar = data_dict.get('content_ar', news.content_ar)
-    news.image_url = data_dict.get('image_url', news.image_url)
-    news.lang = data_dict.get('lang', news.lang)
-    # Save the changes to the database
+    if errors:
+        raise tk.ValidationError(errors)
+
+    news = News(**data)
     model.Session.add(news)
     model.Session.commit()
     return news.as_dict()
+
+def news_edit(context, data_dict):
+    news_id = data_dict.get('id')
+    if news_id:
+        # Fetch the news from the database
+        news = model.Session.query(News).filter(News.id == news_id).first()
+        if not news:
+            raise p.toolkit.ObjectNotFound(f"News with ID {news_id} not found.")
+
+        news.title_en = data_dict.get('title_en', news.title_en)
+        news.title_ar = data_dict.get('title_ar', news.title_ar)
+        news.news_date = data_dict.get('news_date', news.news_date)
+        news.brief_en = data_dict.get('brief_en', news.brief_en)
+        news.brief_ar = data_dict.get('brief_ar', news.brief_ar)
+        news.content_en = data_dict.get('content_en', news.content_en)
+        news.content_ar = data_dict.get('content_ar', news.content_ar)
+        news.image_url = data_dict.get('image_url', news.image_url)
+
+        model.Session.add(news)
+        model.Session.commit()
 
 # List Actions - Header Management
 @tk.side_effect_free

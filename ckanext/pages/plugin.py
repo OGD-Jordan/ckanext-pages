@@ -135,6 +135,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_pages_upload': actions.pages_upload,
             'ckanext_main_page_show': actions.main_page_show,
             'ckanext_event_edit':actions.event_edit,
+            'ckanext_news_create':actions.news_create,
             'ckanext_news_edit':actions.news_edit,
             # Header Management Actions
             'ckanext_header_main_menu_create': actions.header_main_menu_create,

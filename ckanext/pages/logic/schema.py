@@ -1,5 +1,5 @@
 import ckan.plugins as p
-from ckanext.pages.validators import page_name_validator, not_empty_if_blog, validate_logo_upload
+from ckanext.pages.validators import page_name_validator, not_empty_if_blog, validate_image_upload
 from ckanext.pages.interfaces import IPagesSchema
 from ckan.plugins.toolkit import get_validator
 
@@ -59,13 +59,11 @@ def default_news_schema():
         'title_ar': [not_empty, unicode_safe],
         'name': [not_empty, name_validator],
         'news_date': [not_empty, isodate],
-        'brief_ar': [ignore_missing, unicode_safe],
-        'brief_en': [ignore_missing, unicode_safe],
-        'content_en': [ignore_missing, unicode_safe],
-        'content_ar': [ignore_missing, unicode_safe],
-        'image_url': [ignore_missing, unicode_safe],
-        'lang': [ignore_missing, unicode_safe],
-        'hidden':[ignore_missing, p.toolkit.get_validator('boolean_validator')],
+        'brief_ar': [not_empty, unicode_safe],
+        'brief_en': [not_empty, unicode_safe],
+        'content_en': [not_empty, unicode_safe],
+        'content_ar': [not_empty, unicode_safe],
+        'image_url': [not_empty, unicode_safe],
     }
 
 
@@ -154,7 +152,7 @@ def header_menu_schema():
 def header_logo_upload_schema():
     """Schema for logo upload validation."""
     return {
-        'logo_en_upload': [ignore_missing, unicode_safe, validate_logo_upload],
-        'logo_ar_upload': [ignore_missing, unicode_safe, validate_logo_upload],
+        'logo_en_upload': [ignore_missing, unicode_safe, validate_image_upload],
+        'logo_ar_upload': [ignore_missing, unicode_safe, validate_image_upload],
         'clear_upload': [ignore_missing, p.toolkit.get_validator('boolean_validator')]
     }

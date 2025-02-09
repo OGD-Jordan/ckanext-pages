@@ -555,6 +555,44 @@ def news():
 def news_edit(page=None, data=None, errors=None, error_summary=None):
     return utils.news_edit(page, data, errors, error_summary)
 
+def news_new():
+    context = _get_context()
+
+    try:
+        tk.check_access('ckanext_pages_update', context)
+
+        if tk.request.method == 'POST':
+            data_dict = dict(tk.request.form)
+
+            try:
+                tk.get_action('ckanext_news_create')(
+                    context, data_dict
+                )
+                h.flash_success(tk._('News item created successfully'))
+                return h.redirect_to('pages.news_index')
+            except tk.ValidationError as e:
+                return tk.render(
+                    'ckanext_pages/news_edit.html',
+                    extra_vars={
+                        'data': data_dict,
+                        'errors': e.error_dict,
+                        'error_summary': e.error_summary
+                    }
+                )
+
+        return tk.render(
+            'ckanext_pages/news_edit.html',
+            extra_vars={
+                'data': {},
+                'errors': {},
+                'error_summary': {}
+            }
+        )
+
+    except tk.NotAuthorized:
+        tk.abort(403, tk._('Not authorized to create news'))
+    except tk.ObjectNotFound:
+        tk.abort(404, tk._('News item not found'))
 
 def news_delete(id):
     return utils.news_delete(id)
@@ -639,7 +677,7 @@ pages.add_url_rule('/events_edit/<page>', view_func=events_edit, endpoint='event
 pages.add_url_rule('/events_delete/<id>', view_func=events_delete, endpoint='events_delete', methods=['POST', 'GET'])
 
 # News Editing
-pages.add_url_rule('/news_new', view_func=news_edit, endpoint='news_new', methods=['GET', 'POST'])
+pages.add_url_rule('/news_new', view_func=news_new, endpoint='news_new', methods=['GET', 'POST'])
 pages.add_url_rule('/news_edit/<page>', view_func=news_edit, endpoint='news_edit', methods=['GET', 'POST'])
 pages.add_url_rule('/news_delete/<id>', view_func=news_delete, endpoint='news_delete', methods=['POST', 'GET'])
 

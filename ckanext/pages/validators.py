@@ -24,7 +24,7 @@ def not_empty_if_blog(key, data, errors, context):
             errors[key].append('Publish Date Must be supplied')
 
 
-def validate_logo_upload(key, data, errors, context, file_size=2):
+def validate_image_upload(key, data, errors, context, file_size=2):
     """Validator for logo uploads."""
     value = data.get(key)
     if not value:

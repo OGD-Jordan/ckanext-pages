@@ -1,91 +1,322 @@
 {% extends 'base_cms.html' %}
 {% set lang = h.lang() %}
 {% import 'macros/form.html' as form %}
+
 {% block title %}{{ _('Edit News') if data and data.id else _('Add News') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-    <a href="{{ h.url_for('pages.news') }}" aria-label="{{ _('News') }}">
-        <span>{{ _('News') }}</span>
-    </a>
-  </li>
-  <li>{{ _('Edit News') if data and data.id else _('Add News') }}</li>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ h.url_for('pages.news') }}">{{ _('News') }}</a>
+            </li>
+            <li class="breadcrumb-item active">
+                {{ _('Edit News') if data and data.id else _('Add News') }}
+            </li>
+        </ol>
+    </nav>
 {% endblock %}
-
 
 {% block primary_content_inner %}
-<div class="container">
-  <h1> {{ _('Edit News') if data and data.id else _('Add News') }}</h1>
-<form method="post" data-module="basic-form" enctype="multipart/form-data">
-    {{ h.csrf_input() }}
-    {% if data and data.id %}
-        <input type="hidden" name="id" value="{{ data.id }}">
-    {% endif %}
-    {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
+    <div class="container">
+        <h1>{{ _('Edit News') if data and data.id else _('Add News') }}</h1>
 
-    <!-- Title En -->
-    {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder='Enter title in English', value=data.title_en, error=errors.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
+        <form method="post" action="" data-module="basic-form" enctype="multipart/form-data">
+            {{ h.csrf_input() }}
+            {% if data and data.id %}
+                <input type="hidden" name="id" value="{{ data.id }}">
+            {% endif %}
 
-    {% set prefix = h.url_for('pages.show', page='') %}
-    {% set domain = h.url_for('pages.show', page='', qualified=true) %}
-    {% set domain = domain|replace("http://", "")|replace("https://", "") %}
-    {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<page>'} %}
+            {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
-    {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-new'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
-    <!-- Title Ar -->
-    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder='Enter title in Arabic', value=data.title_ar, error=errors.title_ar) }}
+            {# Title Arabic #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    {{ form.input('title_ar',
+                     id='field-title_ar',
+                     label=_('Title Ar'),
+                     placeholder=_('Enter title in Arabic'),
+                     value=data.title_ar,
+                     error=errors.title_ar,
+                     is_required=true) }}
+                </div>
+            </div>
 
-    <!-- Image Upload -->
-    {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload) }}
+            {# Title English #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    {{ form.input('title_en',
+                     id='field-title_en',
+                     label=_('Title En'),
+                     placeholder=_('Enter title in English'),
+                     value=data.title_en,
+                     error=errors.title_en,
+                     classes=['control-full'],
+                     attrs={'data-module': 'slug-preview-target'},
+                     is_required=true) }}
+                </div>
+            </div>
 
+            {# URL #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    {% set prefix = h.url_for('pages.show', page='') %}
+                    {% set domain = h.url_for('pages.show', page='', qualified=true) %}
+                    {% set domain = domain|replace("http://", "")|replace("https://", "") %}
+                    {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<page>'} %}
 
-    <!-- New Date -->
-    <div class="mb-3">
-        <label for="news_date" class="form-label">news Date</label>
-        <input type="date" class="form-control form-control-lg" id="news_date" name="news_date" value="{{ data.news_date }}">
-      </div>
-    {{ form.input('brief_en', id='field-brief_en', label=_('Brief En'), placeholder='Enter Brief in English', value=data.Brief_en, error=errors.brief_en) }}
-    {{ form.input('brief_ar', id='field-brief_ar', label=_('Brief Ar'), placeholder='Enter Brief in Arabic', value=data.brief_ar, error=errors.brief_ar) }}
+                    {{ form.prepend('name',
+                       id='field-name',
+                       label=_('URL'),
+                       prepend=prefix,
+                       placeholder=_('eg. my-news'),
+                       value=data.name,
+                       error=errors.name,
+                       attrs=attrs,
+                       is_required=true) }}
+                </div>
+            </div>
 
+            {# Image Upload #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <p class="boldfont">
+                        {{ _('Image') }}
+                        <span class="Recomndation ms-2">{{ _('Recommended Size 800x600') }}</span>
+                    </p>
+                    <div class="d-flex">
+                        <div class="flex-grow-1 me-3">
+                            <div class="file-container">
+                                <input type="file"
+                                       id="image"
+                                       name="image_url"
+                                       accept="image/*"
+                                       class="hidden-file-input"
+                                       data-filename="{{ data.image_url.split('/')[-1] if data.image_url else '' }}">
+                                <span class="file-name">{{ data.image_url.split('/')[-1] if data.image_url else _('No file chosen') }}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="actionbtn"
+                                    onclick="document.getElementById('image').click()">
+                                {{ _('Upload') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- Content Editors -->
-  {% set editor = h.pages_get_wysiwyg_editor() %}
-  {% if editor == 'ckeditor' %}
-    {% asset 'pages/main-js' %}
-    {% asset 'pages/main-css' %}
+            {# News Date #}
+            <div class="row mb-4">k
+                <div class="col-12">
+                    <label for="news_date" class="boldfont">{{ _('News Date') }}</label>
+                    <input type="date"
+                           class="form-control"
+                           id="news_date"
+                           name="news_date"
+                           value="{{ data.news_date.strftime('%Y-%m-%d') if data.news_date else '' }}"
+                           required>
+                </div>
+            </div>
 
-    <!-- Content in English -->
-    <div class="control-group">
-      <label for="field-content-ck-en" class="control-label">{{ _('Content En') }}</label>
+            {# Brief Arabic #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    {{ form.textarea('brief_ar',
+                        id='field-brief_ar',
+                        label=_('Brief Ar'),
+                        placeholder=_('Enter brief in Arabic'),
+                        value=data.brief_ar,
+                        error=errors.brief_ar) }}
+                </div>
+            </div>
+
+            {# Brief English #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    {{ form.textarea('brief_en',
+                        id='field-brief_en',
+                        label=_('Brief En'),
+                        placeholder=_('Enter brief in English'),
+                        value=data.brief_en,
+                        error=errors.brief_en) }}
+                </div>
+            </div>
+
+            {# Content Arabic #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label for="field-content-ck-ar" class="boldfont">{{ _('Content Ar') }}</label>
+                    <textarea id="field-content-ck-ar"
+                              name="content_ar"
+                              class="form-control"
+                              data-module="ckedit"
+                              style="height:400px">{{ data.content_ar }}</textarea>
+                </div>
+            </div>
+
+            {# Content English #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label for="field-content-ck-en" class="boldfont">{{ _('Content En') }}</label>
+                    <textarea id="field-content-ck-en"
+                              name="content_en"
+                              class="form-control"
+                              data-module="ckedit"
+                              style="height:400px">{{ data.content_en }}</textarea>
+                </div>
+            </div>
+
+            {# Submit Buttons #}
+            <div class="d-flex justify-content-end mt-4">
+                <button type="button"
+                        onclick="window.location='{{ h.url_for('pages.news') }}'"
+                        class="redbtn me-2">{{ _('Cancel') }}</button>
+                <button type="submit" class="graybtn">{{ _('Save') }}</button>
+            </div>
+        </form>
     </div>
-    <textarea id="field-content-ck-en" name="content_en" placeholder="{{_('Content En')}}" data-module="ckedit" style="height:400px">{{ data.content_en }}</textarea>
-
-    <!-- Content in Arabic -->
-    <div class="control-group">
-      <label for="field-content-ck-ar" class="control-label">{{ _('Content Ar') }}</label>
-    </div>
-    <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" style="height:400px">{{ data.content_ar }}</textarea>
-  {% else %}
-    {{ form.markdown('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content, error=errors.content) }}
-  {% endif %}
-    <!-- Submit Button -->
-    <div class="d-flex justify-content-end mt-4">
-      <button type="cancel" class="btn btn-primary btn-lg me-2">Cancel</button>
-      <button type="submit" class="btn btn-secondary btn-lg">Save</button>
-    </div>
-  </form>
-</div>
 {% endblock %}
 
-{% block main_content %}
-   {{ self.flash() }}
-   {{ self.toolbar() }}
-   <div class="wrapper no-nav">
-     {{ self.primary_content() }}
-   </div>
+{% block styles %}
+    {{ super() }}
+    <style>
+        .mb-4 {
+            margin-bottom: 2rem !important;
+        }
+
+        .form-control {
+            border: 1px solid #cdd3da;
+            padding: 8px 12px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .file-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #cdd3da;
+            padding: 4px 17px;
+            background: white;
+            height: 40px;
+            margin-bottom: 0;
+        }
+
+        .hidden-file-input {
+            display: none;
+        }
+
+        .file-name {
+            color: #555;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+
+        .actionbtn {
+            background: #DA1F3D;
+            color: white;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 4px;
+            height: 40px;
+            margin-top: 0 !important;
+        }
+
+        .actionbtn:hover {
+            background: #c01834;
+            color: white;
+        }
+
+        .Recomndation {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .boldfont {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .actionbtn {
+                margin-top: 10px !important;
+            }
+        }
+
+        .boldfont {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .actionbtn {
+            background: #DA1F3D;
+            color: white;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 4px;
+            min-width: 120px;
+        }
+
+        .actionbtn:hover {
+            background: #c01834;
+            color: white;
+        }
+
+        .redbtn, .graybtn {
+            min-width: 80px;
+            height: 35px;
+            padding: 6px 20px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .redbtn {
+            background: #DA1F3D;
+            color: white;
+        }
+
+        .graybtn {
+            background: #607D8B;
+            color: white;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+        }
+
+        .error-block {
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 0.25rem;
+        }
+
+        /* CKEditor customization */
+        .cke_chrome {
+            border-color: #cdd3da !important;
+            border-radius: 4px;
+        }
+    </style>
 {% endblock %}
 
 {% block scripts %}
-  {{ super() }}
-  <script src="/vendor/ckeditor/ckeditor.js"></script>
+    {{ super() }}
+    <script src="/vendor/ckeditor/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelectorAll('.hidden-file-input').forEach(input => {
+                input.addEventListener('change', function () {
+                    const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+                    this.nextElementSibling.textContent = fileName;
+                });
+            });
+
+            // Initialize CKEditor
+            if (typeof CKEDITOR !== 'undefined') {
+                CKEDITOR.replace('field-content-ck-ar');
+                CKEDITOR.replace('field-content-ck-en');
+            }
+        });
+    </script>
 {% endblock %}
