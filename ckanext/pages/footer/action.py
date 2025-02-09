@@ -74,7 +74,7 @@ def footer_main_show(context, data_dict):
             'display_logo_url': h.url_for_static(
                 'uploads/footer/{}'.format(image_url),
                 qualified=True
-                ) if image_url and image_url[0:6] not in {'http:/', 'https:'}  else image_url,
+                ) if record and image_url and image_url[0:6] not in {'http:/', 'https:'}  else image_url,
             })
     return result
 
