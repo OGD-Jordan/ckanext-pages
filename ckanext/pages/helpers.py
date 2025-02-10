@@ -1,6 +1,6 @@
 import ckan.lib.helpers as h
 from ckan import model
-from ckanext.pages.db import HeaderLogo, HeaderMainMenu, HeaderSecondaryMenu
+from ckanext.pages.db import HeaderLogo, HeaderMainMenu, HeaderSecondaryMenu, MainPage
 from sqlalchemy import case
 
 
@@ -74,6 +74,8 @@ def get_helpers():
         'footer_social_items': footer_social_items,
         'footer_banner_items': footer_banner_items,
         'get_header_data': get_header_data,
+        'get_main_page_all_sections': get_main_page_all_sections,
+        'get_main_page_section': get_main_page_section,
     }
 
 
@@ -99,3 +101,26 @@ def footer_social_items():
 def footer_banner_items():
     return tk.get_action('footer_banner_item_list')({'ignore_auth': True}, {})
 
+
+def get_main_page_all_sections():
+    lang = h.lang()
+    sections = MainPage.all()
+    section_data = []
+    for section in sections:
+        section_data.append({
+            'id': section.id,
+            'title_1': section.main_title_1_ar if lang == 'ar' else section.main_title_1_en,
+            'title_2': section.main_title_2_ar if lang == 'ar' else section.main_title_2_en,
+            'brief': section.main_brief_ar if lang == 'ar' else section.main_brief_en
+        })
+    return section_data
+
+def get_main_page_section(id):
+    lang = h.lang()
+    section = MainPage.get(id=id)
+    return {
+        'id': section.id,
+        'title_1': section.main_title_1_ar if lang == 'ar' else section.main_title_1_en,
+        'title_2': section.main_title_2_ar if lang == 'ar' else section.main_title_2_en,
+        'brief': section.main_brief_ar if lang == 'ar' else section.main_brief_en
+    }

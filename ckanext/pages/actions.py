@@ -691,17 +691,17 @@ def _main_page_show(context, data_dict):
     out = db.MainPage.get(id=section_id)
     if out:
         out = db.table_dictize(out, context)
-    return out
+    return out or {}
 
 
 @tk.side_effect_free
 def main_page_show(context, data_dict):
     try:
-        tk.check_access('ckanext_pages_update', {'user': tk.g.user})
-
+        tk.check_access('is_content_editor', context)
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _main_page_show(context, data_dict)
+
 
 def pages_list(context, data_dict):
     p.toolkit.check_access('ckanext_pages_list', context, data_dict)

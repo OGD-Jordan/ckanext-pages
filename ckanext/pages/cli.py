@@ -1,5 +1,5 @@
 import click
-from ckanext.pages.main_cli_func.main_cli import insert_main_page_rows
+from ckanext.pages.main_cli_func.main_cli import insert_main_page_rows, delete_all_rows
 from ckanext.pages.db import setup as model_setup, teardown
 
 @click.group(short_help="pages CLI.")
@@ -20,6 +20,11 @@ def command(name):
 
 def get_commands():
     return [pages]
+
+
+@pages.command()
+def delete_default_rows():
+    delete_all_rows()
 
 
 @pages.command()
