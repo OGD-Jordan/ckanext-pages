@@ -19,20 +19,6 @@ from ckanext.pages import cli
 
 log = logging.getLogger(__name__)
 
-# Helper function to fetch sections dynamically
-def get_main_page_sections(lang='en'):
-    sections = MainPage.all()
-    section_data = []
-    for section in sections:
-        section_data.append({
-            'id': section.id,
-            'title_1': section.main_title_1_ar if lang == 'ar' else section.main_title_1_en,
-            'title_2': section.main_title_2_ar if lang == 'ar' else section.main_title_2_en,
-            'brief': section.main_brief_ar if lang == 'ar' else section.main_brief_en
-        })
-    return section_data
-
-
 
 # Navigation customization
 def build_pages_nav_main(*args):
