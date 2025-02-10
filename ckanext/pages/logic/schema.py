@@ -63,7 +63,7 @@ def default_news_schema():
         'brief_en': [not_empty, unicode_safe],
         'content_en': [not_empty, unicode_safe],
         'content_ar': [not_empty, unicode_safe],
-        'image_url': [not_empty, unicode_safe],
+        'image': [not_empty, unicode_safe],
     }
 
 

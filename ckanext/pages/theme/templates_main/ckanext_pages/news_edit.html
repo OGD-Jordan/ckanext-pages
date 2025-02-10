@@ -21,7 +21,7 @@
     <div class="container">
         <h1>{{ _('Edit News') if data and data.id else _('Add News') }}</h1>
 
-        <form method="post" action="" data-module="basic-form" enctype="multipart/form-data">
+        <form method="post" action="" data-module="basic-form" enctype="multipart/form-data" novalidate>
             {{ h.csrf_input() }}
             {% if data and data.id %}
                 <input type="hidden" name="id" value="{{ data.id }}">
@@ -77,44 +77,42 @@
                 </div>
             </div>
 
-            {# Image Upload #}
+            {# Image Upload Section #}
             <div class="row mb-4">
-                <div class="col-12">
-                    <p class="boldfont">
+                <div class="col-md-9">
+                    <p class="boldfont mt-3">
                         {{ _('Image') }}
                         <span class="Recomndation ms-2">{{ _('Recommended Size 800x600') }}</span>
                     </p>
-                    <div class="d-flex">
-                        <div class="flex-grow-1 me-3">
-                            <div class="file-container">
-                                <input type="file"
-                                       id="image"
-                                       name="image_url"
-                                       accept="image/*"
-                                       class="hidden-file-input"
-                                       data-filename="{{ data.image_url.split('/')[-1] if data.image_url else '' }}">
-                                <span class="file-name">{{ data.image_url.split('/')[-1] if data.image_url else _('No file chosen') }}</span>
-                            </div>
-                        </div>
-                        <div>
-                            <button type="button" class="actionbtn"
-                                    onclick="document.getElementById('image').click()">
-                                {{ _('Upload') }}
-                            </button>
-                        </div>
+                    <div class="file-container">
+                        <input type="file"
+                               id="image"
+                               name="image"
+                               accept="image/*"
+                               class="hidden-file-input"
+                               data-filename="{{ data.image_url.split('/')[-1] if data.image_url else '' }}"
+
+                        >
+                        <span class="file-name">{{ data.image_url.split('/')[-1] if data.image_url else _('No file chosen') }}</span>
                     </div>
+                </div>
+                <div class="col-md-3 my-5">
+                    <button type="button" class="actionbtn mt-0 w-100"
+                            onclick="document.getElementById('image').click()">
+                        {{ _('Upload') }}
+                    </button>
                 </div>
             </div>
 
             {# News Date #}
-            <div class="row mb-4">k
+            <div class="row mb-4">
                 <div class="col-12">
                     <label for="news_date" class="boldfont">{{ _('News Date') }}</label>
                     <input type="date"
                            class="form-control"
                            id="news_date"
                            name="news_date"
-                           value="{{ data.news_date.strftime('%Y-%m-%d') if data.news_date else '' }}"
+                                      value="{{ data.get('news_date', '').split(' ')[0] if data.get('news_date') else '' }}"
                            required>
                 </div>
             </div>

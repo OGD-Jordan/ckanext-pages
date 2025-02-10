@@ -759,35 +759,82 @@ def news_create(context, data_dict):
         default_news_schema(),
         context
     )
-
     if errors:
         raise tk.ValidationError(errors)
+
+    # Handle image upload
+    if data_dict.get('image'):
+        upload = uploader.get_uploader('news')
+        upload.update_data_dict(
+            data_dict,
+            'image',
+            'image',
+            'clear_image'
+        )
+        upload.upload(uploader.get_max_image_size())
+
+        image = data_dict.get('image')
+        if image and image[0:6] not in {'http:/', 'https:'}:
+            data_dict['image'] = 'uploads/news/{}'.format(image)
+            data['image_url'] = data_dict['image']
 
     news = News(**data)
     model.Session.add(news)
     model.Session.commit()
     return news.as_dict()
 
+
 def news_edit(context, data_dict):
+    """Update a news item."""
+    data, errors = tk.navl_validate(
+        data_dict,
+        default_news_schema(),
+        context
+    )
+    if errors:
+        raise tk.ValidationError(errors)
+
+    news = model.Session.query(News).get(data_dict.get('id'))
+    if not news:
+        raise tk.ObjectNotFound('News item not found')
+
+    # Handle image upload
+    if data_dict.get('image'):
+        upload = uploader.get_uploader('news')
+        upload.update_data_dict(
+            data_dict,
+            'image',
+            'image',
+            'clear_image'
+        )
+        upload.upload(uploader.get_max_image_size())
+
+        image = data_dict.get('image')
+        if image and image[0:6] not in {'http:/', 'https:'}:
+            data_dict['image'] = 'uploads/news/{}'.format(image)
+            news.image_url = data_dict['image']
+    else:
+        data_dict['image'] = news.image_url
+
+    for key in data:
+        setattr(news, key, data[key])
+
+    news.modified = datetime.datetime.utcnow()
+    model.Session.add(news)
+    model.Session.commit()
+    return news.as_dict()
+
+
+def news_show(context, data_dict):
     news_id = data_dict.get('id')
-    if news_id:
-        # Fetch the news from the database
-        news = model.Session.query(News).filter(News.id == news_id).first()
-        if not news:
-            raise p.toolkit.ObjectNotFound(f"News with ID {news_id} not found.")
+    if not news_id:
+        raise tk.ValidationError({'id': 'Missing value'})
 
-        news.title_en = data_dict.get('title_en', news.title_en)
-        news.title_ar = data_dict.get('title_ar', news.title_ar)
-        news.news_date = data_dict.get('news_date', news.news_date)
-        news.brief_en = data_dict.get('brief_en', news.brief_en)
-        news.brief_ar = data_dict.get('brief_ar', news.brief_ar)
-        news.content_en = data_dict.get('content_en', news.content_en)
-        news.content_ar = data_dict.get('content_ar', news.content_ar)
-        news.image_url = data_dict.get('image_url', news.image_url)
+    news = model.Session.query(News).get(news_id)
+    if not news:
+        raise tk.ObjectNotFound('News item not found')
 
-        model.Session.add(news)
-        model.Session.commit()
-
+    return news.as_dict()
 # List Actions - Header Management
 @tk.side_effect_free
 def header_main_menu_list(context, data_dict):

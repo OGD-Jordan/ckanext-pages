@@ -137,6 +137,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_event_edit':actions.event_edit,
             'ckanext_news_create':actions.news_create,
             'ckanext_news_edit':actions.news_edit,
+            'ckanext_news_show':actions.news_show,
             # Header Management Actions
             'ckanext_header_main_menu_create': actions.header_main_menu_create,
             'ckanext_header_secondary_menu_create': actions.header_secondary_menu_create,

@@ -552,24 +552,64 @@ def news():
     return utils.news_list()
 
 
-def news_edit(page=None, data=None, errors=None, error_summary=None):
-    return utils.news_edit(page, data, errors, error_summary)
-
 def news_new():
     context = _get_context()
-
     try:
         tk.check_access('ckanext_pages_update', context)
-
         if tk.request.method == 'POST':
             data_dict = dict(tk.request.form)
+            data_dict['__extras'] = {}
+
+            # Handle file upload
+            uploaded_iamge = tk.request.files.get('image')
+            if upload:
+                data_dict['image'] = uploaded_iamge
+                data_dict['clear_image'] = False
 
             try:
-                tk.get_action('ckanext_news_create')(
-                    context, data_dict
+                tk.get_action('ckanext_news_create')(context, data_dict)
+                tk.h.flash_success(tk._('News created successfully'))
+                return tk.h.redirect_to('pages.news_index')
+            except tk.ValidationError as e:
+                return tk.render(
+                    'ckanext_pages/news_edit.html',
+                    extra_vars={
+                        'data': data_dict,
+                        'errors': e.error_dict,
+                        'error_summary': e.error_summary
+                    }
                 )
-                h.flash_success(tk._('News item created successfully'))
-                return h.redirect_to('pages.news_index')
+        return tk.render(
+            'ckanext_pages/news_edit.html',
+            extra_vars={
+                'data': {},
+                'errors': {},
+                'error_summary': {}
+            }
+        )
+    except tk.NotAuthorized:
+        tk.abort(403, tk._('Not authorized to create news'))
+
+
+def news_edit(page=None):
+    context = _get_context()
+    try:
+        tk.check_access('ckanext_pages_update', context)
+        if tk.request.method == 'POST':
+            data_dict = dict(tk.request.form)
+            data_dict['id'] = page
+            data_dict['__extras'] = {}
+
+            # Handle file upload
+            image_uploaded = tk.request.files.get('image')
+            if image_uploaded:
+                data_dict['image'] = image_uploaded
+                data_dict['clear_image'] = False
+
+            try:
+                tk.get_action('ckanext_news_edit')(context, data_dict)
+                tk.h.flash_success(tk._('News updated successfully'))
+                return tk.h.redirect_to('pages.news_index')
             except tk.ValidationError as e:
                 return tk.render(
                     'ckanext_pages/news_edit.html',
@@ -580,19 +620,21 @@ def news_new():
                     }
                 )
 
+        # GET request
+        news = tk.get_action('ckanext_news_show')(context, {'id': page})
         return tk.render(
             'ckanext_pages/news_edit.html',
             extra_vars={
-                'data': {},
+                'data': news,
                 'errors': {},
                 'error_summary': {}
             }
         )
-
     except tk.NotAuthorized:
-        tk.abort(403, tk._('Not authorized to create news'))
+        tk.abort(403, tk._('Not authorized to edit news'))
     except tk.ObjectNotFound:
         tk.abort(404, tk._('News item not found'))
+
 
 def news_delete(id):
     return utils.news_delete(id)
