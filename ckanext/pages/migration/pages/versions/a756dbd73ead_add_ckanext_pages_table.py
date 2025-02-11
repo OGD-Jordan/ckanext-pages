@@ -40,7 +40,7 @@ def upgrade():
             sa.Column("created", sa.DateTime),
             sa.Column("modified", sa.DateTime),
             sa.Column("extras", sa.UnicodeText, default="{}"),
-            sa.Column("modified", sa.Boolean, default=False),
+            sa.Column("hidden", sa.Boolean, default=False),
         )
 
 
