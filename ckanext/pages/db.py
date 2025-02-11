@@ -368,7 +368,7 @@ def setup():
         'news', 
         'events',
         'main_page',
-        "cms_column_titles",
+        "cms_footer_column_titles",
         "cms_footer_column_links",
         "cms_footer_social_media",
         "cms_footer_banner",
