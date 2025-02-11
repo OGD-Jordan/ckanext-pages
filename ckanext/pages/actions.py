@@ -57,7 +57,7 @@ def news_toggle_visibility(context, data_dict):
         raise p.toolkit.ValidationError(_("Missing 'id' in request."))
 
     news = News.get(news_id)
-    
+
     if not news:
         raise p.toolkit.ObjectNotFound(f"News with ID {news_id} not found.")
 
@@ -676,11 +676,7 @@ def header_logo_update(context, data_dict):
             'clear_logo_ar'
         )
         upload_ar.upload(uploader.get_max_image_size())
-
-        logo_ar_url = data_dict.get('logo_ar_url')
-        if logo_ar_url and logo_ar_url[0:6] not in {'http:/', 'https:'}:
-            logo_ar_url = 'uploads/header_logos/{}'.format(logo_ar_url)
-            logo.logo_ar = logo_ar_url
+        logo.logo_ar = data_dict.get('logo_ar_url')
 
     if data_dict.get('logo_en_upload'):
         upload_en = uploader.get_uploader('header_logos')
@@ -693,42 +689,9 @@ def header_logo_update(context, data_dict):
         )
 
         upload_en.upload(uploader.get_max_image_size())
-
-        logo_en_url = data_dict.get('logo_en_url')
-        if logo_en_url and logo_en_url[0:6] not in {'http:/', 'https:'}:
-            logo_en_url = 'uploads/header_logos/{}'.format(logo_en_url)
-            logo.logo_en = logo_en_url
+        logo.logo_en = data_dict.get('logo_en_url')
 
     logo.modified = datetime.datetime.utcnow()
-    model.Session.commit()
-
-    return logo.as_dict()
-
-def header_logo_delete(context, data_dict):
-    """Delete a header logo."""
-    tk.check_access('ckanext_header_management_access', context)
-    
-    logo = model.Session.query(HeaderLogo).get(data_dict['id'])
-
-    if not logo:
-        raise tk.ObjectNotFound('Logo not found')
-
-    logo.delete()
-    model.Session.commit()
-
-    return {'message': 'Logo deleted'}
-
-
-def header_logo_toggle_visibility(context, data_dict):
-    """Toggle visibility of a header logo."""
-    tk.check_access('ckanext_header_management_access', context)
-
-    logo = model.Session.query(HeaderLogo).get(data_dict['id'])
-
-    if not logo:
-        raise tk.ObjectNotFound('Logo not found')
-
-    logo.is_visible = not logo.is_visible
     model.Session.commit()
 
     return logo.as_dict()

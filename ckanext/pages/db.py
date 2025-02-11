@@ -13,6 +13,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import inspect
 from ckan.plugins.toolkit import BaseModel
+import ckan.lib.helpers as h
 
 import logging
 import sqlalchemy as sa
@@ -253,6 +254,15 @@ class HeaderLogo(DomainObject, BaseModel):
     @property
     def logo_ar_filename(self):
         return self.logo_ar.split('/')[-1]
+
+    @property
+    def link(self):
+        return h.url_for_static(
+            f'uploads/header_logos/{getattr(self, f"logo_{h.lang()}")}',
+            qualified=True
+        )
+
+
 
 class HeaderMainMenu(DomainObject, BaseModel):
     __tablename__ = 'header_main_menu'

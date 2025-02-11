@@ -102,40 +102,6 @@ def toggle_secondary_menu_visibility(id):
     return h.redirect_to('header_management.index')
 
 
-@header_management.route('/logo/delete/<id>', methods=['POST'])
-def delete_logo(id):
-    context = _get_context()
-
-    try:
-        tk.get_action('ckanext_header_logo_delete')(
-            context, {'id': id}
-        )
-        h.flash_success(tk._('Header logo deleted'))
-    except tk.NotAuthorized:
-        h.flash_error(tk._('Not authorized to delete logo'))
-    except tk.ObjectNotFound:
-        h.flash_error(tk._('Menu item not found'))
-
-    return h.redirect_to('header_management.index')
-
-
-@header_management.route('/logo/toggle-visibility/<id>', methods=['GET'])
-def toggle_logo_visibility(id):
-    context = _get_context()
-
-    try:
-        tk.get_action('ckanext_header_logo_toggle_visibility')(
-            context, {'id': id}
-        )
-        h.flash_success(tk._('Header logo visibility updated'))
-    except tk.NotAuthorized:
-        h.flash_error(tk._('Not authorized to update logo'))
-    except tk.ObjectNotFound:
-        h.flash_error(tk._('Logo not found'))
-
-    return h.redirect_to('header_management.index')
-
-
 @header_management.route('/logo/edit/<id>', methods=['GET', 'POST'])
 def edit_logo(id):
     context = {

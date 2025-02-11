@@ -8,7 +8,6 @@ def get_header_data():
     lang = h.lang()
 
     logo = HeaderLogo.Session.query(HeaderLogo).filter_by(is_visible=True).first()
-    logo_url = getattr(logo, f'logo_{lang}', None) if logo else ""
 
     main_menu_items = (
         HeaderMainMenu.Session.query(HeaderMainMenu)
@@ -48,7 +47,7 @@ def get_header_data():
     secondary_menu_tree = build_menu_tree(secondary_menu_items)
 
     return {
-        'logo_url': logo_url,
+        'logo_url': logo.link,
         'main_menu_tree': main_menu_tree,
         'secondary_menu_tree': secondary_menu_tree,
         'lang': lang
