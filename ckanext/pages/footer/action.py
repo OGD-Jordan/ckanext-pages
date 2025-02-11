@@ -93,8 +93,7 @@ def footer_column_titles_show(context, data_dict):
         'modified': '',
     }
 
-    if record:
-        result = record.as_dict()
+    result = record.as_dict() if record else {}
 
     for k,v in default.items():
         if not result.get(k, None):
