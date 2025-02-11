@@ -1,4 +1,5 @@
 import ckan.plugins as p
+from ckanext.pages.footer.validators import event_name_validator, news_name_validator, pages_name_validator
 from ckanext.pages.validators import page_name_validator, not_empty_if_blog, validate_image_upload
 from ckanext.pages.interfaces import IPagesSchema
 from ckan.plugins.toolkit import get_validator
@@ -18,14 +19,12 @@ def default_pages_schema():
         'id': [ignore_empty, unicode_safe],
         'title_en': [not_empty, unicode_safe],
         'title_ar': [not_empty, unicode_safe],
-        'name': [not_empty, name_validator],
-        'content_en': [ignore_missing, unicode_safe],
-        'content_ar': [ignore_missing, unicode_safe],
-        'image_url': [ignore_missing, unicode_safe],
-        'lang': [ignore_missing, unicode_safe],
+        'name': [not_empty, name_validator, pages_name_validator],
+        'content_en': [not_empty, unicode_safe],
+        'content_ar': [not_empty, unicode_safe],
+        'image_url': [not_empty, unicode_safe],
         'order': [ignore_missing, unicode_safe],
         'private': [ignore_missing, p.toolkit.get_validator('boolean_validator')],
-        'group_id': [ignore_missing, unicode_safe],
         'user_id': [ignore_missing, unicode_safe],
         'publish_date': [ignore_missing, isodate],
         'page_type': [ignore_missing, unicode_safe],
@@ -40,7 +39,7 @@ def default_events_schema():
         'id': [ignore_empty, unicode_safe],
         'title_en': [not_empty, unicode_safe],
         'title_ar': [not_empty, unicode_safe],
-        'name': [not_empty, name_validator],
+        'name': [not_empty, name_validator, event_name_validator],
         'start_date': [not_empty, isodate],
         'end_date': [not_empty, isodate],
         'brief_ar': [ignore_missing, unicode_safe],
@@ -57,13 +56,13 @@ def default_news_schema():
         'id': [ignore_empty, unicode_safe],
         'title_en': [not_empty, unicode_safe],
         'title_ar': [not_empty, unicode_safe],
-        'name': [not_empty, name_validator],
+        'name': [not_empty, name_validator, news_name_validator],
         'news_date': [not_empty, isodate],
         'brief_ar': [not_empty, unicode_safe],
         'brief_en': [not_empty, unicode_safe],
         'content_en': [not_empty, unicode_safe],
         'content_ar': [not_empty, unicode_safe],
-        'image': [not_empty, unicode_safe],
+        'image_url': [not_empty, unicode_safe],
     }
 
 

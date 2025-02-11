@@ -5,23 +5,20 @@
 {% block title %}{{ _('Edit News') if data and data.id else _('Add News') }}{% endblock %}
 
 {% block breadcrumb_content %}
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ h.url_for('pages.news') }}">{{ _('News') }}</a>
-            </li>
-            <li class="breadcrumb-item active">
-                {{ _('Edit News') if data and data.id else _('Add News') }}
-            </li>
-        </ol>
-    </nav>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li>{% link_for _('News'), named_route='pages.news_index' %}</li>
+{% if action == 'new' %}
+<li class="active">{% link_for _('Add New'), named_route='pages.news_new' %}</li>
+{% else %}
+<li class="active">{% link_for _('News Edit'), named_route='pages.news_edit', id=data.id %}</li>
+{% endif %}
 {% endblock %}
 
 {% block primary_content_inner %}
     <div class="container">
         <h1>{{ _('Edit News') if data and data.id else _('Add News') }}</h1>
 
-        <form method="post" action="" data-module="basic-form" enctype="multipart/form-data" novalidate>
+        <form method="post" action="" data-module="basic-form" enctype="multipart/form-data">
             {{ h.csrf_input() }}
             {% if data and data.id %}
                 <input type="hidden" name="id" value="{{ data.id }}">
@@ -29,18 +26,6 @@
 
             {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
-            {# Title Arabic #}
-            <div class="row mb-4">
-                <div class="col-12">
-                    {{ form.input('title_ar',
-                     id='field-title_ar',
-                     label=_('Title Ar'),
-                     placeholder=_('Enter title in Arabic'),
-                     value=data.title_ar,
-                     error=errors.title_ar,
-                     is_required=true) }}
-                </div>
-            </div>
 
             {# Title English #}
             <div class="row mb-4">
@@ -58,12 +43,12 @@
             </div>
 
             {# URL #}
-            <div class="row mb-4">
+            <div class="row">
                 <div class="col-12">
-                    {% set prefix = h.url_for('pages.show', page='') %}
-                    {% set domain = h.url_for('pages.show', page='', qualified=true) %}
+                    {% set prefix = h.url_for('home_page.news_detail', id='') %}
+                    {% set domain = h.url_for('home_page.news_detail', id='', qualified=true) %}
                     {% set domain = domain|replace("http://", "")|replace("https://", "") %}
-                    {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<page>'} %}
+                    {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<news>'} %}
 
                     {{ form.prepend('name',
                        id='field-name',
@@ -77,32 +62,37 @@
                 </div>
             </div>
 
-            {# Image Upload Section #}
+            {# Title Arabic #}
             <div class="row mb-4">
-                <div class="col-md-9">
-                    <p class="boldfont mt-3">
-                        {{ _('Image') }}
-                        <span class="Recomndation ms-2">{{ _('Recommended Size 800x600') }}</span>
-                    </p>
-                    <div class="file-container">
-                        <input type="file"
-                               id="image"
-                               name="image"
-                               accept="image/*"
-                               class="hidden-file-input"
-                               data-filename="{{ data.image_url.split('/')[-1] if data.image_url else '' }}"
-
-                        >
-                        <span class="file-name">{{ data.image_url.split('/')[-1] if data.image_url else _('No file chosen') }}</span>
-                    </div>
-                </div>
-                <div class="col-md-3 my-5">
-                    <button type="button" class="actionbtn mt-0 w-100"
-                            onclick="document.getElementById('image').click()">
-                        {{ _('Upload') }}
-                    </button>
+                <div class="col-12">
+                    {{ form.input('title_ar',
+                     id='field-title_ar',
+                     label=_('Title Ar'),
+                     placeholder=_('Enter title in Arabic'),
+                     value=data.title_ar,
+                     error=errors.title_ar,
+                     is_required=true) }}
                 </div>
             </div>
+
+
+            {# Image Upload Section #}
+
+            <div class="row mb-4">
+                {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
+                {% set is_url = data.image_url and data.image_url.startswith('http') %}
+                {{ form.image_upload(
+                    data, 
+                    errors, 
+                    is_upload_enabled=h.uploads_enabled(), 
+                    is_url=is_url, 
+                    is_upload=is_upload, 
+                    url_label=_('News Image (1200 x 400 pixels)'), 
+                    upload_label=_('News Image (1200 x 400 pixels)') 
+                    ) 
+                }}
+            </div>
+            {% set news_date_formatted =  h.date_str_to_datetime(data.news_date).strftime('%Y-%m-%d') if data and data.news_date else '' %}
 
             {# News Date #}
             <div class="row mb-4">
@@ -112,27 +102,17 @@
                            class="form-control"
                            id="news_date"
                            name="news_date"
-                                      value="{{ data.get('news_date', '').split(' ')[0] if data.get('news_date') else '' }}"
+                            value="{{ news_date_formatted }}"
                            required>
                 </div>
             </div>
 
-            {# Brief Arabic #}
-            <div class="row mb-4">
-                <div class="col-12">
-                    {{ form.textarea('brief_ar',
-                        id='field-brief_ar',
-                        label=_('Brief Ar'),
-                        placeholder=_('Enter brief in Arabic'),
-                        value=data.brief_ar,
-                        error=errors.brief_ar) }}
-                </div>
-            </div>
+
 
             {# Brief English #}
             <div class="row mb-4">
                 <div class="col-12">
-                    {{ form.textarea('brief_en',
+                    {{ form.input('brief_en',
                         id='field-brief_en',
                         label=_('Brief En'),
                         placeholder=_('Enter brief in English'),
@@ -141,17 +121,19 @@
                 </div>
             </div>
 
-            {# Content Arabic #}
+            {# Brief Arabic #}
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="field-content-ck-ar" class="boldfont">{{ _('Content Ar') }}</label>
-                    <textarea id="field-content-ck-ar"
-                              name="content_ar"
-                              class="form-control"
-                              data-module="ckedit"
-                              style="height:400px">{{ data.content_ar }}</textarea>
+                    {{ form.input('brief_ar',
+                        id='field-brief_ar',
+                        label=_('Brief Ar'),
+                        placeholder=_('Enter brief in Arabic'),
+                        value=data.brief_ar,
+                        error=errors.brief_ar) }}
                 </div>
             </div>
+
+
 
             {# Content English #}
             <div class="row mb-4">
@@ -165,10 +147,23 @@
                 </div>
             </div>
 
+
+            {# Content Arabic #}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label for="field-content-ck-ar" class="boldfont">{{ _('Content Ar') }}</label>
+                    <textarea id="field-content-ck-ar"
+                              name="content_ar"
+                              class="form-control"
+                              data-module="ckedit"
+                              style="height:400px">{{ data.content_ar }}</textarea>
+                </div>
+            </div>
+
             {# Submit Buttons #}
             <div class="d-flex justify-content-end mt-4">
                 <button type="button"
-                        onclick="window.location='{{ h.url_for('pages.news') }}'"
+                        onclick="window.location='{{ h.url_for('pages.news_index') }}'"
                         class="redbtn me-2">{{ _('Cancel') }}</button>
                 <button type="submit" class="graybtn">{{ _('Save') }}</button>
             </div>

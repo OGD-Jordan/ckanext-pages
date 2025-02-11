@@ -46,3 +46,11 @@ index-css:
   contents:
     - css/pages.css
 
+news-list:
+  filter: rjsmin
+  output: ckanext-pages/%(version)s_news-list.js
+  contents:
+    - js/news-list.js
+  extra:
+    preload:
+      - base/main

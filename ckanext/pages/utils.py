@@ -9,9 +9,21 @@ from ckanext.pages.db import MainPage,Page , News, Event, HeaderMainMenu, Header
 from ckanext.pages.logic.schema import main_page_schema, update_pages_schema
 import ckan.lib.navl.dictization_functions as df
 from flask import request, flash
-
+from ckan.types import Context
+from ckan.common import current_user, _
+from typing import Any, Optional, Union, cast
 config = tk.config
 _ = tk._
+
+
+def _get_context():
+    context = cast(Context, {
+        u'model': model,
+        u'session': model.Session,
+        u'user': current_user.name,
+        u'auth_user_obj': current_user,
+    })
+    return context
 
 
 def _parse_form_data(request):
@@ -22,75 +34,6 @@ def _parse_form_data(request):
             )
         )
     )
-
-
-def pages_list_pages(page_type):
-    data_dict = {'org_id': None, 'page_type': page_type,
-                 'sort': request.args.get('sort', 'title_en asc')
-                 }
-    if page_type == 'blog':
-        data_dict['order_publish_date'] = True
-    tk.g.pages_dict = tk.get_action('ckanext_pages_list')(
-        context={}, data_dict=data_dict
-    )
-
-    tk.g.page = helpers.Page(
-        collection=tk.g.pages_dict,
-        page=tk.request.args.get('page', 1),
-        url=helpers.pager_url,
-        items_per_page=21
-    )
-    
-    print("DEBUG: Pages dict passed to template:", tk.g.pages_dict)  # Debug
-
-    return tk.render('ckanext_pages/pages_list.html', extra_vars={"pages": tk.g.pages_dict})
-
-def news_list():
-    data_dict = {
-        'org_id': None,
-        'sort': request.args.get('sort', 'title_en asc')  # Default sorting
-    }
-
-    # Fetch news items
-    news_list = tk.get_action('ckanext_news_list')(
-        context={}, data_dict=data_dict
-    )
-
-    print(f"DEBUG: News items sent to template: {news_list}")
-    # Paginate results
-    tk.g.page = helpers.Page(
-        collection=news_list,
-        page=tk.request.args.get('page', 1),
-        url=helpers.pager_url,
-        items_per_page=21
-    )
-
-
-    return tk.render('ckanext_pages/news.html', extra_vars={"pages": news_list})
-
-def news_toggle_visibility(news_id):
-    data_dict = {'news_id': news_id}
-    return tk.get_action('ckanext_news_toggle_visibility')({}, data_dict)  #
-
-def events_list():
-
-    data_dict = {
-        'org_id': None,
-        'sort': request.args.get('sort', 'title_en asc')  # Default to 'title_en asc'
-    }
-
-    events_list = tk.get_action('ckanext_events_list')(
-        context={}, data_dict=data_dict
-    )
-
-    tk.g.page = helpers.Page(
-        collection=events_list,
-        page=tk.request.args.get('page', 1),
-        url=helpers.pager_url,
-        items_per_page=21
-    )
-
-    return tk.render('ckanext_pages/events.html', extra_vars={"pages": events_list})
 
 
 class HeaderLogoUtils:
@@ -306,133 +249,7 @@ def news_edit(page=None, data=None, errors=None, error_summary=None):
 
 
 
-def events_edit(page=None, data=None, errors=None, error_summary=None):
-    if request.method == 'POST':
-        form_data =_parse_form_data(request)
-        print(form_data)
-        try:
-            result = tk.get_action("ckanext_event_edit")({}, form_data)
-            page_id = result.get("id")
-            if not page_id:
-                raise ValueError("Page ID is missing for redirect")
-            return tk.redirect_to("pages.events_edit", page=page_id)
-
-        except tk.ValidationError as e:
-            return tk.render(
-                "ckanext_pages/page_edit.html",
-                extra_vars={
-                    "data": form_data,
-                    "errors": e.error_dict,
-                    "error_summary": {"summary": "Validation failed"},
-                },
-            )
-    else:
-        page_data = model.Session.query(Event).get(page) if page else Event()
-
-        if page_data.content_en is None:
-            page_data.content_en = ""
-        if page_data.content_ar is None:
-            page_data.content_ar = ""
-
-        return tk.render(
-            "ckanext_pages/events_edit.html",
-            extra_vars={
-                "data": page_data,
-                "errors": errors or {},
-                "error_summary": error_summary or {},
-            },
-        )
-    
-def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type='pages'):
-    if request.method == 'POST':
-        form_data = _parse_form_data(request)
-
-        try:
-            result = tk.get_action("ckanext_pages_edit")({}, form_data)
-            page_id = result.get("id")
-            if not page_id:
-                raise ValueError("Page ID is missing for redirect")
-            return tk.redirect_to("pages.pages_index")
-
-        except tk.ValidationError as e:
-            return tk.render(
-                "ckanext_pages/page_edit.html",
-                extra_vars={
-                    "data": form_data,
-                    "errors": e.error_dict,
-                    "error_summary": {"summary": "Validation failed"},
-                },
-            )
-    else:
-        page_data = model.Session.query(Page).get(page) if page else Page()
-
-        if page_data.content_en is None:
-            page_data.content_en = ""
-        if page_data.content_ar is None:
-            page_data.content_ar = ""
-
-        return tk.render(
-            "ckanext_pages/page_edit.html",
-            extra_vars={
-                "data": page_data,
-                "errors": errors or {},
-                "error_summary": error_summary or {},
-            },
-        )
-
-def events_delete(id):
-
-    if request.method == 'POST':
-        if 'cancel' in request.form:
-            return tk.redirect_to('pages.events')
-
-        if 'confirm' in request.form:
-            try:
-                event = model.Session.query(Event).filter(Event.id == id).first()
-                if not event:
-                    raise tk.ObjectNotFound(_("Event not found"))
-
-                model.Session.delete(event)
-                model.Session.commit()
-
-                flash(_('Event deleted successfully!'), 'success')
-                return tk.redirect_to('pages.events')
-            except tk.NotAuthorized:
-                return tk.abort(401, _('Unauthorized to delete event'))
-            except tk.ObjectNotFound:
-                return tk.abort(404, _('Event not found'))
-
-    event = model.Session.query(Event).filter(Event.id == id).first()
-    if not event:
-        return tk.abort(404, _('Event not found'))
-    return tk.render('ckanext_pages/confirm_delete.html', {'page': event})
-
-def news_delete(id):
-
-    if request.method == 'POST':
-        if 'cancel' in request.form:
-            return tk.redirect_to('pages.news')
-
-        if 'confirm' in request.form:
-            try:
-                new = model.Session.query(News).filter(News.id == id).first()
-                if not new:
-                    raise tk.ObjectNotFound(_("New not found"))
-
-                model.Session.delete(new)
-                model.Session.commit()
-
-                flash(_('New deleted successfully!'), 'success')
-                return tk.redirect_to('pages.news')
-            except tk.NotAuthorized:
-                return tk.abort(401, _('Unauthorized to delete new'))
-            except tk.ObjectNotFound:
-                return tk.abort(404, _('Event not found'))
-
-    new = model.Session.query(News).filter(News.id == id).first()
-    if not new:
-        return tk.abort(404, _('Event not found'))
-    return tk.render('ckanext_pages/confirm_delete.html', {'page': new})
+ 
 
 
 def _inject_views_into_page(_page):
@@ -504,65 +321,6 @@ def _inject_views_into_page(_page):
     _page['content'] = new_content
 
 
-def pages_show(page=None, page_type='page'):
-    tk.c.page_type = page_type
-    if page.startswith('/'):
-        page = page[1:]
-    if not page:
-        return pages_list_pages(page_type)
-    _page = tk.get_action('ckanext_pages_show')(
-        context={},
-        data_dict={
-            'org_id': None, 'page': page}
-    )
-    if _page is None:
-        return pages_list_pages(page_type)
-    tk.c.page = _page
-    _inject_views_into_page(_page)
-
-    return tk.render('ckanext_pages/%s.html' % page_type)
-
-def blog_delete(page, page_type):
-    pass
-
-def pages_delete(id):
-
-
-    if request.method == 'POST':
-        if 'cancel' in request.form:
-            # Redirect back to the pages index if the cancel button is clicked
-            return tk.redirect_to('pages.pages_index')
-
-        if 'confirm' in request.form:
-            try:
-                # Query for the page by ID
-                page = model.Session.query(Page).filter(Page.id == id).first()
-                if not page:
-                    raise tk.ObjectNotFound(_("Page not found"))
-
-                # Delete the page from the database
-                model.Session.delete(page)
-                model.Session.commit()
-
-                # Flash success message and redirect
-                flash(_('Page deleted successfully!'), 'success')
-                return tk.redirect_to('pages.pages_index')
-
-            except tk.NotAuthorized:
-                # Unauthorized access
-                return tk.abort(401, _('Unauthorized to delete page'))
-            except tk.ObjectNotFound:
-                # Page not found
-                return tk.abort(404, _('Page not found'))
-
-    # Render the confirmation template for GET requests
-    page = model.Session.query(Page).filter(Page.id == id).first()
-    if not page:
-        return tk.abort(404, _('Page not found'))
-
-    # Render the confirmation delete template with page details
-    return tk.render('ckanext_pages/confirm_delete.html', {'page': page})
-
 
 def pages_upload():
     if not tk.request.method == 'POST':
@@ -582,153 +340,10 @@ def pages_upload():
     return upload_info
 
 
-def group_list_pages(id, group_type, group_dict=None):
-    tk.c.pages_dict = tk.get_action('ckanext_pages_list')(
-        context={}, data_dict={'org_id': tk.c.group_dict['id']}
-    )
-    return tk.render(
-        'ckanext_pages/{}_page_list.html'.format(group_type),
-        extra_vars={
-            'group_type': group_type,
-            'group_dict': group_dict
-        })
 
 
-def _template_setup_group(id, group_type):
-    if not id:
-        return
-    context = {'for_view': True}
-    action = 'organization_show' if group_type == 'organization' else 'group_show'
-    try:
-        tk.c.group_dict = tk.get_action(action)(context, {'id': id})
-    except tk.ObjectNotFound:
-        tk.abort(404, _('{} not found'.format(group_type.title())))
-    except tk.NotAuthorized:
-        tk.abort(401, _('Unauthorized to read {} {}'.format(group_type, id)))
 
 
-def group_show(id, group_type, page=None):
-
-    if page and page.startswith('/'):
-        page = page[1:]
-
-    _template_setup_group(id, group_type)
-
-    context = {'for_view': True}
-
-    action = 'organization_show' if group_type == 'organization' else 'group_show'
-
-    group_dict = tk.get_action(action)(context, {'id': id})
-
-    if not page:
-        return group_list_pages(id, group_type, group_dict)
-
-    _page = tk.get_action('ckanext_pages_show')(
-        context={},
-        data_dict={
-            'org_id': tk.c.group_dict['id'], 'page': page}
-    )
-    if _page is None:
-        return group_list_pages(id, group_type, group_dict)
-
-    tk.c.page = _page
-
-    return tk.render(
-        'ckanext_pages/{}_page.html'.format(group_type),
-        {
-            'group_type': group_type,
-            'group_dict': group_dict
-        }
-    )
-
-
-def group_edit(id, group_type, page=None, data=None, errors=None, error_summary=None):
-
-    _template_setup_group(id, group_type)
-
-    page_dict = None
-    if page:
-        if page.startswith('/'):
-            page = page[1:]
-        page_dict = tk.get_action('ckanext_pages_show')(
-            context={}, data_dict={'org_id': tk.c.group_dict['id'], 'page': page}
-        )
-    if page_dict is None:
-        page_dict = {}
-
-    if tk.request.method == 'POST' and not data:
-
-        data = _parse_form_data(tk.request)
-
-        page_dict.update(data)
-
-        data = _parse_form_data(tk.request)
-        page_dict['org_id'] = tk.c.group_dict['id']
-        page_dict['page'] = page
-        try:
-            tk.get_action('ckanext_org_pages_update')(
-                context={}, data_dict=page_dict
-            )
-        except tk.ValidationError as e:
-            errors = e.error_dict
-            error_summary = e.error_summary
-            return group_edit(id, group_type, page, data, errors, error_summary)
-
-        endpoint = 'pages.{}_pages_show'.format(group_type)
-        return tk.redirect_to(endpoint, id=id, page=page_dict['name'])
-
-    if not data:
-        data = page_dict
-
-    errors = errors or {}
-    error_summary = error_summary or {}
-
-    context = {'for_view': True}
-
-    action = 'organization_show' if group_type == 'organization' else 'group_show'
-    group_dict = tk.get_action(action)(context, {'id': id})
-
-    vars = {'data': data, 'errors': errors,
-            'error_summary': error_summary, 'page': page,
-            'group_type': group_type, 'group_dict': group_dict}
-
-    return tk.render(
-        'ckanext_pages/{}_page_edit.html'.format(group_type), extra_vars=vars)
-
-
-def group_delete(id, group_type, page):
-
-    _template_setup_group(id, group_type)
-
-    if page.startswith('/'):
-        page = page[1:]
-
-    if 'cancel' in tk.request.args:
-        return tk.redirect_to('pages.%s_edit' % group_type, id=tk.c.group_dict['name'], page=page)
-
-    try:
-        if tk.request.method == 'POST':
-            action = 'ckanext_org_pages_delete' if group_type == 'organization' else 'ckanext_group_pages_delete'
-            action = tk.get_action(action)
-            action({}, {'org_id': tk.c.group_dict['id'], 'page': page})
-            endpoint = 'pages.{}_pages_index'.format(group_type)
-            return tk.redirect_to(endpoint, id=id)
-        else:
-            tk.abort(404, _('Page Not Found'))
-    except tk.NotAuthorized:
-        tk.abort(401, _('Unauthorized to delete page'))
-    except tk.ObjectNotFound:
-        tk.abort(404, _('{} not found'.format(group_type.title())))
-
-    context = {'for_view': True}
-
-    action = 'organization_show' if group_type == 'organization' else 'group_show'
-    group_dict = tk.get_action(action)(context, {'id': id})
-
-    return tk.render(
-        'ckanext_pages/confirm_delete.html',
-        {'page': page, 'group_type': group_type, 'group_dict': group_dict}
-    )
 
 
 def _has_user_role_for_some_org(user: model.User, role):
@@ -836,8 +451,6 @@ def main_page_edit(section_id, data=None, errors=None, error_summary=None):
     return tk.render('main_page/main_page_edit.html', extra_vars=vars)
 
 
-
-    
 
 def main_page():
     sections = MainPage.all()

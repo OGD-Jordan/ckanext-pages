@@ -4,20 +4,19 @@
 {% block title %}{{ _('Edit Page') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-    <a href="{{ h.url_for('pages.pages_index') }}" aria-label="{{ _('Pages') }}">
-        <span>{{ _('Pages') }}</span>
-    </a>
-  </li>
-  <li>
-    <span>{{ _('Pages Edit') }}</span>
-    </li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li>{% link_for _('Pages'), named_route='pages.pages_index' %}</li>
+{% if action == 'new' %}
+<li class="active">{% link_for _('Add New'), named_route='pages.new' %}</li>
+{% else %}
+<li class="active">{% link_for _('Page Edit'), named_route='pages.edit', id=data.id %}</li>
+{% endif %}
 {% endblock %}
 
 {% block primary_content_inner %}
 <div class="container">
-  <h1>Add Pages</h1>
-  <form method="post" action="{{ h.url_for('pages.edit', page=data.id if data and data.id else '') }}" data-module="basic-form" enctype="multipart/form-data">
+  <h1>{{ _('Add Pages') }}</h1>
+  <form method="post" action="{{ h.url_for('pages.edit', id=data.id if data and data.id else '') }}" data-module="basic-form" enctype="multipart/form-data">
     {{ h.csrf_input() }}
     {% if data and data.id %}
         <input type="hidden" name="id" value="{{ data.id }}">
@@ -27,8 +26,8 @@
     <!-- Title En -->
     {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder='Enter title in English', value=data.title_en, error=errors.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
 
-    {% set prefix = h.url_for('pages.show', page='') %}
-    {% set domain = h.url_for('pages.show', page='', qualified=true) %}
+    {% set prefix = h.url_for('pages.show', id='') %}
+    {% set domain = h.url_for('pages.show', id='', qualified=true) %}
     {% set domain = domain|replace("http://", "")|replace("https://", "") %}
     {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<page>'} %}
 
@@ -41,12 +40,21 @@
     {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
     {% set is_url = data.image_url and data.image_url.startswith('http') %}
 
-    {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload) }}
+    {{ form.image_upload(
+        data, 
+        errors, 
+        is_upload_enabled=h.uploads_enabled(), 
+        is_url=is_url, 
+        is_upload=is_upload,
+        url_label=_('News Image (1200 x 400 pixels)'), 
+        upload_label=_('News Image (1200 x 400 pixels)') 
+      ) }}
 
     <!-- Publish Date -->
     <div class="mb-3">
-      <label for="publish_date" class="form-label">Publish Date</label>
-      <input type="date" class="form-control form-control-lg" id="publish_date" name="publish_date" value="{{ data.publish_date }}">
+      {% set publish_date_formatted =  h.date_str_to_datetime(data.publish_date).strftime('%Y-%m-%d') if data and data.publish_date else '' %}
+      <label for="publish_date" class="form-label">{{ _('Publish Date') }}</label>
+      <input type="date" class="form-control form-control-lg" id="publish_date" name="publish_date" value="{{ publish_date_formatted }}">
     </div>
 
     <!-- Content Editors -->
@@ -72,8 +80,8 @@
 
     <!-- Submit Button -->
     <div class="d-flex justify-content-end mt-4">
-      <button type="cancel" class="btn btn-primary btn-lg me-2">Cancel</button>
-      <button type="submit" class="btn btn-secondary btn-lg">Save</button>
+      <button type="cancel" class="btn btn-primary btn-lg me-2">{{ _('Cancel')}}</button>
+      <button type="submit" class="btn btn-secondary btn-lg">{{ _('Save')}}</button>
     </div>
   </form>
 </div>

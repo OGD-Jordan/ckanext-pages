@@ -4,17 +4,14 @@
 {% block title %}{{ _('Pages') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-      <a href="{{ h.url_for('pages.pages_index') }}" aria-label="{{ _('Pages') }}">
-      <span>{{ _('Pages') }}</span>
-      </a>
-  </li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li class="active">{% link_for _('Pages'), named_route='pages.pages_index' %}</li>
 {% endblock %}
 
 {% block page_primary_action %}
 <section>
 
-  {% if h.check_access('ckanext_pages_update', {}) %}
+  {% if h.check_access('ckanext_pages_edit', {}) %}
   <a href="{{ h.url_for('pages.new') }}" class="btn btn-primary">
     <i class="fa fa-plus-square"></i> {{ _('Add Page') }}
   </a>  
@@ -91,7 +88,7 @@
                     {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
                   </td>
                   <td>
-                    <a href="{{ h.url_for('pages.edit', page = page.id) }}">
+                    <a href="{{ h.url_for('pages.edit', id = page.id) }}">
                       <img src="/images/edit_icon.png" alt="{{_('Edit')}}" style="width: 32px; height: 32px; cursor: pointer;">
                     </a>
 
