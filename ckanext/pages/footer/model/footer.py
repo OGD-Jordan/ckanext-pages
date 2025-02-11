@@ -67,7 +67,7 @@ class FooterBaseModelForInstances():
 class FooterBaseModelSingleton():
     @classmethod
     def get(cls):
-        return Session.query(cls).first()
+        return cls.Session.query(cls).first()
     
     @classmethod
     def patch_records(cls, **kwargs):
@@ -77,7 +77,7 @@ class FooterBaseModelSingleton():
                 if hasattr(cls, key):
                     setattr(record, key, value)
 
-            Session.commit()
+            cls.Session.commit()
         else:
             kwargs = {k:v for k,v in kwargs.items() if hasattr(cls, k) and k != 'id'}
             record = cls(**kwargs)
