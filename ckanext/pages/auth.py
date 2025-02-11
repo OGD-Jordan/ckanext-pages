@@ -36,6 +36,7 @@ def page_privacy(context, data_dict):
     return {'success': False}    
 
 from datetime import datetime
+@p.toolkit.auth_allow_anonymous_access
 def news_privacy(context, data_dict):
     if authz.is_authorized_boolean('is_content_editor', context):
         return {'success':  True}
