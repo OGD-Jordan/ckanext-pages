@@ -137,6 +137,7 @@ def pages_edit_action(context, data_dict):
             setattr(page, key, value)
 
     page.modified = datetime.datetime.utcnow()
+    page.private = False
     if not page_id:
         model.Session.add(page)
     model.Session.commit()
