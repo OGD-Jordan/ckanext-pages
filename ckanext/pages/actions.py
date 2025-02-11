@@ -90,7 +90,7 @@ def event_edit(context , data_dict):
     model.Session.commit()
 
     # Return success with ID
-    return {"success": True, "id": page.id}
+    return {"success": True, "id": page.name}
 
 
 
