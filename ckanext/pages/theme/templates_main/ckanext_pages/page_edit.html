@@ -34,7 +34,7 @@
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-page'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
     <!-- Title Ar -->
-    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder='Enter title in Arabic', value=data.title_ar, error=errors.title_ar) }}
+    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder='Enter title in Arabic', value=data.title_ar, error=errors.title_ar, is_required=true) }}
 
     <!-- Image Upload -->
     {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
@@ -75,7 +75,8 @@
       </div>
       <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" style="height:400px">{{ data.content_ar }}</textarea>
     {% else %}
-      {{ form.markdown('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content, error=errors.content) }}
+      {{ form.markdown('content_en', id='field-content_en', label=_('Content En'), placeholder=_('Enter content in English here'), value=data.content_en, error=errors.content_en, is_required=true) }}
+      {{ form.markdown('content_ar', id='field-content_ar', label=_('Content Ar'), placeholder=_('Enter content in Arabic here'), value=data.content_ar, error=errors.content_ar, is_required=true) }}
     {% endif %}
 
     <!-- Submit Button -->
