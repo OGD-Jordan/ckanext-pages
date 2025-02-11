@@ -249,8 +249,8 @@ def footer_column_link_create(context, data_dict):
     tk.check_access('footer_column_link_create', context)
 
     record = FooterColumnLinks(**data_dict)
-    record.add()
-    record.commit()
+    record.save()
+    # record.commit()
 
     return tk.get_action('footer_column_link_show')(context, {'id': record.id}) 
     
