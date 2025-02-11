@@ -114,7 +114,7 @@ def news_edit(context , data_dict):
     page.modified = datetime.datetime.utcnow()
     page.commit()
 
-    return tk.get_action('ckanext_news_show')(context, {'id': page_id})
+    return tk.get_action('ckanext_news_show')(context, {'id': page.name})
 
 
 
@@ -543,7 +543,7 @@ def news_show(context, data_dict):
     tk.check_access('ckanext_news_show', context, data_dict)
     news_id = data_dict.get('id')
     if not news_id:
-        raise tk.ValidationError({'id': 'Missing value'})
+        raise tk.ValidationError({'id': ['Missing value']})
 
     news = News.get(news_id)
 
