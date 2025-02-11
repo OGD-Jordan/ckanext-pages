@@ -24,9 +24,12 @@ def upgrade():
         op.create_table(
             "ckanext_pages",
             sa.Column("id", sa.UnicodeText, primary_key=True),
-            sa.Column("title", sa.UnicodeText, default=""),
+            sa.Column("title_en", sa.UnicodeText, default=""),
+            sa.Column("title_ar", sa.UnicodeText, default=""),
             sa.Column("name", sa.UnicodeText, default=""),
-            sa.Column("content", sa.UnicodeText, default=""),
+            sa.Column("content_en", sa.UnicodeText, default=""),
+            sa.Column("content_ar", sa.UnicodeText, default=""),
+            sa.Column("image_url", sa.UnicodeText, default=""),
             sa.Column("lang", sa.UnicodeText, default=""),
             sa.Column("order", sa.UnicodeText, default=""),
             sa.Column("private", sa.Boolean, default=True),
@@ -37,6 +40,7 @@ def upgrade():
             sa.Column("created", sa.DateTime),
             sa.Column("modified", sa.DateTime),
             sa.Column("extras", sa.UnicodeText, default="{}"),
+            sa.Column("modified", sa.Boolean, default=False),
         )
 
 

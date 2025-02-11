@@ -82,9 +82,24 @@ def upgrade():
     )
 
 def downgrade():
-    op.drop_table("cms_footer_main")
-    op.drop_table("cms_column_titles")
-    op.drop_table("cms_footer_column_links")
-    op.drop_table("cms_footer_social_media")
-    op.drop_table("cms_footer_banner")
+    try:
+        op.drop_table("cms_footer_column_titles")
+    except:
+        pass
+    try:
+        op.drop_table("cms_footer_column_links")
+    except:
+        pass
+    try:
+        op.drop_table("cms_footer_social_media")
+    except:
+        pass
+    try:
+        op.drop_table("cms_footer_banner")
+    except:
+        pass
+    try:
+        op.drop_table("cms_footer_main")
+    except:
+        pass
 

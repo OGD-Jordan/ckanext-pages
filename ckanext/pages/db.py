@@ -10,6 +10,15 @@ from sqlalchemy.orm import class_mapper
 from ckan.model import Session
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import inspect
+from ckan.plugins.toolkit import BaseModel
+
+import logging
+import sqlalchemy as sa
+from ckan.common import config
+
+log = logging.getLogger(__name__)
 
 
 try:
@@ -339,18 +348,11 @@ def table_dictize(obj, context, **kw):
 
     return result_dict
 
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import inspect
-from ckan.plugins.toolkit import BaseModel
-
-import logging
-import sqlalchemy as sa
-from ckan.common import config
-
-log = logging.getLogger(__name__)
 
 try:
-    engine = sa.create_engine(config.get('sqlalchemy.url'))
+    import ckan.plugins.toolkit as tk
+    engine = sa.create_engine(tk.config.get('sqlalchemy.url'))
+
     Session = sessionmaker(bind=engine)()
     BaseModel.metadata.create_all(engine)
 except Exception as e:
@@ -366,6 +368,11 @@ def setup():
         'news', 
         'events',
         'main_page',
+        "cms_column_titles",
+        "cms_footer_column_links",
+        "cms_footer_social_media",
+        "cms_footer_banner",
+        "cms_footer_main",
         ]
     
     for tn in table_names:
@@ -387,6 +394,11 @@ def teardown():
         'news', 
         'events',
         'main_page',
+        "cms_footer_column_titles",
+        "cms_footer_column_links",
+        "cms_footer_social_media",
+        "cms_footer_banner",
+        "cms_footer_main",
         ]
     
     for tn in table_names:
