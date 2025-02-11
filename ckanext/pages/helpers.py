@@ -5,14 +5,13 @@ from sqlalchemy import case
 
 
 def get_header_data():
-    session = model.Session
     lang = h.lang()
 
-    logo = session.query(HeaderLogo).filter_by(is_visible=True).first()
+    logo = HeaderLogo.Session.query(HeaderLogo).filter_by(is_visible=True).first()
     logo_url = getattr(logo, f'logo_{lang}', None) if logo else ""
 
     main_menu_items = (
-        session.query(HeaderMainMenu)
+        HeaderMainMenu.Session.query(HeaderMainMenu)
         .filter_by(is_visible=True).
         order_by(
             HeaderMainMenu.order,
@@ -24,7 +23,7 @@ def get_header_data():
         .all())
 
     secondary_menu_items = (
-        session.query(HeaderSecondaryMenu)
+        HeaderSecondaryMenu.Session.query(HeaderSecondaryMenu)
         .filter_by(is_visible=True)
         .order_by(HeaderSecondaryMenu.order)
         .all()
