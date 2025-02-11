@@ -47,8 +47,8 @@ def upgrade():
         sa.Column("title_ar", sa.UnicodeText, nullable=False, default=''),
         sa.Column("link_en", sa.UnicodeText, nullable=False, default=''),
         sa.Column("link_ar", sa.UnicodeText, nullable=False, default=''),
-        sa.Column("target", sa.Integer, nullable=False, default=0),
-        sa.Column("order", sa.UnicodeText, nullable=False, default=''),
+        sa.Column("target", sa.UnicodeText, nullable=False, default=0),
+        sa.Column("order", sa.Integer, nullable=False, default=''),
         sa.Column("column_number", sa.Integer, nullable=False, default=2),
         sa.Column("modified", sa.DateTime, default=datetime.datetime.utcnow),
         sa.Column("created", sa.DateTime, default=datetime.datetime.utcnow),
@@ -62,7 +62,7 @@ def upgrade():
         sa.Column("link_en", sa.UnicodeText, nullable=False, default=''),
         sa.Column("link_ar", sa.UnicodeText, nullable=False, default=''),
         sa.Column("image_url", sa.UnicodeText, nullable=False, default=''),
-        sa.Column("order", sa.UnicodeText, nullable=False, default=''),
+        sa.Column("order", sa.Integer, nullable=False, default=''),
         sa.Column("modified", sa.DateTime, default=datetime.datetime.utcnow),
         sa.Column("created", sa.DateTime, default=datetime.datetime.utcnow),
     )
@@ -76,7 +76,7 @@ def upgrade():
         sa.Column("link_en", sa.UnicodeText, nullable=False, default=''),
         sa.Column("link_ar", sa.UnicodeText, nullable=False, default=''),
         sa.Column("image_url", sa.UnicodeText, nullable=False, default=''),
-        sa.Column("order", sa.UnicodeText, nullable=False, default=''),
+        sa.Column("order", sa.Integer, nullable=False, default=''),
         sa.Column("modified", sa.DateTime, default=datetime.datetime.utcnow),
         sa.Column("created", sa.DateTime, default=datetime.datetime.utcnow),
     )
