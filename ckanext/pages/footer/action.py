@@ -54,16 +54,19 @@ def footer_main_show(context, data_dict):
     tk.check_access('is_content_editor', context)
 
     record = FooterMain.get()
-    if record:
-        result = record.as_dict()
-    else:
-        result = {
+    default = {
             'logo_en': FooterMain.DEFAULT_LOGO_EN,
             'logo_ar': FooterMain.DEFAULT_LOGO_AR,
             'phone_number': FooterMain.DEFAULT_PHONE_NUMBER,
             'modified': ''
         
         }
+    result = record.as_dict() if record else {}
+    
+    for k,v in default.items():
+        if not result.get(k, None):
+            result[k] = v
+
 
     if has_request_context:
         result.update({
