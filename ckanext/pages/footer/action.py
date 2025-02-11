@@ -84,26 +84,20 @@ def footer_column_titles_show(context, data_dict):
     tk.check_access('is_content_editor', context)
 
     record = FooterColumnTitles.get()
+
     default = {
-            'column2_en': FooterColumnTitles.DEFAULT_COLUMN2_EN,
-            'column2_ar': FooterColumnTitles.DEFAULT_COLUMN2_AR,
-            'column3_en': FooterColumnTitles.DEFAULT_COLUMN3_EN,
-            'column3_ar': FooterColumnTitles.DEFAULT_COLUMN3_AR,
-            'modified': '',
-        }
+        'column2_en': FooterColumnTitles.DEFAULT_COLUMN2_EN,
+        'column2_ar': FooterColumnTitles.DEFAULT_COLUMN2_AR,
+        'column3_en': FooterColumnTitles.DEFAULT_COLUMN3_EN,
+        'column3_ar': FooterColumnTitles.DEFAULT_COLUMN3_AR,
+        'modified': '',
+    }
+
     if record:
         result = record.as_dict()
-    else:
-        result = {
-            'column2_en': FooterColumnTitles.DEFAULT_COLUMN2_EN,
-            'column2_ar': FooterColumnTitles.DEFAULT_COLUMN2_AR,
-            'column3_en': FooterColumnTitles.DEFAULT_COLUMN3_EN,
-            'column3_ar': FooterColumnTitles.DEFAULT_COLUMN3_AR,
-            'modified': '',
-        }
 
     for k,v in default.items():
-        if k not in result:
+        if not result.get(k, None):
             result[k] = v
 
     if has_request_context:
