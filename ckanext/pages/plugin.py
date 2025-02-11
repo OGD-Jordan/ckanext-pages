@@ -8,6 +8,7 @@ from ckan.lib.helpers import build_nav_main as core_build_nav_main
 from ckanext.pages import actions
 from ckanext.pages import auth
 from ckanext.pages import blueprint
+from ckanext.pages import header_blueprint
 from ckan.lib.plugins import DefaultTranslation
 from ckanext.pages.db import MainPage
 
@@ -92,7 +93,7 @@ class PagesPlugin(PagesPluginBase):
 
 
     def get_blueprint(self):
-        return [blueprint.pages, blueprint.header_management, *footer_get_blueprints()]
+        return [*blueprint.get_blueprints(), *header_blueprint.get_blueprints(), *footer_get_blueprints()]
 
 
     def update_config(self, config):
@@ -110,20 +111,31 @@ class PagesPlugin(PagesPluginBase):
 
     def get_actions(self):
         actions_dict = {
+            # Pages
             'ckanext_pages_edit': actions.pages_edit_action,
             'ckanext_pages_show': actions.pages_show,
-            'ckanext_pages_update': actions.pages_update,
             'ckanext_pages_delete': actions.pages_delete,
             'ckanext_pages_list': actions.pages_list,
-            'ckanext_news_list': actions.news_list,
-            'ckanext_news_toggle_visibility': actions.news_toggle_visibility,
-            'ckanext_events_list': actions.events_list,
+
             'ckanext_pages_upload': actions.pages_upload,
-            'ckanext_main_page_show': actions.main_page_show,
-            'ckanext_event_edit':actions.event_edit,
-            'ckanext_news_create':actions.news_create,
+
+            # News
             'ckanext_news_edit':actions.news_edit,
+            'ckanext_news_list': actions.news_list,
             'ckanext_news_show':actions.news_show,
+            'ckanext_news_toggle_visibility': actions.news_toggle_visibility,
+            'ckanext_news_delete':actions.news_delete,
+            
+            # Events
+            'ckanext_event_edit':actions.event_edit,
+            'ckanext_events_list': actions.events_list,
+            'ckanext_event_show':actions.events_show,
+            'ckanext_event_delete':actions.events_delete,
+
+            
+            # Main Page
+            'ckanext_main_page_show': actions.main_page_show,
+            
             # Header Management Actions
             'ckanext_header_main_menu_create': actions.header_main_menu_create,
             'ckanext_header_secondary_menu_create': actions.header_secondary_menu_create,
@@ -143,6 +155,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_header_secondary_menu_show': actions.header_secondary_menu_show,
             'ckanext_header_secondary_menu_edit': actions.header_secondary_menu_edit,
             'ckanext_header_secondary_menu_delete': actions.header_secondary_menu_delete,
+            
             **footer_get_actions()
         }
         return actions_dict
@@ -151,12 +164,27 @@ class PagesPlugin(PagesPluginBase):
     def get_auth_functions(self):
         return {
             'ckanext_pages_show': auth.pages_show,
-            'ckanext_pages_update': auth.pages_update,
-            'ckanext_pages_delete': auth.pages_delete,
-            'ckanext_pages_list': auth.pages_list,
-            'ckanext_pages_upload': auth.pages_upload,
+            'ckanext_pages_edit': auth.is_content_editor,
+            'ckanext_pages_delete': auth.is_content_editor,
+            'ckanext_pages_list': auth.is_content_editor,
+            'ckanext_pages_upload': auth.is_content_editor,
+
+            # News
+            'ckanext_news_edit':auth.is_content_editor,
+            'ckanext_news_list': auth.is_content_editor,
+            'ckanext_news_show':auth.news_privacy,
+            'ckanext_news_toggle_visibility': auth.is_content_editor,
+            'ckanext_news_delete':auth.is_content_editor,
+
+            # Events
+            'ckanext_event_edit':auth.is_content_editor,
+            'ckanext_events_list': auth.is_content_editor,
+            'ckanext_event_show':auth.anyone,
+            'ckanext_event_delete':auth.is_content_editor,
+
             # Header Management Auth Functions
             'ckanext_header_management_access': auth.header_management_access,
+
             **footer_get_auth_functions(),
         }
     

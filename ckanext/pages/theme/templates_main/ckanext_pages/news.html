@@ -3,35 +3,35 @@
 {% block title %}{{ _('News') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-      <a href="{{h.url_for('pages.news')}}" aria-label="{{_('news')}}">
-      <span>{{ _('News') }}</span>
-      </a>
-  </li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li class="active">{% link_for _('News'), named_route='pages.news_index' %}</li>
 {% endblock %}
 
 {% block page_primary_action %}
 <section>
-  <!-- Page Heading -->
-  <h1 class="page-heading" style="font-size: 24px; font-weight: bold; margin-bottom: 1px;">
-    {{ _('News') }}
-  </h1>
-  {% if h.check_access('ckanext_pages_update', {}) %}
+  {% if h.check_access('is_content_editor') %}
 
     <a href="{{ h.url_for('pages.news_new') }}" class="btn btn-primary">
       <i class="fa fa-plus-square"></i> {{ _('Add News') }}
     </a>
   {% endif %}
+
+  <!-- Page Heading -->
+  <h1 class="page-heading mt-4" style="font-size: 24px; font-weight: bold; margin-bottom: 1px;">
+    {{ _('News') }}
+  </h1>
 {% endblock %}
 
 {% block primary_content_inner %}
 
 {% set sorting = sorting if sorting else [
-    (_('Title Ascending'), 'Title_en asc'),
-    (_('Title Descending'), 'Title_en desc'),
+    (_('Title Ascending'), 'title_en asc') if h.lang() == 'en' else (False, False),
+    (_('Title Descending'), 'title_en desc') if h.lang() == 'en' else (False, False),
+    (_('Title Ascending'), 'title_ar asc') if h.lang() == 'ar' else (False, False),
+    (_('Title Descending'), 'title_ar desc') if h.lang() == 'ar' else (False, False),
     (_('Creation Date Ascending'), 'created asc'),
     (_('Creation Date Descending'), 'created desc'),
-    (_('News Date Ascending'), 'news_date asc'),
+    (_('Publish Date Ascending'), 'news_date asc'),
     (_('Publish Date Descending'), 'news_date desc')
   ] %}
 
@@ -50,83 +50,91 @@
     <div class="form-group control-order-by">
         <label for="field-order-by">{{ _('Order by') }}</label>
         <select id="field-order-by" name="sort" class="form-control form-select small-select" onchange="this.form.submit()">
-            <option value="title_en asc" {% if request.args.get('sort', 'title_en asc') == 'title_en asc' %} selected {% endif %}>Title Ascending</option>
-            <option value="title_en desc" {% if request.args.get('sort') == 'title_en desc' %} selected {% endif %}>Title Descending</option>
-            <option value="created asc" {% if request.args.get('sort') == 'created asc' %} selected {% endif %}>Creation Date Ascending</option>
-            <option value="created desc" {% if request.args.get('sort') == 'created desc' %} selected {% endif %}>Creation Date Descending</option>
-            <option value="news_date asc" {% if request.args.get('sort') == 'news_date asc' %} selected {% endif %}>Publish Date Ascending</option>
-            <option value="news_date desc" {% if request.args.get('sort') == 'news_date desc' %} selected {% endif %}>Publish Date Descending</option>
+          {% for title, value in sorting %}
+          {% if value %}
+              <option value="{{value}}" {% if request.args.get('sort', '') == value %} selected {% endif %}>{{ title }}</option>
+          {% endif %}
+          {% endfor %}
         </select>
     </div>
 </form>
 </div>
 
-<table class="table" style="border-collapse: collapse; width: 100%; background-color: white;">
+{% asset 'pages/news-list' %}
+<table class="table" style="border-collapse: collapse; width: 100%; background-color: white;" data-module="news-actions">
   <thead>
       <tr>
-          <th>News Title</th>
-          <th>Date Of Creation</th>
-        <th>Publish Date</th>
-          <th>Url</th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th>{{_('News Title')}}</th>
+          <th>{{_('Date Of Creation')}}</th>
+          <th>{{_('Publish Date')}}</th>
+          <th>{{_('Urls')}}</th>
+          <th>{{_('Status')}}</th>
+          <th>{{_('Actions')}}</th>
       </tr>
   </thead>
   <tbody>
-      {% if pages %}
-          {% for item in pages %}
+    
+    {% if pages %}
+      {% for item in pages %}
+        <tr>
+          <td><strong>{{ item.title_en if h.lang() == 'en' else item.title_ar }}</strong></td>
+          <td>{{ h.render_datetime(item.created, date_format='%d/%m/%Y') }}</td>
+          <td>{{ h.render_datetime(item.news_date, date_format='%d/%m/%Y') }}</td>
+          <td>
+            {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
+            <br>
+            {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
+          </td>
+          <td>{{item.status}}</td>
+          <td>
+            <div class="news-actions">
+            {% if item.status == _('Posted') %}
+            <a href="#" style="border: none; background: none; padding: 0;" data-id="{{ item.id }}" class="news-action news-visibility-toggler">
+                <img src="{{ '/images/EYE3.png' if item.hidden else '/images/hide_icon.png' }}"
+                      alt="{{ _('Unhide') if item.hidden else _('Hide') }}"
+                      title="{{ _('Unhide') if item.hidden else _('Hide') }}"
+                      style="width: 32px; height: 32px; cursor: pointer;">
+            </a>
+            {% endif %}
+            <!-- Edit Button -->
+            <a href="{{ h.url_for('pages.news_edit', id=item.id) }}">
+              <img src="/images/edit_icon.png" alt="Edit" style="width: 32px; height: 32px; cursor: pointer;">
+            </a>
 
-
-              <tr>
-                  <td><strong>{{ item.title_en }}</strong></td>
-                  <td><strong>{{ h.render_datetime(item.created, date_format='%d/%m/%Y') }}</strong></td>
-                  <td><strong>{{ h.render_datetime(item.news_date, date_format='%d/%m/%Y') }}</strong></td>
-                  <td><strong>{{ item.name }}</strong></td>
-                  <td><strong>{{item.status}}</strong></td>
-                  <td><strong>
-                    <a href="#" style="border: none; background: none; padding: 0;" data-id="{{ item.id }}" class="news-visibility-toggler">
-                        <img src="{{ '/images/EYE3.png' if item.hidden else '/images/hide_icon.png' }}"
-                             alt="{{ _('View') if item.hidden else _('Hide') }}"
-                             style="width: 32px; height: 32px; cursor: pointer;">
-                    </a>
-                    <!-- Edit Button -->
-                    <a href="{{ h.url_for('pages.news_edit', page=item.id) }}">
-                      <img src="/images/edit_icon.png" alt="Edit" style="width: 32px; height: 32px; cursor: pointer;">
-                  </a>
-
-                  <!-- Delete Button with Modal Trigger -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ item.id }}">
-                      <img src="/images/remove_icon.png" alt="Delete">
-                  </a>
-                  <!-- Delete Confirmation Modal -->
-                  <div class="modal fade" id="deleteModal-{{ item.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title" id="deleteModalLabel">{{ _('Please Confirm Action') }}</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                {{ _('Are you sure you want to delete this new?') }}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ _('Cancel') }}</button>
-                                <form action="{{ h.url_for('pages.news_delete', id=item.id) }}" method="post">
-                                    {{ h.csrf_input() }}
-                                    <button class="btn btn-primary" type="submit" name="confirm">{{ _('Confirm') }}</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </strong></td>
-          </tr>
-          {% endfor %}
-      {% else %}
-          <tr>
-              <td colspan="6">No news found.</td>
-          </tr>
-      {% endif %}
+            <!-- Delete Button with Modal Trigger -->
+            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ item.id }}">
+                <img src="/images/remove_icon.png" alt="Delete">
+            </a>
+                <!-- Delete Confirmation Modal -->
+                <div class="modal fade" id="deleteModal-{{ item.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="modal-title" id="deleteModalLabel">{{ _('Please Confirm Action') }}</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              {{ _('Are you sure you want to delete this new?') }}
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ _('Cancel') }}</button>
+                              <form action="{{ h.url_for('pages.news_delete', id=item.id) }}" method="post">
+                                  {{ h.csrf_input() }}
+                                  <button class="btn btn-primary" type="submit" name="confirm">{{ _('Confirm') }}</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6">{{_('No news found')}}.</td>
+        </tr>
+    {% endif %}
   </tbody>
 </table>
 
@@ -138,5 +146,6 @@
 
 {% block scripts %}
   {{ super() }}
-    <script src="/js/news-list.js"></script>
+    <script src="{{ h.url_for_static('/js/news-list.js') }}"></script>
+
 {% endblock %}

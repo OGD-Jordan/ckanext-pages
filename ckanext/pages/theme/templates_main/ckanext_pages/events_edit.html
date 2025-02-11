@@ -5,18 +5,19 @@
 {% block title %}{{ _('Edit Event') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-    <a href="{{ h.url_for('pages.events') }}" aria-label="{{ _('Events') }}">
-        <span>{{ _('Events') }}</span>
-    </a>
-  </li>
-  <li>{{ _('Events Edit') }}</li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li>{% link_for _('Events'), named_route='pages.events' %}</li>
+{% if action == 'new' %}
+<li class="active">{% link_for _('Add New'), named_route='pages.events_new' %}</li>
+{% else %}
+<li class="active">{% link_for _('Event Edit'), named_route='pages.events_edit', id=data.id %}</li>
+{% endif %}
 {% endblock %}
 
 {% block primary_content_inner %}
 <div class="container">
-  <h1>Edit Event</h1>
-<form method="post" action="{{ h.url_for('pages.events_edit', page=data.id if data and data.id else '') }}" data-module="basic-form" enctype="multipart/form-data">
+  <h1>{{_('Edit Event')}}</h1>
+<form method="post" action="" data-module="basic-form" enctype="multipart/form-data">
     {{ h.csrf_input() }}
     {% if data and data.id %}
         <input type="hidden" name="id" value="{{ data.id }}">
@@ -27,10 +28,10 @@
     <!-- Title En -->
     {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder='Enter event title in English', value=data.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
 
-    {% set prefix = h.url_for('pages.show', page='') %}
-    {% set domain = h.url_for('pages.show', page='', qualified=true) %}
+    {% set prefix = h.url_for('home_page.events_detail', id='') %}
+    {% set domain = h.url_for('home_page.events_detail', id='', qualified=true) %}
     {% set domain = domain|replace("http://", "")|replace("https://", "") %}
-    {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<pages>'} %}
+    {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<event>'} %}
 
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-event'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
@@ -38,22 +39,35 @@
     {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder='Enter event title in Arabic', value=data.title_ar, error=errors.title_ar, is_required=true) }}
 
     <!-- Image Upload -->
-    {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload) }}
+    {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
+    {% set is_url = data.image_url and data.image_url.startswith('http') %}
+
+    {{ form.image_upload(
+        data, 
+        errors, 
+        is_upload_enabled=h.uploads_enabled(), 
+        is_url=is_url, 
+        is_upload=is_upload,
+        url_label=_('News Image (1200 x 400 pixels)'), 
+        upload_label=_('News Image (1200 x 400 pixels)') 
+      ) }}
 
     <!-- Start Date -->
     <div class="mb-3">
-      <label for="start_date" class="form-label">Start Date</label>
-      <input type="date" class="form-control form-control-lg" id="start_date" name="start_date" value="{{ data.start_date }}">
+      {% set start_date_formatted =  h.date_str_to_datetime(data.start_date).strftime('%Y-%m-%d') if data and data.start_date else '' %}
+      <label for="start_date" class="form-label">{{_('Start Date')}}</label>
+      <input type="date" class="form-control form-control-lg" id="start_date" name="start_date" value="{{ start_date_formatted }}">
     </div>
 
     <!-- End Date -->
     <div class="mb-3">
-      <label for="end_date" class="form-label">End Date</label>
-      <input type="date" class="form-control form-control-lg" id="end_date" name="end_date" value="{{ data.end_date }}">
+      {% set end_date_formatted =  h.date_str_to_datetime(data.end_date).strftime('%Y-%m-%d') if data and data.end_date else '' %}
+      <label for="end_date" class="form-label">{{_('End Date')}}</label>
+      <input type="date" class="form-control form-control-lg" id="end_date" name="end_date" value="{{ end_date_formatted }}">
     </div>
 
-    {{ form.input('brief_en', id='field-brief_en', label=_('Brief En'), placeholder='Enter Brief in English', value=data.Brief_en, error=errors.brief_en)}}
-    {{ form.input('brief_ar', id='field-brief_ar', label=_('Brief Ar'), placeholder='Enter Brief in Arabic', value=data.brief_ar, error=errors.brief_ar) }}
+    {{ form.input('brief_en', id='field-brief_en', label=_('Brief En'), placeholder=_('Enter Brief in English'), value=data.brief_en, error=errors.brief_en)}}
+    {{ form.input('brief_ar', id='field-brief_ar', label=_('Brief Ar'), placeholder=_('Enter Brief in Arabic'), value=data.brief_ar, error=errors.brief_ar) }}
 
     <!-- Content Editors -->
     {% set editor = h.pages_get_wysiwyg_editor() %}
@@ -77,8 +91,8 @@
     {% endif %}
     <!-- Submit Button -->
     <div class="d-flex justify-content-end mt-4">
-      <button type="cancel" class="btn btn-primary btn-lg me-2">Cancel</button>
-      <button type="submit" class="btn btn-secondary btn-lg">Save</button>
+      <button type="cancel" class="btn btn-primary btn-lg me-2">{{_('Cancel')}}</button>
+      <button type="submit" class="btn btn-secondary btn-lg">{{_('Save')}}</button>
     </div>
   </form>
 </div>

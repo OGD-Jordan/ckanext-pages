@@ -4,26 +4,24 @@
 
 {% block title %}{{ _('Events') }}{% endblock %}
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-    <a href="{{ h.url_for('pages.events') }}" aria-label="{{ _('Events') }}">
-  <span>{{ _('Events') }}</span>
-   </a>
-  </li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li class="active">{% link_for _('Events'), named_route='pages.events' %}</li>
 
 {% endblock %}
 
 {% block page_primary_action %}
 <section>
   <!-- Page Heading -->
-  <h1 class="page-heading" style="font-size: 24px; font-weight: bold; margin-bottom: 1px;">
-    {{ _('Events') }}
-  </h1>
-
-  {% if h.check_access('ckanext_pages_update', {}) %}
-  <a href="/events_edit" class="btn btn-primary">
+  
+  {% if h.check_access('is_content_editor') %}
+  <a href="{{ h.url_for('pages.events_new') }}" class="btn btn-primary">
     <i class="fa fa-plus-square"></i> {{ _('Add Events') }}
   </a>  
   {% endif %}
+
+  <h1 class="page-heading mt-4" style="font-size: 24px; font-weight: bold; margin-bottom: 1px;">
+    {{ _('Events') }}
+  </h1>
 {% endblock %}
 
 {% block primary_content_inner %}
@@ -70,28 +68,32 @@
 <table class="table" style="border-collapse: collapse; width: 100%; background-color: white;">
   <thead>
       <tr>
-          <th>Title En</th>
-          <th>Date Of Creation</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Url</th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th>{{_('Title')}}</th>
+          <th>{{_('Date Of Creation')}}</th>
+          <th>{{_('Start Date')}}</th>
+          <th>{{_('End Date')}}</th>
+          <th>{{_('Urls')}}</th>
+          <th>{{_('Status')}}</th>
+          <th>{{_('Actions')}}</th>
       </tr>
   </thead>
   <tbody>
       {% if pages %}
           {% for event in pages %}
               <tr>
-                  <td><strong>{{ event.title_en }}</strong></td>
-                  <td><strong>{{ h.render_datetime(event.created, date_format='%d/%m/%Y') }}</strong></td>
-                  <td><strong>{{ h.render_datetime(event.start_date, date_format='%d/%m/%Y') }}</strong></td>
-                  <td><strong>{{ h.render_datetime(event.end_date, date_format='%d/%m/%Y') }}</strong></td>
-                  <td><strong>{{ event.name }}</strong></td>
-                  <td><strong>{{ event.status }}</strong></td>
-                  <td><strong>
+                  <td><strong>{{ event.title_en if h.lang() == 'en' else event.title_ar }}</strong></td>
+                  <td>{{ h.render_datetime(event.created, date_format='%d/%m/%Y') }}</td>
+                  <td>{{ h.render_datetime(event.start_date, date_format='%d/%m/%Y') }}</td>
+                  <td>{{ h.render_datetime(event.end_date, date_format='%d/%m/%Y') }}</td>
+                  <td>
+                      {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.events_detail', id = event.name).replace('/' + lang + '/', '/') }}
+                      <br>
+                      {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.events_detail', id = event.name).replace('/' + lang + '/', '/') }}
+                  </td>
+                  <td>{{ event.status }}</td>
+                  <td>
                     <!-- Edit Button -->
-                    <a href="/events_edit/{{ event.id }}">
+                    <a href="{{ h.url_for('pages.events_edit', id=event.id) }}">
                         <img src="/images/edit_icon.png" alt="Edit" style="width: 32px; height: 32px; cursor: pointer;">
                     </a>
 
@@ -121,12 +123,12 @@
                             </div>
                         </div>
                     </div>
-                  </strong></td>
+                  </td>
               </tr>
           {% endfor %}
       {% else %}
           <tr>
-              <td colspan="7">No events found.</td>
+              <td colspan="7">{{_('No events found.')}}</td>
           </tr>
       {% endif %}
   </tbody>

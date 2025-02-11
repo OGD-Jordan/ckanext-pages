@@ -62,10 +62,18 @@ class Page(DomainObject, BaseModel):
 
 
     @classmethod
-    def get(cls, id=None):
-        if id:
-            return Session.query(cls).filter_by(id=id).first()
-        return None
+    def filter_custom(cls, **kwargs):
+        q = cls.Session.query(cls)
+        
+        if kwargs:  
+            q = q.filter_by(**kwargs)
+
+        return q
+
+    @classmethod
+    def get(cls, id_or_name=None):
+        return cls.filter_custom(id = id_or_name).first() or cls.filter_custom(name = id_or_name).first()
+
 
     @classmethod
     def pages(cls, **kw):
@@ -107,12 +115,12 @@ class MainPage(DomainObject, BaseModel):
 
     @classmethod
     def get(cls, **kw):
-        query = model.Session.query(cls).autoflush(False)
+        query = cls.Session.query(cls).autoflush(False)
         return query.filter_by(**kw).first()
 
     @classmethod
     def all(cls):
-        query = model.Session.query(cls).order_by(cls.id).autoflush(False)
+        query = cls.Session.query(cls).order_by(cls.id).autoflush(False)
         return query.all()
 
 class Event(DomainObject, BaseModel):
@@ -133,9 +141,9 @@ class Event(DomainObject, BaseModel):
 
     
     @classmethod
-    def get(cls, id=None):
-        if id:
-            return Session.query(cls).filter_by(id=id).first()
+    def get(cls, id_or_name=None):
+        if id_or_name:
+            return cls.Session.query(cls).filter_by(id=id_or_name).first() or Session.query(cls).filter_by(name=id_or_name).first()
         return None
 
     @classmethod
@@ -143,7 +151,7 @@ class Event(DomainObject, BaseModel):
         order = kw.pop('order', False)
         order_start_date = kw.pop('order_start_date', False)
 
-        query = model.Session.query(cls).autoflush(False)
+        query = cls.Session.query(cls).autoflush(False)
         query = query.filter_by(**kw)
         if order:
             query = query.order_by(sa.cast(cls.order, sa.Integer)).filter(cls.order != '')
@@ -156,8 +164,8 @@ class Event(DomainObject, BaseModel):
     def save(self):
         try:
             self.modified = datetime.datetime.utcnow()
-            model.Session.add(self)
-            model.Session.commit()
+            self.add(self)
+            self.commit()
             print("Saved page with ID:", self.id)  # Debug: Confirm save
         except Exception as e:
             print("Error during saving:", str(e))  # Debug: Log errors
@@ -184,9 +192,9 @@ class News(DomainObject, BaseModel):
     
 
     @classmethod
-    def get(cls, id=None):
-        if id:
-            return Session.query(cls).filter_by(id=id).first()
+    def get(cls, id_or_name=None):
+        if id_or_name:
+            return cls.Session.query(cls).filter_by(id=id_or_name).first() or Session.query(cls).filter_by(name=id_or_name).first()
         return None
 
     @classmethod
@@ -194,7 +202,7 @@ class News(DomainObject, BaseModel):
         order = kw.pop('order', False)
         order_news_date = kw.pop('order_news_date', False)
 
-        query = model.Session.query(cls).autoflush(False)
+        query = cls.Session.query(cls).autoflush(False)
         query = query.filter_by(**kw)
         if order:
             query = query.order_by(sa.cast(cls.order, sa.Integer)).filter(cls.order != '')
@@ -207,8 +215,8 @@ class News(DomainObject, BaseModel):
     def save(self):
         try:
             self.modified = datetime.datetime.utcnow()
-            model.Session.add(self)
-            model.Session.commit()
+            self.add(self)
+            self.commit()
             print("Saved page with ID:", self.id)
         except Exception as e:
             print("Error during saving:", str(e))

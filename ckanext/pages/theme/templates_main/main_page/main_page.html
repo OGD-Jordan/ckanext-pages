@@ -6,11 +6,8 @@
 {% block title %}{{ _('Main Page') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="breadcrumb-item">
-    <a href="{{ h.url_for('pages.main_page') }}" aria-label="{{ _('Main Page') }}">
-      <span> {{ _('Main Page') }}</span>
-    </a>
-  </li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li class="active">{% link_for _('Main Page'), named_route='pages.main_page' %}</li>
 {% endblock %}
 
 {% block primary_content_inner %}

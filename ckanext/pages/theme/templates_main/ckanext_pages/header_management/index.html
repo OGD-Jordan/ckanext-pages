@@ -3,11 +3,8 @@
 {% block title %}{{ _('Header Management') }}{% endblock %}
 
 {% block breadcrumb_content %}
-    <li class="breadcrumb-item">
-        <a href="{{ h.url_for('header_management.index') }}" aria-label="{{ _('Header Management') }}">
-            <span>{{ _('Header Management') }}</span>
-        </a>
-    </li>
+<li>{% link_for _('Content Management System'), named_route='header_management.index' %}</li>
+<li class="active">{% link_for _('Header Management'), named_route='header_management.index' %}</li>
 {% endblock %}
 
 {% block page_primary_action %}

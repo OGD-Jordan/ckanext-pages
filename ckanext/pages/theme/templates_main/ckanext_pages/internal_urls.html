@@ -42,12 +42,34 @@
 
 <script>
     function copyToClipboard(text, element) {
-        navigator.clipboard.writeText(text).then(() => {
-            let message = element.nextElementSibling;
+        if (navigator.clipboard && window.isSecureContext) {
+            // Modern method (requires HTTPS)
+            navigator.clipboard.writeText(text).then(() => showCopyMessage(element))
+                .catch(err => console.error('Failed to copy: ', err));
+        } else {
+            // Fallback method (works on HTTP)
+            let textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                showCopyMessage(element);
+            } catch (err) {
+                console.error("Fallback copy failed: ", err);
+            }
+            document.body.removeChild(textarea);
+        }
+    }
+
+    function showCopyMessage(element) {
+        let message = element.nextElementSibling;
+        if (message) {
             message.classList.add("show");
             setTimeout(() => message.classList.remove("show"), 1500);
-        }).catch(err => console.error('Failed to copy: ', err));
+        }
     }
+    
 </script>
 
 <style>
