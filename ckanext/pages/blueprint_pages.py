@@ -243,7 +243,7 @@ class PageDelete(MethodView):
             }
         )
 
-def upload():
+def pages_upload():
     return utils.pages_upload()
 
 
@@ -252,7 +252,7 @@ def register_pages(pages):
     pages.add_url_rule("/pages/<id>", view_func=show)
 
     pages.add_url_rule("/pages/edit/", view_func=PageEdit.as_view('new'), endpoint='new')
-    pages.add_url_rule("/pages/edit/pages_upload", view_func=upload, methods=['POST'])
+    pages.add_url_rule("/pages/edit/pages_upload", view_func=pages_upload, methods=['POST'])
     pages.add_url_rule("/pages/edit/<id>", view_func=PageEdit.as_view('edit'), endpoint='edit')
 
 

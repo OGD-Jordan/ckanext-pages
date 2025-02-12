@@ -220,13 +220,13 @@ class EventDelete(MethodView):
             }
         )
 
-def upload():
+def events_upload():
     return utils.pages_upload()
 
 
 def register_events(pages):
     pages.add_url_rule('/events/edit', view_func=EventEdit.as_view('events_new'), endpoint='events_new')
-    pages.add_url_rule("/events/edit/pages_upload", view_func=upload, methods=['POST'])
+    pages.add_url_rule("/events/edit/pages_upload", view_func=events_upload, methods=['POST'])
     pages.add_url_rule('/events/edit/<id>', view_func=EventEdit.as_view('events_edit'), endpoint='events_edit')
     pages.add_url_rule('/events/delete/<id>', view_func=EventDelete.as_view('events_delete'), endpoint='events_delete')
     pages.add_url_rule('/events', view_func=events, methods=['GET'])

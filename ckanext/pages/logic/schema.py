@@ -22,7 +22,7 @@ def default_pages_schema():
         'name': [not_empty, name_validator, pages_name_validator],
         'content_en': [not_empty, unicode_safe],
         'content_ar': [not_empty, unicode_safe],
-        'image_url': [not_empty, unicode_safe],
+        'image_url': [ignore_missing, unicode_safe],
         'order': [ignore_missing, unicode_safe],
         'private': [ignore_missing, p.toolkit.get_validator('boolean_validator')],
         'user_id': [ignore_missing, unicode_safe],
