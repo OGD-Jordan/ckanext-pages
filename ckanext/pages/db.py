@@ -244,8 +244,18 @@ class HeaderLogo(DomainObject, BaseModel):
     modified = Column(types.DateTime, default=datetime.datetime.utcnow)
 
     @classmethod
-    def get(cls):
-        return Session.query(cls).first()
+    def get(cls, session: Session):
+        instance = session.query(cls).first()
+
+        if not instance:
+            instance = cls(
+                logo_en="/images/mainlogo-en.png",
+                logo_ar="/images/mainlogo-ar.png"
+            )
+            session.add(instance)
+            session.commit()
+
+        return instance
 
     @property
     def logo_en_filename(self):
@@ -257,10 +267,8 @@ class HeaderLogo(DomainObject, BaseModel):
 
     @property
     def link(self):
-        return h.url_for_static(
-            f'uploads/header_logos/{getattr(self, f"logo_{h.lang()}")}',
-            qualified=True
-        )
+        logo = getattr(self, f"logo_{h.lang()}")
+        return logo if logo.startswith("/images/") else h.url_for_static(f"uploads/header_logos/{logo}", qualified=True)
 
 
 

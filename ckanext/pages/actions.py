@@ -615,7 +615,7 @@ def header_secondary_menu_list(context, data_dict):
 def header_logo_get(context, data_dict):
     """Get header logo."""
     tk.check_access('ckanext_header_management_access', context)
-    return model.Session.query(HeaderLogo).first()
+    return HeaderLogo.get(model.Session)
 
 
 # Update Actions - Header Management
