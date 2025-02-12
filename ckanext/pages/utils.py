@@ -333,7 +333,7 @@ def pages_upload():
         )
     )
     try:
-        upload_info = tk.get_action('ckanext_pages_upload')(None, data_dict)
+        upload_info = tk.get_action('ckanext_pages_upload')(_get_context(), data_dict)
     except tk.NotAuthorized:
         return tk.abort(401, _('Unauthorized to upload file %s') % id)
 

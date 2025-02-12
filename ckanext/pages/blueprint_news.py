@@ -224,9 +224,13 @@ def news_toggle_visibility(id):
     data_dict = {'id': id}
     return tk.get_action('ckanext_news_toggle_visibility')(_get_context(), data_dict)  #
 
+def upload():
+    return utils.pages_upload()
+
 
 def register_news(pages):
     pages.add_url_rule('/news/add', view_func=NewsEdit.as_view('news_new'), endpoint='news_new')
+    pages.add_url_rule("/news/edit/pages_upload", view_func=upload, methods=['POST'])
     pages.add_url_rule('/news/edit/<id>', view_func=NewsEdit.as_view('news_edit'), endpoint='news_edit')
     pages.add_url_rule('/news/delete/<id>', view_func=NewsDelete.as_view('news_delete'), endpoint='news_delete')
 

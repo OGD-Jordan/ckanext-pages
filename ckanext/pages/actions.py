@@ -163,7 +163,7 @@ def pages_upload(context, data_dict):
     upload = uploader.get_uploader('page_images')
 
     upload.update_data_dict(data_dict, 'image_url',
-                            'image_upload', 'clear_upload')
+                            'upload', 'clear_upload')
 
     max_image_size = uploader.get_max_image_size()
 

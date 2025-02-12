@@ -135,9 +135,6 @@ pages.add_url_rule("/main_page/edit/<section_id>", view_func=main_page_edit, end
 pages.add_url_rule("/main_page", view_func=main_page, endpoint="main_page")
 
 
-# File Uploads
-pages.add_url_rule("/pages_upload", view_func=upload, methods=['POST'])
-
 
 pages.add_url_rule("/internal-urls", view_func=internal_urls, endpoint='internal_urls',
                    methods=['GET'])
