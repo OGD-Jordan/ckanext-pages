@@ -63,7 +63,7 @@ class Page(DomainObject, BaseModel):
     private = Column(types.Boolean, default=True)
     group_id = Column(types.UnicodeText, default=None)
     user_id = Column(types.UnicodeText, default=u'')
-    publish_date = Column(types.DateTime, default = datetime.datetime.utcnow)
+    publish_date = Column(types.DateTime, nullable=True)  # Make it nullable
     page_type = Column(types.UnicodeText)
     created = Column(types.DateTime, default=datetime.datetime.utcnow)
     modified = Column(types.DateTime, default=datetime.datetime.utcnow)

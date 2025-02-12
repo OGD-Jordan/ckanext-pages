@@ -47,7 +47,7 @@ def get_header_data():
     secondary_menu_tree = build_menu_tree(secondary_menu_items)
 
     return {
-        'logo_url': logo.link,
+        'logo_url': logo.link if logo else '',
         'main_menu_tree': main_menu_tree,
         'secondary_menu_tree': secondary_menu_tree,
         'lang': lang

@@ -81,7 +81,7 @@
                     {% endif %}
                   </strong></td>
                   <td>{{ h.render_datetime(page.created, date_format='%d/%m/%Y') }}</td>
-                  <td>{{ h.render_datetime(page.publish_date, date_format='%d/%m/%Y') }}</td>
+                  <td>{{ h.render_datetime(page.publish_date, date_format='%d/%m/%Y') if page.publish_date else '-' }}</td>
                   <td>
                     {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
                     <br>
