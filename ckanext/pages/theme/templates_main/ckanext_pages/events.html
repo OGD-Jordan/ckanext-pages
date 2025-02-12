@@ -81,11 +81,11 @@
       {% if pages %}
           {% for event in pages %}
               <tr>
-                  <td><strong>{{ event.title_en if h.lang() == 'en' else event.title_ar }}</strong></td>
+                  <td style="width: 25%;"><strong>{{ event.title_en if h.lang() == 'en' else event.title_ar }}</strong></td>
                   <td>{{ h.render_datetime(event.created, date_format='%d/%m/%Y') }}</td>
                   <td>{{ h.render_datetime(event.start_date, date_format='%d/%m/%Y') }}</td>
                   <td>{{ h.render_datetime(event.end_date, date_format='%d/%m/%Y') }}</td>
-                  <td>
+                  <td style="width: 35%;">
                       {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.events_detail', id = event.name).replace('/' + lang + '/', '/') }}
                       <br>
                       {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.events_detail', id = event.name).replace('/' + lang + '/', '/') }}

@@ -73,7 +73,7 @@
       {% if pages %}
           {% for page in pages %}
               <tr>
-                  <td><strong>
+                  <td style="width: 25%;"><strong>
                     {% if lang == 'ar' %}
                       {{ page.title_ar }}
                       {% else %}
@@ -82,7 +82,7 @@
                   </strong></td>
                   <td>{{ h.render_datetime(page.created, date_format='%d/%m/%Y') }}</td>
                   <td>{{ h.render_datetime(page.publish_date, date_format='%d/%m/%Y') if page.publish_date else '-' }}</td>
-                  <td>
+                  <td style="width: 35%;">
                     {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
                     <br>
                     {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}

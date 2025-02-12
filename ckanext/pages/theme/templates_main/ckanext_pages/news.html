@@ -77,10 +77,10 @@
     {% if pages %}
       {% for item in pages %}
         <tr>
-          <td><strong>{{ item.title_en if h.lang() == 'en' else item.title_ar }}</strong></td>
+          <td style="width: 25%;"><strong>{{ item.title_en if h.lang() == 'en' else item.title_ar }}</strong></td>
           <td>{{ h.render_datetime(item.created, date_format='%d/%m/%Y') }}</td>
           <td>{{ h.render_datetime(item.news_date, date_format='%d/%m/%Y') }}</td>
-          <td>
+          <td style="width: 35%;">
             {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
             <br>
             {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
