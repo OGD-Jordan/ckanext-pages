@@ -10,7 +10,7 @@ def sysadmin(context, data_dict):
     return {'success':  False}
 
 def is_content_editor(context, data_dict):
-    return authz.is_authorized('is_content_editor')
+    return authz.is_authorized('is_content_editor', context)
 
 @p.toolkit.auth_allow_anonymous_access
 def anyone(context, data_dict):
@@ -58,18 +58,3 @@ pages_upload = is_content_editor
 pages_show = page_privacy
 
 
-
-def header_management_access(context, data_dict):
-    """
-    Only sysadmin and content writers can manage headers
-    """
-    # todo: remove this line
-    # return {'success': True}
-    user = context.get('auth_user_obj')
-    if not user:
-        return {'success': False}
-
-    is_sysadmin = user.sysadmin
-    is_content_writer = user.has_role('content_writer') if hasattr(user, 'has_role') else False
-
-    return {'success': is_sysadmin or is_content_writer}

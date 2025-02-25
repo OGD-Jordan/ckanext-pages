@@ -181,7 +181,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_event_delete':auth.is_content_editor,
 
             # Header Management Auth Functions
-            'ckanext_header_management_access': auth.header_management_access,
+            'ckanext_header_management_access': auth.is_content_editor,
 
             **footer_get_auth_functions(),
         }
