@@ -10,7 +10,6 @@
     {% endif %}
     <h1 class="page-heading">{{ c.page.title }}</h1>
          <span class="muted date"> {{ h.render_datetime(c.page.publish_date) }} </span>
-      {% endif %}
     {% if c.page.content %}
       {% set editor = h.pages_get_wysiwyg_editor() %}
       {% if editor %}
