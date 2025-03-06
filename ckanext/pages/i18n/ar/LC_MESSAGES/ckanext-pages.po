@@ -22,283 +22,283 @@ msgstr ""
 
 #: ckanext/pages/actions.py:57
 msgid "Missing 'id' in request."
-msgstr ""
+msgstr "مفقود 'رقم المعرف' في الطلب"
 
 #: ckanext/pages/actions.py:132 ckanext/pages/actions.py:203
 #: ckanext/pages/blueprint_pages.py:80
 msgid "Page not found."
-msgstr ""
+msgstr "لم يتم العثور على الصفحة"
 
 #: ckanext/pages/actions.py:161 ckanext/pages/actions.py:510
 msgid "Not authorized to see this page"
-msgstr ""
+msgstr "غير مصرح له برؤية هذه الصفحة"
 
 #: ckanext/pages/actions.py:260
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:91
 msgid "Disabled"
-msgstr ""
+msgstr "معطل"
 
 #: ckanext/pages/actions.py:262 ckanext/pages/actions.py:304
 #: ckanext/pages/actions.py:333
 msgid "Upcoming"
-msgstr ""
+msgstr "القادمة"
 
 #: ckanext/pages/actions.py:262
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:91
 msgid "Posted"
-msgstr ""
+msgstr "نشر"
 
 #: ckanext/pages/actions.py:300 ckanext/pages/actions.py:329
 msgid "Past Event"
-msgstr ""
+msgstr "فعالية سابقة"
 
 #: ckanext/pages/actions.py:302 ckanext/pages/actions.py:331
 msgid "Currently Happening"
-msgstr ""
+msgstr "يحدث حالياً"
 
 #: ckanext/pages/actions.py:344
 msgid "Event item not found."
-msgstr ""
+msgstr "لم يتم العثور على عنصر الفعالية"
 
 #: ckanext/pages/actions.py:355
 msgid "Event not found"
-msgstr ""
+msgstr "لم يتم العثور على الفعالية"
 
 #: ckanext/pages/actions.py:368 ckanext/pages/utils.py:209
 msgid "News not found"
-msgstr ""
+msgstr "لم يتم العثور على الأخبار"
 
 #: ckanext/pages/actions.py:380 ckanext/pages/blueprint_events.py:203
 #: ckanext/pages/blueprint_news.py:203 ckanext/pages/blueprint_pages.py:225
 msgid "Page not found"
-msgstr ""
+msgstr "لم يتم العثور على الصفحة"
 
 #: ckanext/pages/actions.py:563
 msgid "News item not found."
-msgstr ""
+msgstr "لم يتم العثور على عنصر الأخبار"
 
 #: ckanext/pages/auth.py:23
 msgid "User not found"
-msgstr ""
+msgstr "لم يتم العثور على المستخدم"
 
 #: ckanext/pages/blueprint.py:63
 msgid "Datasets"
-msgstr ""
+msgstr "مجموعات البيانات"
 
 #: ckanext/pages/blueprint.py:68
 msgid "Government Entities"
-msgstr ""
+msgstr "الجهات الحكومية"
 
 #: ckanext/pages/blueprint.py:73
 msgid "Sectors"
-msgstr ""
+msgstr "القطاعات"
 
 #: ckanext/pages/blueprint.py:78
 msgid "Dashboard"
-msgstr ""
+msgstr "لوحة الأداء"
 
 #: ckanext/pages/blueprint.py:83
 msgid "Reuses"
-msgstr ""
+msgstr "إعادة الاستخدام"
 
 #: ckanext/pages/blueprint.py:88
 msgid "Request New Dataset"
-msgstr ""
+msgstr "طلب مجموعة بيانات جديدة"
 
 #: ckanext/pages/blueprint.py:93
 msgid "Report an Error"
-msgstr ""
+msgstr "الإبلاغ عن خطأ"
 
 #: ckanext/pages/blueprint.py:98
 msgid "API Guide"
-msgstr ""
+msgstr "دليل واجهة برمجة التطبيقات"
 
 #: ckanext/pages/blueprint.py:103
 msgid "Submit new Reuse"
-msgstr ""
+msgstr "إرسال إعادة استخدام جديدة"
 
 #: ckanext/pages/blueprint.py:108
 msgid "News List"
-msgstr ""
+msgstr "قائمة الأخبار"
 
 #: ckanext/pages/blueprint.py:113
 msgid "Events List"
-msgstr ""
+msgstr "قائمة الفعاليات"
 
 #: ckanext/pages/blueprint_events.py:78 ckanext/pages/blueprint_news.py:78
 #: ckanext/pages/blueprint_pages.py:101
 msgid "Unauthorized to Add/update Pages"
-msgstr ""
+msgstr "غير مصرح بإضافة/تحديث الصفحات"
 
 #: ckanext/pages/blueprint_events.py:161 ckanext/pages/blueprint_news.py:161
 #: ckanext/pages/blueprint_pages.py:184
 msgid "Unauthorized to delete the Page"
-msgstr ""
+msgstr "غير مصرح بحذف الصفحة"
 
 #: ckanext/pages/blueprint_events.py:174
 msgid "Event deleted successfully!"
-msgstr ""
+msgstr "!تم حذف الفعالية بنجاح"
 
 #: ckanext/pages/blueprint_news.py:174
 msgid "News deleted successfully!"
-msgstr ""
+msgstr "تم حذف الأخبار بنجاح"
 
 #: ckanext/pages/blueprint_pages.py:73
 msgid "Page id not specified."
-msgstr ""
+msgstr "لم يتم تحديد معرف الصفحة"
 
 #: ckanext/pages/blueprint_pages.py:197
 msgid "Page deleted successfully!"
-msgstr ""
+msgstr "!تم حذف الصفحة بنجاح"
 
 #: ckanext/pages/header_blueprint.py:48
 msgid "Not authorized to manage headers"
-msgstr ""
+msgstr "غير مصرح له لإدارة الترويسات"
 
 #: ckanext/pages/header_blueprint.py:60 ckanext/pages/header_blueprint.py:96
 msgid "Menu item visibility updated"
-msgstr ""
+msgstr "تم تحديث رؤية عنصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:62 ckanext/pages/header_blueprint.py:98
 msgid "Not authorized to update menu items"
-msgstr ""
+msgstr "غير مصرح بتحديث عناصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:64 ckanext/pages/header_blueprint.py:81
 #: ckanext/pages/header_blueprint.py:100 ckanext/pages/header_blueprint.py:284
 #: ckanext/pages/header_blueprint.py:300 ckanext/pages/header_blueprint.py:384
 #: ckanext/pages/header_blueprint.py:399
 msgid "Menu item not found"
-msgstr ""
+msgstr "لم يتم العثور على عنصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:77 ckanext/pages/header_blueprint.py:395
 msgid "Menu item deleted"
-msgstr ""
+msgstr "تم حذف عنصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:79 ckanext/pages/header_blueprint.py:397
 msgid "Not authorized to delete menu items"
-msgstr ""
+msgstr "غير مصرح بحذف عناصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:137
 msgid "Header logo uploaded successfully"
-msgstr ""
+msgstr "تم تحميل شعار الترويسة بنجاح"
 
 #: ckanext/pages/header_blueprint.py:163
 msgid "Not authorized to edit logo"
-msgstr ""
+msgstr "غير مصرح بتعديل الشعار"
 
 #: ckanext/pages/header_blueprint.py:165
 msgid "Logo not found"
-msgstr ""
+msgstr "لم يتم العثور على الشعار"
 
 #: ckanext/pages/header_blueprint.py:183 ckanext/pages/header_blueprint.py:246
 msgid "Not More Than 6 Items Can Be Added to Main Header Without Any Parent."
-msgstr ""
+msgstr "لا يمكن إضافة أكثر من 6 عناصر إلى العنوان الرئيسي بدون أي عنصر رئيسي"
 
 #: ckanext/pages/header_blueprint.py:191
 msgid "Maximum root items reached"
-msgstr ""
+msgstr "تم الوصول إلى الحد الأقصى للعناصر الجذرية"
 
 #: ckanext/pages/header_blueprint.py:197 ckanext/pages/header_blueprint.py:316
 msgid "Menu item created successfully"
-msgstr ""
+msgstr "تم إنشاء عنصر القائمة بنجاح"
 
 #: ckanext/pages/header_blueprint.py:221 ckanext/pages/header_blueprint.py:340
 msgid "Not authorized to create menu items"
-msgstr ""
+msgstr "غير مصرح بإنشاء عناصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:255 ckanext/pages/header_blueprint.py:357
 msgid "Menu item updated"
-msgstr ""
+msgstr "تم تحديث عنصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:282 ckanext/pages/header_blueprint.py:382
 msgid "Not authorized to edit menu items"
-msgstr ""
+msgstr "غير مصرح بتعديل عناصر القائمة"
 
 #: ckanext/pages/header_blueprint.py:298
 msgid "Not authorized to view menu item details"
-msgstr ""
+msgstr "غير مصرح له بعرض تفاصيل عناصر القائمة"
 
 #: ckanext/pages/helpers.py:60
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:31
 msgid "Same Tab"
-msgstr ""
+msgstr "نفس علامة التبويب"
 
 #: ckanext/pages/helpers.py:61
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:32
 msgid "New Tab"
-msgstr ""
+msgstr "علامة تبويب جديدة"
 
 #: ckanext/pages/utils.py:296
 msgid "ERROR: View not found {view_id}"
-msgstr ""
+msgstr "{view_id}خطأ: لم يتم العثور على العرض "
 
 #: ckanext/pages/utils.py:307
 msgid "Your browser does not support iframes."
-msgstr ""
+msgstr "لا يدعم متصفحك الأطر المضمنة"
 
 #: ckanext/pages/utils.py:327
 msgid "Only Posting is availiable"
-msgstr ""
+msgstr "متاح النشر فقط"
 
 #: ckanext/pages/utils.py:338
 #, python-format
 msgid "Unauthorized to upload file %s"
-msgstr ""
+msgstr "%s غير مصرح بتحميل الملف "
 
 #: ckanext/pages/validators.py:17
 msgid "Page name already exists in database"
-msgstr ""
+msgstr "اسم الصفحة موجود بالفعل في قاعدة البيانات"
 
 #: ckanext/pages/footer/auth.py:27 ckanext/pages/footer/auth.py:44
 #: ckanext/pages/footer/auth.py:60
 msgid "User not authorized."
-msgstr ""
+msgstr "المستخدم غير مصرح له"
 
 #: ckanext/pages/footer/auth.py:34
 #, python-format
 msgid "Maximum %s links can be added in a column."
-msgstr ""
+msgstr "في العمود %s يمكن إضافة أقصى عدد من الروابط"
 
 #: ckanext/pages/footer/auth.py:50
 #, python-format
 msgid "Maximum %s Social Media links can be."
-msgstr ""
+msgstr "من روابط الوسائط الاجتماعية %s يمكن إضافة أقصى عدد "
 
 #: ckanext/pages/footer/auth.py:66
 #, python-format
 msgid "Maximum %s items can be added in Footer Banner."
-msgstr ""
+msgstr "%s يمكن إضافة حد أقصى من  عنصر في قائمة التذييل. "
 
 #: ckanext/pages/footer/validators.py:13
 msgid "Invalid Column Number."
-msgstr ""
+msgstr "رقم العمود غير صالح"
 
 #: ckanext/pages/footer/validators.py:19 ckanext/pages/footer/validators.py:25
 #: ckanext/pages/footer/validators.py:31
 msgid "Invalid Id. Record not found."
-msgstr ""
+msgstr "معرف غير صالح. لم يتم العثور على السجل"
 
 #: ckanext/pages/footer/validators.py:37
 msgid "Invalid Target Selected."
-msgstr ""
+msgstr "تم تحديد هدف غير صالح"
 
 #: ckanext/pages/footer/validators.py:61
 msgid "Invalid name. Name already exists"
-msgstr ""
+msgstr "اسم غير صالح. الاسم موجود بالفعل"
 
 #: ckanext/pages/footer/views.py:51 ckanext/pages/footer/views.py:133
 msgid "Unauthorized to update CMS footer"
-msgstr ""
+msgstr "غير مصرح بتحديث تذييل نظام ادارة المحتوى"
 
 #: ckanext/pages/footer/views.py:211 ckanext/pages/footer/views.py:290
 #: ckanext/pages/footer/views.py:373
 msgid "Unauthorized to Add/update this footer Item"
-msgstr ""
+msgstr "غير مصرح بإضافة/تحديث عنصر التذييل هذا"
 
 #: ckanext/pages/footer/views.py:454 ckanext/pages/footer/views.py:527
 #: ckanext/pages/footer/views.py:601
 msgid "Unauthorized to delete this footer Item"
-msgstr ""
+msgstr "غير مصرح بحذف هذا العنصر التذييلي"
 
 #: ckanext/pages/theme/templates_group/group/read_base.html:6
 #: ckanext/pages/theme/templates_group/group/read_base.html:8
@@ -321,15 +321,15 @@ msgstr ""
 #: ckanext/pages/theme/templates_organization/organization/read_base.html:6
 #: ckanext/pages/theme/templates_organization/organization/read_base.html:8
 msgid "Pages"
-msgstr ""
+msgstr "الصفحات"
 
 #: ckanext/pages/theme/templates_main/base_cms.html:4
 msgid "Header"
-msgstr ""
+msgstr "الترويسة"
 
 #: ckanext/pages/theme/templates_main/base_cms.html:5
 msgid "Footer"
-msgstr ""
+msgstr "التذييل"
 
 #: ckanext/pages/theme/templates_main/base_cms.html:6
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:6
@@ -337,7 +337,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:17
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:10
 msgid "Main Page"
-msgstr ""
+msgstr "الصفحة الرئيسية"
 
 #: ckanext/pages/theme/templates_main/base_cms.html:8
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:3
@@ -345,7 +345,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:21
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:9
 msgid "News"
-msgstr ""
+msgstr "الاخبار"
 
 #: ckanext/pages/theme/templates_main/base_cms.html:9
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:5
@@ -353,40 +353,41 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:23
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:9
 msgid "Events"
-msgstr ""
+msgstr "الفعاليات"
 
 #: ckanext/pages/theme/templates_main/base_cms.html:10
 #: ckanext/pages/theme/templates_main/ckanext_pages/internal_urls.html:4
 msgid "System Pages Urls"
-msgstr ""
+msgstr "عناوين صفحات النظام"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:33
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:9
 #: ckanext/pages/theme/templates_main/header.html:10
 msgid "Blog"
-msgstr ""
+msgstr "المدونة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base.html:27
 msgid "What are Pages?"
-msgstr ""
+msgstr "ما هي الصفحات؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base.html:30
 msgid ""
 "<p>Pages are a simple way to add extra pages to your ckan instance. You "
 "can assign an order to them.</p>"
-msgstr ""
+msgstr "<p>الصفحات هي طريقة بسيطة لإضافة صفحات إضافية إلى مثيل 'سكان' الخاص بك. يمكنك "
+"تعيين ترتيب لها.</p>"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:39
 msgid "Add Blog Article"
-msgstr ""
+msgstr "أضف مقالة المدونة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:41
 msgid "Edit Blog Article"
-msgstr ""
+msgstr "تعديل مقالة المدونة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:44
 msgid "eg. Blog Article Title"
-msgstr ""
+msgstr "مثال : عنوان مقال المدونة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:47
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page_list.html:7
@@ -394,7 +395,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page_list.html:7
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page_list.html:9
 msgid "Add page"
-msgstr ""
+msgstr "إضافة صفحة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:49
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:8
@@ -402,11 +403,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:8
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:10
 msgid "Edit page"
-msgstr ""
+msgstr "تعديل الصفحة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:52
 msgid "eg. Page Title"
-msgstr ""
+msgstr "مثال : عنوان الصفحة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:61
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:71
@@ -415,7 +416,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:5
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:5
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:65
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:36
@@ -429,7 +430,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:56
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:67
 msgid "Publish Date"
-msgstr ""
+msgstr "تاريخ النشر"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:67
 msgid "2021-04-23"
@@ -437,40 +438,40 @@ msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:76
 msgid "Visibility"
-msgstr ""
+msgstr "الوضوح"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:79
 msgid "Private"
-msgstr ""
+msgstr "خاص"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:79
 msgid "Public"
-msgstr ""
+msgstr "عام"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:88
 msgid "Header Order"
-msgstr ""
+msgstr "ترتيب الترويسة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:91
 msgid "Not in Menu"
-msgstr ""
+msgstr "ليس في القائمة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:106
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:111
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:115
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:90
 msgid "Content"
-msgstr ""
+msgstr "محتوى"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:106
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:115
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:90
 msgid "Enter content here"
-msgstr ""
+msgstr "أدخل المحتوى هنا"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:113
 msgid "My content"
-msgstr ""
+msgstr "المحتوى الخاص بي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:123
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:18
@@ -487,22 +488,22 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:109
 #: ckanext/pages/theme/templates_main/footer-management/confirm_delete.html:18
 msgid "Cancel"
-msgstr ""
+msgstr "الغاء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:124
 msgid "Add"
-msgstr ""
+msgstr "اضافة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:129
 msgid "Are you sure you want to delete this Page?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذه الصفحة؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:130
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:33
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:27
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:46
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:134
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:95
@@ -516,7 +517,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:54
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:50
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:9
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:32
@@ -525,7 +526,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:22
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:46
 msgid "Edit"
-msgstr ""
+msgstr "تعديل"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:23
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:25
@@ -533,35 +534,35 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/page.html:29
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/page_item.html:32
 msgid "This page currently has no content"
-msgstr ""
+msgstr "لا يوجد محتوى في هذه الصفحة حاليا"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:50
 msgid "More"
-msgstr ""
+msgstr "المزيد"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit.html:3
 msgid "Edit Article"
-msgstr ""
+msgstr "تعديل المقال"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:3
 msgid "Blog Articles"
-msgstr ""
+msgstr "مقالات المدونة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:12
 msgid "<p>Add blog articles to CKAN here.</p>"
-msgstr ""
+msgstr "<p>أضف مقالات المدونة إلى 'سكان' هنا</p>"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_list.html:6
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_list.html:8
 msgid "Add Article"
-msgstr ""
+msgstr "اضافة مقال"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:3
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:21
 #: ckanext/pages/theme/templates_main/footer-management/confirm_delete.html:4
 #: ckanext/pages/theme/templates_main/footer-management/confirm_delete.html:19
 msgid "Confirm Delete"
-msgstr ""
+msgstr "تأكيد الحذف"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:7
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:8
@@ -578,11 +579,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:8
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:9
 msgid "Content Management System"
-msgstr ""
+msgstr "نظام ادارة المحتوى"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:18
 msgid "Add Events"
-msgstr ""
+msgstr "اضافة فعاليات"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:30
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:55
@@ -591,7 +592,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:29
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:51
 msgid "Title Ascending"
-msgstr ""
+msgstr "عنوان تصاعدي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:31
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:56
@@ -600,7 +601,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:30
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:52
 msgid "Title Descending"
-msgstr ""
+msgstr "عنوان تنازلي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:32
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:57
@@ -608,7 +609,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:31
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:53
 msgid "Creation Date Ascending"
-msgstr ""
+msgstr "تاريخ الإنشاء تصاعدي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:33
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:58
@@ -616,49 +617,49 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:32
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:54
 msgid "Creation Date Descending"
-msgstr ""
+msgstr "تاريخ الإنشاء تنازلي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:34
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:59
 msgid "Start Date Ascending"
-msgstr ""
+msgstr "تاريخ البدء تصاعدي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:35
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:60
 msgid "Start Date Descending"
-msgstr ""
+msgstr "تاريخ البدء تنازلي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:36
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:61
 msgid "End Date Ascending"
-msgstr ""
+msgstr "تاريخ الانتهاء تصاعدي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:37
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:62
 msgid "End Date Descending"
-msgstr ""
+msgstr "تاريخ الانتهاء تنازلي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:53
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:51
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:49
 msgid "Order by"
-msgstr ""
+msgstr "ترتيب حسب"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:72
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:68
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:66
 msgid "Date Of Creation"
-msgstr ""
+msgstr "تاريخ الإنشاء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:73
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:58
 msgid "Start Date"
-msgstr ""
+msgstr "تاريخ البدء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:74
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:65
 msgid "End Date"
-msgstr ""
+msgstr "تاريخ الانتهاء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:75
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:70
@@ -668,7 +669,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:76
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:71
 msgid "Status"
-msgstr ""
+msgstr "حالة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:77
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_list.html:9
@@ -682,7 +683,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:9
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:27
 msgid "Actions"
-msgstr ""
+msgstr "الإجراءات"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:110
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:71
@@ -690,11 +691,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:113
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:102
 msgid "Please Confirm Action"
-msgstr ""
+msgstr "يرجى تأكيد الإجراء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:114
 msgid "Are you sure you want to delete this event?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذه الفعالية؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:120
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:86
@@ -702,16 +703,16 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:123
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:112
 msgid "Confirm"
-msgstr ""
+msgstr "تأكيد"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:131
 msgid "No events found."
-msgstr ""
+msgstr "لم يتم العثور على أي فعاليات"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:19
 msgid "Edit Event"
-msgstr ""
+msgstr "تعديل فعالية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:11
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:5
@@ -723,11 +724,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column4.html:5
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column4.html:16
 msgid "Add New"
-msgstr ""
+msgstr "اضافة خبر"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:13
 msgid "Event Edit"
-msgstr ""
+msgstr "تعديل فعالية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:29
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:9
@@ -742,11 +743,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:21
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:21
 msgid "Title En"
-msgstr ""
+msgstr "العنوان باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:36
 msgid "eg. my-event"
-msgstr ""
+msgstr "مثال . فعاليتي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:39
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:19
@@ -758,32 +759,32 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:22
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:22
 msgid "Title Ar"
-msgstr ""
+msgstr "العنوان باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:51
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:52
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:90
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:91
-msgid "News Image (1200 x 400 pixels)"
-msgstr ""
+msgid "News Image "
+msgstr "(1200 x 400 pixels) صورة الاخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:69
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:117
 msgid "Brief En"
-msgstr ""
+msgstr "موجز اللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:69
 msgid "Enter Brief in English"
-msgstr ""
+msgstr "أدخل موجز باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:70
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:130
 msgid "Brief Ar"
-msgstr ""
+msgstr "موجز باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:70
 msgid "Enter Brief in Arabic"
-msgstr ""
+msgstr "أدخل موجز باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:80
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:82
@@ -792,7 +793,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:70
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:78
 msgid "Content En"
-msgstr ""
+msgstr "المحتوى باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:86
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:88
@@ -801,11 +802,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:76
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:79
 msgid "Content Ar"
-msgstr ""
+msgstr "المحتوى باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/internal_urls.html:9
 msgid "System Pages"
-msgstr ""
+msgstr "صفحات النظام"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:27
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:37
@@ -817,7 +818,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:24
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:24
 msgid "Link En"
-msgstr ""
+msgstr "رابط اللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:23
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:28
@@ -827,127 +828,127 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:25
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:25
 msgid "Link Ar"
-msgstr ""
+msgstr "رابط اللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:15
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:19
 msgid "Add News"
-msgstr ""
+msgstr "اضافة اخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:34
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:33
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:55
 msgid "Publish Date Ascending"
-msgstr ""
+msgstr "تاريخ النشر تصاعدي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:35
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:34
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:56
 msgid "Publish Date Descending"
-msgstr ""
+msgstr "تاريخ النشر تنازلي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:67
 msgid "News Title"
-msgstr ""
+msgstr "عنوان الاخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:94
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:95
 msgid "Unhide"
-msgstr ""
+msgstr "إظهار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:97
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:72
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:94
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:95
 msgid "Hide"
-msgstr ""
+msgstr "إخفاء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:117
 msgid "Are you sure you want to delete this new?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذا الخبر؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:135
 msgid "No news found"
-msgstr ""
+msgstr "لم يتم العثور على أخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:19
 msgid "Edit News"
-msgstr ""
+msgstr "تعديل الاخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:13
 msgid "News Edit"
-msgstr ""
+msgstr "تعديل الاخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:36
 msgid "Enter title in English"
-msgstr ""
+msgstr "أدخل العنوان باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:57
 msgid "eg. my-news"
-msgstr ""
+msgstr "مثال. اخباري"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:71
 msgid "Enter title in Arabic"
-msgstr ""
+msgstr "أدخل العنوان باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:100
 msgid "News Date"
-msgstr ""
+msgstr "تاريخ الاخبار"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:118
 msgid "Enter brief in English"
-msgstr ""
+msgstr "أدخل موجز باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:131
 msgid "Enter brief in Arabic"
-msgstr ""
+msgstr "أدخل موجز باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:4
 msgid "Edit Page"
-msgstr ""
+msgstr "تعديل الصفحة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:12
 msgid "Page Edit"
-msgstr ""
+msgstr "تعديل الصفحة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:18
 msgid "Add Pages"
-msgstr ""
+msgstr "اضافة صفحات"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:34
 msgid "eg. my-page"
-msgstr ""
+msgstr "مثال. صفحتي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:49
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:50
-msgid "Cover Image (1200 x 400 pixels)"
-msgstr ""
+msgid "Cover Image "
+msgstr "(1200 x 400 pixels) صورة الغلاف"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:78
 msgid "Enter content in English here"
-msgstr ""
+msgstr "أدخل المحتوى باللغة الإنجليزية هنا"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:79
 msgid "Enter content in Arabic here"
-msgstr ""
+msgstr "أدخل المحتوى باللغة العربية هنا"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:16
 msgid "Add Page"
-msgstr ""
+msgstr "اضافة صفحة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:68
 msgid "Page Urls"
-msgstr ""
+msgstr "اضافة عناوين"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:106
 msgid "Are you sure you want to delete this page?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذه الصفحة؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:123
 msgid "No pages found."
-msgstr ""
+msgstr "لم يتم العثور على صفحات"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/base.html:3
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/base.html:7
@@ -957,35 +958,35 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/index.html:7
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/index.html:14
 msgid "Header Management"
-msgstr ""
+msgstr "ادارة الترويسة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/edit_header_logo.html:6
 msgid "Edit Header Logo"
-msgstr ""
+msgstr "تعديل شعار الترويسة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/edit_main_menu.html:5
 msgid "Edit Main Menu Item"
-msgstr ""
+msgstr "تعديل عنصر القائمة الرئيسية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/edit_main_menu.html:5
 msgid "Add Main Menu Item"
-msgstr ""
+msgstr "إضافة عنصر القائمة الرئيسية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/edit_secondary_menu.html:5
 msgid "Edit Secondary Menu Item"
-msgstr ""
+msgstr "تعديل عنصر القائمة الثانوية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/edit_secondary_menu.html:5
 msgid "Add Secondary Menu Item"
-msgstr ""
+msgstr "اضافة عنصر القائمة الثانوية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:5
 msgid "Menu Item Details"
-msgstr ""
+msgstr "تفاصيل عنصر القائمة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:10
 msgid "Value"
-msgstr ""
+msgstr "قيمة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:31
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:63
@@ -993,7 +994,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:63
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:13
 msgid "Type"
-msgstr ""
+msgstr "نوع"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:35
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:53
@@ -1001,7 +1002,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:53
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:14
 msgid "Parent"
-msgstr ""
+msgstr "الاصل"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:39
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:45
@@ -1015,78 +1016,78 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:8
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:27
 msgid "Order"
-msgstr ""
+msgstr "ترتيب"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:1
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:5
 msgid "Main Menu"
-msgstr ""
+msgstr "القائمة الرئيسية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:9
 msgid "Title (English)"
-msgstr ""
+msgstr "العنوان (الإنجليزية)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:10
 msgid "Title (Arabic)"
-msgstr ""
+msgstr "العنوان (العربية)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:11
 msgid "Link (English)"
-msgstr ""
+msgstr "الرابط (الإنجليزية)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:12
 msgid "Link (Arabic)"
-msgstr ""
+msgstr "الرابط (العربية)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:16
 msgid "Visible"
-msgstr ""
+msgstr "ظاهر"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:28
 msgid "None"
-msgstr ""
+msgstr "لا أحد"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:30
 msgid "Yes"
-msgstr ""
+msgstr "نعم"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:30
 msgid "No"
-msgstr ""
+msgstr "لا"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:10
 msgid "Header Logo In Arabic"
-msgstr ""
+msgstr "شعار الترويسة باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:11
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:35
 msgid "Recomndation Size 250*55"
-msgstr ""
+msgstr " 250*55 الحجم الموصى به  "
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:27
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:51
 msgid "Upload"
-msgstr ""
+msgstr "تحميل"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:34
 msgid "Header Logo In English"
-msgstr ""
+msgstr "شعار الترويسة باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_list.html:1
 msgid "Header Logo"
-msgstr ""
+msgstr "شعار الترويسة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_list.html:7
 msgid "Header Logo Arabic"
-msgstr ""
+msgstr "شعار االترويسة باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_list.html:8
 msgid "Header Logo English"
-msgstr ""
+msgstr "شعار االترويسة باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_list.html:34
 msgid "No logo uploaded yet"
-msgstr ""
+msgstr "لم يتم تحميل الشعار بعد"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:65
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:18
@@ -1094,55 +1095,55 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:6
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:6
 msgid "Link"
-msgstr ""
+msgstr "الرابط"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:66
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:20
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:66
 msgid "Menu"
-msgstr ""
+msgstr "القائمة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:8
 msgid "Filter By Type"
-msgstr ""
+msgstr "نوع التصنيف"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:12
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:16
 msgid "Select Type"
-msgstr ""
+msgstr "تحديد النوع"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:76
 msgid "Are you sure you want to delete this menu item?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف عنصر القائمة هذا؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:97
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:72
 msgid "View"
-msgstr ""
+msgstr "عرض"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:1
 msgid "Secondary Menu"
-msgstr ""
+msgstr "القائمة الثانوية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:51
 msgid "Are you sure you want to delete this secondary menu item?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف عنصر القائمة الثانوية هذا؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:80
 msgid "No secondary menu found."
-msgstr ""
+msgstr "لم يتم العثور على قائمة ثانوية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:41
 msgid "There are currently no blog articles here"
-msgstr ""
+msgstr "لا توجد مقالات مدونة هنا حاليًا"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:43
 msgid "There are currently no pages here"
-msgstr ""
+msgstr "لا يوجد صفحات هنا حاليا"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:5
 msgid "CMS Footer Footer Banner Link"
-msgstr ""
+msgstr "رابط لافتة تذييل نظام ادارة المحتوى"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:9
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:9
@@ -1150,15 +1151,15 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/index.html:11
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:9
 msgid "Footer Management"
-msgstr ""
+msgstr "ادارة التذييل"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:11
 msgid "Footer Banner Add"
-msgstr ""
+msgstr "إضافة لافتة التذييل"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:13
 msgid "Footer Banner Edit"
-msgstr ""
+msgstr "تعديل لافتة التذييل"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:21
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:21
@@ -1166,7 +1167,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:7
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:21
 msgid "eg. A descriptive title in English"
-msgstr ""
+msgstr "مثال. عنوان وصفي باللغة الإنجليزية "
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:22
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:22
@@ -1174,7 +1175,7 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:10
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:22
 msgid "eg. A descriptive title in Arabic"
-msgstr ""
+msgstr "مثال.عنوان وصفي باللغة العربية "
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:24
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:24
@@ -1192,41 +1193,41 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:27
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:27
 msgid "eg. 1 or 2"
-msgstr ""
+msgstr "مثال. 1 او 2"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:32
 msgid "Footer Banner Icon (175 x 70 pixels)"
-msgstr ""
+msgstr "(175 x 70 pixels) أيقونة لافتة التذييل "
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:41
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:63
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:45
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:41
 msgid "Back"
-msgstr ""
+msgstr "عودة"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:5
 msgid "CMS Footer Column 1"
-msgstr ""
+msgstr "عمود تذييل نظام ادارة المحتوى 1"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:10
 msgid "Column 1 Update"
-msgstr ""
+msgstr "تحديث العمود 1"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:27
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:28
 msgid "Footer Logo En (260 x 110 pixels)"
-msgstr ""
+msgstr "(260 x 110 pixels) شعار التذييل باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:46
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:47
 msgid "Footer Logo Ar (260 x 110 pixels)"
-msgstr ""
+msgstr "(260 x 110 pixels)شعار التذييل باللغة العربية "
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:55
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:7
 msgid "Phone Number"
-msgstr ""
+msgstr "رقم الهاتف"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:55
 msgid "eg. 962778000004"
@@ -1234,145 +1235,145 @@ msgstr ""
 
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:5
 msgid "CMS Footer Column Link"
-msgstr ""
+msgstr "رابط عمود تذييل نظام ادارة المحتوى"
 
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:11
 msgid "Column Link Add"
-msgstr ""
+msgstr "إضافة رابط العمود"
 
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:13
 msgid "Column Link Edit"
-msgstr ""
+msgstr "تعديل رابط العمود"
 
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:30
 msgid "Select Target"
-msgstr ""
+msgstr "حدد الهدف"
 
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:36
 msgid "Link Target"
-msgstr ""
+msgstr "رابط الهدف"
 
 #: ckanext/pages/theme/templates_main/footer-management/index.html:5
 msgid "CMS Footer"
-msgstr ""
+msgstr "تذييل نظام ادارة المحتوى"
 
 #: ckanext/pages/theme/templates_main/footer-management/index.html:18
 msgid "Edit Footer Column 1"
-msgstr ""
+msgstr "تعديل عمود التذييل 1"
 
 #: ckanext/pages/theme/templates_main/footer-management/index.html:21
 msgid "Edit Footer Column 2"
-msgstr ""
+msgstr "تعديل عمود التذييل 2"
 
 #: ckanext/pages/theme/templates_main/footer-management/index.html:24
 msgid "Edit Footer Column 3"
-msgstr ""
+msgstr "تعديل عمود التذييل 3"
 
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:5
 msgid "CMS Footer Social Media Link"
-msgstr ""
+msgstr "رابط الوسائط الاجتماعية لتذييل نظام ادارة المحتوى"
 
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:11
 msgid "Social Media Add"
-msgstr ""
+msgstr "إضافة وسائل التواصل الاجتماعي"
 
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:13
 msgid "Social Media Edit"
-msgstr ""
+msgstr "تعديل وسائل التواصل الاجتماعي"
 
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:32
 msgid "Social Media Icon (42 x 42 pixels)"
-msgstr ""
+msgstr "(42 x 42 pixels)ايقونة وسائل التواصل الاجتماعي"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:5
 msgid "Logo En"
-msgstr ""
+msgstr "شعار اللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:6
 msgid "Logo Ar"
-msgstr ""
+msgstr "شعار اللغة العربية"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:19
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:22
 msgid "Edit Link"
-msgstr ""
+msgstr "تعديل الرابط"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column2.html:7
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:7
 msgid "Column Title En"
-msgstr ""
+msgstr "عنوان العمود باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column2.html:10
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:10
 msgid "Column Title Ar"
-msgstr ""
+msgstr "عنوان العمود باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column2.html:19
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:19
 msgid "Update"
-msgstr ""
+msgstr "تحديث"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column4.html:1
 msgid "Social Media"
-msgstr ""
+msgstr "وسائل التواصل الاجتماعي"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column4.html:12
 msgid "Footer Banner"
-msgstr ""
+msgstr "لافتة تذييلية"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:7
 msgid "Image"
-msgstr ""
+msgstr "صورة"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:7
 msgid "Target"
-msgstr ""
+msgstr "هدف"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:27
 msgid "Delete Link"
-msgstr ""
+msgstr "حذف الرابط"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:30
 msgid "Are you sure you want to delete this link?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذا الرابط؟"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:25
 msgid "Section Name"
-msgstr ""
+msgstr "اسم القسم"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:26
 msgid "Last Update"
-msgstr ""
+msgstr "التحديث الأخير"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:12
 msgid "Edit Section"
-msgstr ""
+msgstr "تعديل القسم"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:31
 msgid "Main Title 1 AR"
-msgstr ""
+msgstr "العنوان الرئيسي باللغة العربية 1"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:32
 msgid "Main Title 1 EN"
-msgstr ""
+msgstr "العنوان الرئيسي باللغة الإنجليزية 1"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:36
 msgid "Main Title 2 AR"
-msgstr ""
+msgstr "العنوان الرئيسي باللغة العربية 2"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:37
 msgid "Main Title 2 EN"
-msgstr ""
+msgstr "العنوان الرئيسي باللغة الإنجليزية 2"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:41
 msgid "Main Brief EN"
-msgstr ""
+msgstr "الموجز الرئيسي للغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:42
 msgid "Main Brief AR"
-msgstr ""
+msgstr "الموجز الرئيسي للغة العربية"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:47
 msgid "Save Edit"
-msgstr ""
+msgstr "حفظ التعديل"
 
