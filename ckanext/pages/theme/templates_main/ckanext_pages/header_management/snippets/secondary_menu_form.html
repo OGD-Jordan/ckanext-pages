@@ -49,22 +49,6 @@
                     {% endfor %}
                 </select>
 
-                {# Parent #}
-                <p class="boldfont mt-3">{{ _('Parent') }}</p>
-                <select name="parent_id" id="parentDropdown" class="form-control">
-                    <option value="">{{ "-" }}</option>
-                    {% for menu in parent_menus %}
-                        <option value="{{ menu.id }}"
-                                {% if data.parent_id == menu.id %}selected{% endif %}>{{ menu.title_en }}</option>
-                    {% endfor %}
-                </select>
-
-                {# Type #}
-                <p class="boldfont mt-3">{{ _('Type') }}</p>
-                <select name="menu_type" id="typeDropdown" class="form-control">
-                    <option value="link" {% if data.menu_type == 'link' %}selected{% endif %}>{{ _('Link') }}</option>
-                    <option value="menu" {% if data.menu_type == 'menu' %}selected{% endif %}>{{ _('Menu') }}</option>
-                </select>
 
                 <div class="d-flex flex-row mt-3 mb-3 justify-content-end">
                     <button type="button" class="redbtn"

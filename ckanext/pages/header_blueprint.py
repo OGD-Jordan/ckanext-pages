@@ -312,7 +312,7 @@ def new_secondary_menu():
             data_dict.update(tk.request.files.to_dict())
 
             try:
-                tk.get_action('ckanext_header_secondary_menu_create')(context, data_dict)
+                tk.get_action('ckanext_header_secondary_menu_create')(context, {**data_dict, 'menu_type': 'link'})
                 h.flash_success(tk._('Menu item created successfully'))
                 return h.redirect_to('header_management.index')
             except tk.ValidationError as e:
@@ -353,7 +353,7 @@ def edit_secondary_menu(id):
             data_dict['id'] = id
 
             try:
-                tk.get_action('ckanext_header_secondary_menu_edit')(context, data_dict)
+                tk.get_action('ckanext_header_secondary_menu_edit')(context, {**data_dict, 'menu_type': 'link'})
                 h.flash_success(tk._('Menu item updated'))
                 return h.redirect_to('header_management.index')
             except tk.ValidationError as e:

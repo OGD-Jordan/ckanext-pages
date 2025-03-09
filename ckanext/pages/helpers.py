@@ -35,7 +35,7 @@ def get_header_data():
         for item in menu_items:
             if item.parent_id:
                 parent = menu_dict.get(item.parent_id)
-                if parent and item not in parent.children:
+                if parent and hasattr(parent, 'children') and item not in parent.children:
                     parent.children.append(item)
             else:
                 if item not in root_items:
