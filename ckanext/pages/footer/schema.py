@@ -21,7 +21,7 @@ def _base_simple_link_schema():
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
         'target': [not_empty, unicode_safe, validators.link_target_validator],
-        'order': [not_empty, unicode_safe],
+        'order': [not_empty, unicode_safe, natural_number_validator],
         'column_number': [not_empty, natural_number_validator, validators.column_number_validator],
     }
 
@@ -51,7 +51,7 @@ def _base_image_link_schema():
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
         'image_url': [not_empty, unicode_safe],
-        'order': [not_empty, unicode_safe],
+        'order': [not_empty, unicode_safe, natural_number_validator],
     }
 
 

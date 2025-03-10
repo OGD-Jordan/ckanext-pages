@@ -623,7 +623,7 @@ def header_main_menu_toggle_visibility(context, data_dict):
     """Toggle visibility of a main menu item."""
     tk.check_access('ckanext_header_management_access', context)
     
-    menu_item = model.Session.query(HeaderMainMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderMainMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -638,7 +638,7 @@ def header_main_menu_delete(context, data_dict):
     """Delete a main menu item."""
     tk.check_access('ckanext_header_management_access', context)
     
-    menu_item = model.Session.query(HeaderMainMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderMainMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -661,7 +661,7 @@ def header_logo_update(context, data_dict):
     tk.check_access('ckanext_header_management_access', context)
 
     model = context['model']
-    logo = model.Session.query(HeaderLogo).get(data_dict['id'])
+    logo = model.Session.query(HeaderLogo).get(data_dict.get('id', ''))
 
     if not logo:
         raise tk.ObjectNotFound('Header logo not found')
@@ -701,7 +701,7 @@ def header_secondary_menu_delete(context, data_dict):
     """Delete a secondary menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -716,7 +716,7 @@ def header_secondary_menu_toggle_visibility(context, data_dict):
     """Toggle visibility of a secondary menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -823,11 +823,11 @@ def header_main_menu_create(context, data_dict):
                 raise tk.ValidationError({'order': ['Order already taken']})
 
     menu_item = HeaderMainMenu(
-        title_en=data['title_en'],
-        title_ar=data['title_ar'],
-        link_en=data['link_en'],
-        link_ar=data['link_ar'],
-        menu_type=data['menu_type'],
+        title_en=data.get('title_en', ''),
+        title_ar=data.get('title_ar', ''),
+        link_en=data.get('link_en', ''),
+        link_ar=data.get('link_ar', ''),
+        menu_type=data.get('menu_type', ''),
         parent_id=parent_id or None,
         order=data.get('order', 0),
         is_visible=data.get('is_visible', True)
@@ -840,7 +840,7 @@ def header_main_menu_show(context, data_dict):
     """Show a main menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderMainMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderMainMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -853,7 +853,7 @@ def header_main_menu_edit(context, data_dict):
     """Edit a main menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderMainMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderMainMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -893,11 +893,11 @@ def header_main_menu_edit(context, data_dict):
                 raise tk.ValidationError({'order': ['Order already taken']})
 
 
-    menu_item.title_en = data['title_en']
-    menu_item.title_ar = data['title_ar']
-    menu_item.link_en = data['link_en']
-    menu_item.link_ar = data['link_ar']
-    menu_item.menu_type = data['menu_type']
+    menu_item.title_en = data.get('title_en', '')
+    menu_item.title_ar = data.get('title_ar', '')
+    menu_item.link_en = data.get('link_en', '')
+    menu_item.link_ar = data.get('link_ar', '')
+    menu_item.menu_type = data.get('menu_type', '')
     menu_item.order = data.get('order', 0)
     menu_item.is_visible = data.get('is_visible', True)
 
@@ -908,7 +908,7 @@ def header_secondary_menu_edit(context, data_dict):
     """Edit a secondary menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -948,11 +948,11 @@ def header_secondary_menu_edit(context, data_dict):
                 raise tk.ValidationError({'order': ['Order already taken']})
 
 
-    menu_item.title_en = data['title_en']
-    menu_item.title_ar = data['title_ar']
-    menu_item.link_en = data['link_en']
-    menu_item.link_ar = data['link_ar']
-    menu_item.menu_type = data['menu_type']
+    menu_item.title_en = data.get('title_en', '')
+    menu_item.title_ar = data.get('title_ar', '')
+    menu_item.link_en = data.get('link_en', '')
+    menu_item.link_ar = data.get('link_ar', '')
+    menu_item.menu_type = data.get('menu_type', '')
     menu_item.order = data.get('order', 0)
     menu_item.is_visible = data.get('is_visible', True)
 
@@ -963,7 +963,7 @@ def header_secondary_menu_show(context, data_dict):
     """Show a secondary menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict['id'])
+    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
@@ -984,11 +984,11 @@ def header_secondary_menu_create(context, data_dict):
         raise tk.ValidationError(errors)
 
     menu_item = HeaderSecondaryMenu(
-        title_en=data['title_en'],
-        title_ar=data['title_ar'],
-        link_en=data['link_en'],
-        link_ar=data['link_ar'],
-        menu_type=data['menu_type'],
+        title_en=data.get('title_en', ''),
+        title_ar=data.get('title_ar', ''),
+        link_en=data.get('link_en', ''),
+        link_ar=data.get('link_ar', ''),
+        menu_type=data.get('menu_type', ''),
         parent_id=data.get('parent_id') or None,
         order=data.get('order', 0),
         is_visible=data.get('is_visible', True)
