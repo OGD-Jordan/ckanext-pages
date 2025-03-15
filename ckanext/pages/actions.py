@@ -591,7 +591,7 @@ def header_main_menu_parent_list(context, data_dict):
     """List all main menu parent items."""
     tk.check_access('ckanext_header_management_access', context)
 
-    return model.Session.query(HeaderMainMenu).filter_by(parent_id=None, menu_type='menu').order_by(HeaderMainMenu.order).all()
+    return model.Session.query(HeaderMainMenu).filter_by(menu_type='menu').order_by(HeaderMainMenu.order).all()
 
 
 def header_secondary_menu_parent_list(context, data_dict):
@@ -808,8 +808,6 @@ def header_main_menu_create(context, data_dict):
 
         if parent.menu_type != 'menu':
             errors.append('Parent must be a menu type item')
-        if parent.parent_id:
-            errors.append('Maximum nesting level exceeded')
 
         if errors:
             raise tk.ValidationError({'parent_id': errors})
@@ -819,7 +817,7 @@ def header_main_menu_create(context, data_dict):
             if model.Session.query(HeaderMainMenu).filter_by(order=order, parent_id=parent_id).first():
                 raise tk.ValidationError({'order': ['Order already taken']})
         elif menu_type == 'link':
-            if model.Session.query(HeaderMainMenu).filter_by(order=order).first():
+            if model.Session.query(HeaderMainMenu).filter_by(order=order, parent_id=parent_id).first():
                 raise tk.ValidationError({'order': ['Order already taken']})
 
     menu_item = HeaderMainMenu(
@@ -877,8 +875,6 @@ def header_main_menu_edit(context, data_dict):
             errors.append('Cannot set parent to self')
         if parent.menu_type != 'menu':
             errors.append('Parent must be a menu type item')
-        if parent.parent_id:
-            errors.append('Maximum nesting level exceeded')
 
         if errors:
             raise tk.ValidationError({'parent_id': errors})
