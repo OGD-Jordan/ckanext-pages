@@ -3,7 +3,7 @@ from ckanext.pages.footer.validators import event_name_validator, news_name_vali
 from ckanext.pages.validators import page_name_validator, not_empty_if_blog, validate_image_upload
 from ckanext.pages.interfaces import IPagesSchema
 from ckan.plugins.toolkit import get_validator
-
+from datetime import datetime
 
 ignore_empty = p.toolkit.get_validator('ignore_empty')
 ignore_missing = p.toolkit.get_validator('ignore_missing')
@@ -34,14 +34,30 @@ def default_pages_schema():
         'hidden':[ignore_missing, p.toolkit.get_validator('boolean_validator')],  
     }
 
+def start_date_less_than_end_date(key, data, errors, context):
+    start = data.get(('start_date',))
+    end = data.get(('end_date',))
+
+    if start and end:
+        try:
+
+            start_dt = datetime.fromisoformat(start)
+            end_dt = datetime.fromisoformat(end)
+
+            if start_dt > end_dt:
+                errors[key].append("Start date must be less than end date.")
+        except ValueError:
+            pass
+
+
 def default_events_schema():
     return {
         'id': [ignore_empty, unicode_safe],
         'title_en': [not_empty, unicode_safe],
         'title_ar': [not_empty, unicode_safe],
         'name': [not_empty, name_validator, event_name_validator],
-        'start_date': [not_empty, isodate],
-        'end_date': [not_empty, isodate],
+        'start_date': [not_empty],
+        'end_date': [not_empty, start_date_less_than_end_date],
         'brief_ar': [ignore_missing, unicode_safe],
         'brief_en': [ignore_missing, unicode_safe],
         'content_en': [ignore_missing, unicode_safe],
