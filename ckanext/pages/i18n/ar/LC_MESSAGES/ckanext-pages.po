@@ -1377,3 +1377,10 @@ msgstr "الموجز الرئيسي للغة العربية"
 msgid "Save Edit"
 msgstr "حفظ التعديل"
 
+#: ckanext-pages/ckanext/pages/logic/schema.py:59
+msgid "Start date must be less than end date."
+msgstr "يجب ان يكون تاريخ البدء اقل من تاريخ النهاية."
+
+#: ckanext-pages/ckanext/pages/logic/schema.py:25
+msgid "Publish date must be today or in the future."
+msgstr "يجب ان يكون تاريخ النشر هو اليوم او في المستقبل."

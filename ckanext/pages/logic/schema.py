@@ -13,6 +13,17 @@ name_validator = p.toolkit.get_validator('name_validator')
 unicode_safe = p.toolkit.get_validator('unicode_safe')
 convert_to_extras = p.toolkit.get_converter('convert_to_extras')
 
+def publish_date_in_future(key, data, errors, context):
+    publish_date = data.get(key)
+
+    if not publish_date:
+        return
+
+    today = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+
+    if publish_date < today:
+        errors[key].append("Publish date must be today or in the future.")
+
 def default_pages_schema():
 
     return {
@@ -26,7 +37,7 @@ def default_pages_schema():
         'order': [ignore_missing, unicode_safe],
         'private': [ignore_missing, p.toolkit.get_validator('boolean_validator')],
         'user_id': [ignore_missing, unicode_safe],
-        'publish_date': [ignore_missing, isodate],
+        'publish_date': [ignore_missing, isodate, publish_date_in_future],
         'page_type': [ignore_missing, unicode_safe],
         'created': [ignore_missing, isodate],
         'modified': [ignore_missing, isodate],
