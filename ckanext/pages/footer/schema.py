@@ -16,8 +16,8 @@ url_validator = tk.get_validator("url_validator")
 def _base_simple_link_schema():
     return {
         'id': [not_empty, unicode_safe],
-        'title_en': [not_empty, unicode_safe],
-        'title_ar': [not_empty, unicode_safe],
+        'title_en': [not_empty, unicode_safe, tk.get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, tk.get_validator('validate_arabic_text')],
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
         'target': [not_empty, unicode_safe, validators.link_target_validator],
@@ -46,8 +46,8 @@ def column_links_search_schema():
 def _base_image_link_schema():
     return {
         'id': [not_empty, unicode_safe],
-        'title_en': [not_empty, unicode_safe],
-        'title_ar': [not_empty, unicode_safe],
+        'title_en': [not_empty, unicode_safe, tk.get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, tk.get_validator('validate_arabic_text')],
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
         'image_url': [not_empty, unicode_safe],
@@ -105,8 +105,8 @@ def column1_update_schema():
 
 def column_titles_update_schema():
     return {
-        'column2_en': [ignore_missing, unicode_safe],
-        'column2_ar': [ignore_missing, unicode_safe],
-        'column3_en': [ignore_missing, unicode_safe],
-        'column3_ar': [ignore_missing, unicode_safe],
+        'column2_en': [ignore_missing, unicode_safe, tk.get_validator('validate_english_text')],
+        'column2_ar': [ignore_missing, unicode_safe, tk.get_validator('validate_arabic_text')],
+        'column3_en': [ignore_missing, unicode_safe, tk.get_validator('validate_english_text')],
+        'column3_ar': [ignore_missing, unicode_safe, tk.get_validator('validate_arabic_text')],
     }

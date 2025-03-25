@@ -28,8 +28,8 @@ def default_pages_schema():
 
     return {
         'id': [ignore_empty, unicode_safe],
-        'title_en': [not_empty, unicode_safe],
-        'title_ar': [not_empty, unicode_safe],
+        'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
         'name': [not_empty, name_validator, pages_name_validator],
         'content_en': [not_empty, unicode_safe],
         'content_ar': [not_empty, unicode_safe],
@@ -64,13 +64,13 @@ def start_date_less_than_end_date(key, data, errors, context):
 def default_events_schema():
     return {
         'id': [ignore_empty, unicode_safe],
-        'title_en': [not_empty, unicode_safe],
-        'title_ar': [not_empty, unicode_safe],
+        'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
         'name': [not_empty, name_validator, event_name_validator],
-        'start_date': [not_empty],
-        'end_date': [not_empty, start_date_less_than_end_date],
-        'brief_ar': [ignore_missing, unicode_safe],
-        'brief_en': [ignore_missing, unicode_safe],
+        'start_date': [not_empty, isodate],
+        'end_date': [not_empty, isodate, start_date_less_than_end_date],
+        'brief_ar': [ignore_missing, unicode_safe, get_validator('validate_arabic_text')],
+        'brief_en': [ignore_missing, unicode_safe, get_validator('validate_english_text')],
         'content_en': [ignore_missing, unicode_safe],
         'content_ar': [ignore_missing, unicode_safe],
         'image_url': [ignore_missing, unicode_safe],
@@ -81,12 +81,12 @@ def default_events_schema():
 def default_news_schema():
     return {
         'id': [ignore_empty, unicode_safe],
-        'title_en': [not_empty, unicode_safe],
-        'title_ar': [not_empty, unicode_safe],
+        'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
         'name': [not_empty, name_validator, news_name_validator],
         'news_date': [not_empty, isodate],
-        'brief_ar': [not_empty, unicode_safe],
-        'brief_en': [not_empty, unicode_safe],
+        'brief_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
+        'brief_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
         'content_en': [not_empty, unicode_safe],
         'content_ar': [not_empty, unicode_safe],
         'image_url': [not_empty, unicode_safe],
@@ -96,10 +96,10 @@ def default_news_schema():
 def main_page_schema(id=None):
     schema = {
         'id': [not_empty],  # Mandatory ID
-        'main_title_1_ar': [not_empty, unicode_safe],
-        'main_title_1_en': [not_empty, unicode_safe],
-        'main_brief_en': [not_empty, unicode_safe],
-        'main_brief_ar': [not_empty, unicode_safe],
+        'main_title_1_ar': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'main_title_1_en': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
+        'main_brief_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'main_brief_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
     }
     if id == 1:  # Conditional for section 1
         schema['main_title_2_ar'] = [ignore_missing, unicode_safe]
@@ -164,8 +164,8 @@ def link_required_if_link_type_or_menu_child(key, data, errors, context):
 def header_menu_schema():
     return {
         'id': [ignore_missing, unicode_safe],
-        'title_en': [not_empty, unicode_safe],
-        'title_ar': [not_empty, unicode_safe],
+        'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
         'link_en': [ignore_missing, unicode_safe, link_required_if_link_type_or_menu_child],
         'link_ar': [ignore_missing, unicode_safe, link_required_if_link_type_or_menu_child],
         'menu_type': [not_empty, unicode_safe, p.toolkit.get_validator('one_of')(['link', 'menu'])],
