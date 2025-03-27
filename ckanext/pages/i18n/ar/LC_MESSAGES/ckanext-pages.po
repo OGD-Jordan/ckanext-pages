@@ -724,7 +724,7 @@ msgstr "تعديل فعالية"
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column4.html:5
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column4.html:16
 msgid "Add New"
-msgstr "اضافة خبر"
+msgstr "اضافة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:13
 msgid "Event Edit"
