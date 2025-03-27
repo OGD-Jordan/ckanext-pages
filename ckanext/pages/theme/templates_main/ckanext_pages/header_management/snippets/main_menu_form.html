@@ -55,7 +55,9 @@
                     <option value="">{{ "-" }}</option>
                     {% for menu in parent_menus %}
                         <option value="{{ menu.id }}"
-                                {% if data.parent_id == menu.id %}selected{% endif %}>{{ menu.title_en }}</option>
+                                {% if data.parent_id == menu.id %}selected{% endif %}>
+                            {{ menu.title_en if h.lang() == 'en' else menu.title_ar }}
+                        </option>
                     {% endfor %}
                 </select>
 
