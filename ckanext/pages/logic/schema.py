@@ -96,10 +96,10 @@ def default_news_schema():
 def main_page_schema(id=None):
     schema = {
         'id': [not_empty],  # Mandatory ID
-        'main_title_1_ar': [not_empty, unicode_safe, get_validator('validate_english_text')],
-        'main_title_1_en': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
-        'main_brief_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
-        'main_brief_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
+        'main_title_1_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
+        'main_title_1_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'main_brief_en': [unicode_safe, get_validator('validate_english_text')],
+        'main_brief_ar': [unicode_safe, get_validator('validate_arabic_text')],
     }
     if id == 1:  # Conditional for section 1
         schema['main_title_2_ar'] = [ignore_missing, unicode_safe]
