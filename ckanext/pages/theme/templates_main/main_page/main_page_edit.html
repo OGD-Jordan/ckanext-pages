@@ -18,6 +18,15 @@
     <h1 class="page-heading" style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
         {{ section_title }}
     </h1>
+    {% if error_summary and error_summary|length %}
+        <div class="aerror-explanation alert alert-error">
+            <ul>
+                {% for field, message in error_summary.items() %}
+                    <li>{{ field }}: {{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
     <!-- Form -->
     <!-- FIXED ACTION URL -->
