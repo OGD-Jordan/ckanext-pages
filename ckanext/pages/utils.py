@@ -392,7 +392,8 @@ def update_main_page(section_id, data):
     return {"success": False, "error": "Section not found"}
 
 
-def main_page_edit(section_id, data=None, errors=None, error_summary=None):
+def main_page_edit(section_id):
+    context = _get_context()
     section_titles = {
         1: "Main Title & Brief",
         2: "Open Data Sector",
@@ -400,56 +401,59 @@ def main_page_edit(section_id, data=None, errors=None, error_summary=None):
         4: "Open Data In Numbers",
         5: "Also Explore"
     }
-    section = get_main_page(section_id)
 
-    has_two_titles = True if int(section_id) == 1 else False
-    main_page_dict = tk.get_action('ckanext_main_page_show')(
-        context={}, data_dict={'section_id': section_id}
-    )
-    if main_page_dict is None:
-        main_page_dict = {}
+    try:
 
-    # Handle POST (save or delete)
-    if tk.request.method == 'POST':
-        action = tk.request.form.get('save') or tk.request.form.get('delete')
+        if tk.request.method == 'POST':
+            data_dict = dict(tk.request.form)
+            data_dict['id'] = section_id
 
-        data = _parse_form_data(tk.request)
-        data['id'] = section_id  # Explicitly set ID
+            if tk.request.form.get('delete'):
+                return tk.redirect_to('pages.main_page')
 
-        if action == 'save':
-            schema = main_page_schema(id=int(section_id))
-            validated_data, errors = df.validate(data, schema, context={})
+            try:
+                tk.get_action('ckanext_main_page_edit')(
+                    context, data_dict
+                )
+                tk.h.flash_success(tk._('Section updated successfully!'))
+                return tk.redirect_to('pages.main_page')
+            except tk.ValidationError as e:
+                errors = e.error_dict if hasattr(e, 'error_dict') else e
+                error_summary = e.error_summary if hasattr(e, 'error_summary') else {
+                    field: tk._('Invalid value') for field in errors.keys()
+                }
+                return tk.render(
+                    'main_page/main_page_edit.html',
+                    extra_vars={
+                        'has_two_titles': True if int(section_id) == 1 else False,
+                        'section_title': section_titles.get(int(section_id), "Unknown Section"),
+                        'data': data_dict,
+                        'errors': errors,
+                        'error_summary': error_summary
+                    }
+                )
 
-            if errors:
-                tk.h.flash_error(errors)
-                return tk.redirect_to('pages.main_page_edit', section_id=section_id)
+        main_page_dict = tk.get_action('ckanext_main_page_show')(
+            context, {'section_id': section_id}
+        )
+        if main_page_dict is None:
+            raise tk.ObjectNotFound('Section not found')
 
-            # Update section
+        return tk.render(
+            'main_page/main_page_edit.html',
+            extra_vars={
+                'has_two_titles': True if int(section_id) == 1 else False,
+                'section_title': section_titles.get(int(section_id), "Unknown Section"),
+                'data': main_page_dict,
+                'errors': {},
+                'error_summary': None
+            }
+        )
 
-            section.main_title_1_ar = validated_data.get('main_title_1_ar')
-            section.main_title_1_en = validated_data.get('main_title_1_en')
-            section.main_title_2_ar = validated_data.get('main_title_2_ar', None)
-            section.main_title_2_en = validated_data.get('main_title_2_en', None)
-            section.main_brief_en = validated_data.get('main_brief_en')
-            section.main_brief_ar = validated_data.get('main_brief_ar')
-            section.save()
-            model.Session.commit()
-
-            tk.h.flash_success('Section updated successfully!')
-
-        return tk.redirect_to('pages.main_page')
-
-    # Prepare variables for rendering the form
-    vars = {
-        'has_two_titles': has_two_titles,
-        'section_title': section_titles.get(int(section_id), "Unknown Section"),
-        'data': main_page_dict or {},
-        'errors': errors or {},
-        'error_summary': error_summary or {}
-    }
-
-    return tk.render('main_page/main_page_edit.html', extra_vars=vars)
-
+    except tk.NotAuthorized:
+        tk.abort(403, tk._('Not authorized to edit main page sections'))
+    except tk.ObjectNotFound:
+        tk.abort(404, tk._('Section not found'))
 
 
 def main_page():

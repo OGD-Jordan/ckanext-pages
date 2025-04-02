@@ -135,6 +135,7 @@ class PagesPlugin(PagesPluginBase):
             
             # Main Page
             'ckanext_main_page_show': actions.main_page_show,
+            'ckanext_main_page_edit': actions.ckanext_main_page_edit,
             
             # Header Management Actions
             'ckanext_header_main_menu_create': actions.header_main_menu_create,

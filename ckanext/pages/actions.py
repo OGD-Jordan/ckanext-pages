@@ -510,6 +510,34 @@ def main_page_show(context, data_dict):
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _main_page_show(context, data_dict)
 
+def ckanext_main_page_edit(context, data_dict):
+    """Edit a main page section."""
+    # tk.check_access('ckanext_main_page_access', context)
+
+    section = get_main_page(data_dict.get('id'))
+    if not section:
+        raise tk.ObjectNotFound('Section not found')
+
+    schema = main_page_schema(id=int(data_dict.get('id')))
+    data, errors = tk.navl_validate(
+        data_dict,
+        schema,
+        context
+    )
+
+    if errors:
+        raise tk.ValidationError(errors)
+
+    # Update section with validated data
+    section.main_title_1_ar = data.get('main_title_1_ar', '')
+    section.main_title_1_en = data.get('main_title_1_en', '')
+    section.main_title_2_ar = data.get('main_title_2_ar', None)
+    section.main_title_2_en = data.get('main_title_2_en', None)
+    section.main_brief_en = data.get('main_brief_en', '')
+    section.main_brief_ar = data.get('main_brief_ar', '')
+
+    model.Session.commit()
+    return section.as_dict()
 
 def events_edit(context, data_dict):
     event_id = data_dict.get('id')

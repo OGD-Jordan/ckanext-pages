@@ -45,8 +45,8 @@ def main_page():
     return utils.main_page()
 
 
-def main_page_edit(section_id, data=None, errors=None, error_summary=None):
-    return utils.main_page_edit(section_id, data, errors, error_summary)
+def main_page_edit(section_id):
+    return utils.main_page_edit(section_id)
 
 
 def get_main_page(section_id):
