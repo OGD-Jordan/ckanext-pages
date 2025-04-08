@@ -53,23 +53,21 @@ def get_actions():
 def footer_main_show(context, data_dict):
     tk.check_access('is_content_editor', context)
 
+    defaults = {
+            'default_logo_en': FooterMain.DEFAULT_LOGO_EN,
+            'default_logo_ar': FooterMain.DEFAULT_LOGO_AR,
+            'default_phone_number': FooterMain.DEFAULT_PHONE_NUMBER,
+    }
     record = FooterMain.get()
-    default = {
-            'logo_en': FooterMain.DEFAULT_LOGO_EN,
-            'logo_ar': FooterMain.DEFAULT_LOGO_AR,
-            'phone_number': FooterMain.DEFAULT_PHONE_NUMBER,
-            'modified': ''
-        
-        }
     result = record.as_dict() if record else {}
-    
-    for k,v in default.items():
-        if not result.get(k, None):
-            result[k] = v
 
+    result.update(defaults)
+
+    if not record:  return result
+    
     if has_request_context():
         result.update({
-            'display_logo': result.get('logo_ar') if h.lang() == 'ar' else  result.get('logo_en')
+            'display_logo': result.get('logo_ar', '') if h.lang() == 'ar' else  result.get('logo_en', '')
             })
         image_url = result.get('display_logo')
 

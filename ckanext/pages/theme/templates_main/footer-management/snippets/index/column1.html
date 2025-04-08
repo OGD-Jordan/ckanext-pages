@@ -10,9 +10,9 @@
       </thead>
       <tbody>
             <tr>
-                <td>{{ data.logo_en }}</td>
-                <td>{{ data.logo_ar }}</td>
-                <td>{{ data.phone_number }}</td>
+                <td>{{ data.logo_en or data.default_logo_en }}</td>
+                <td>{{ data.logo_ar or data.default_logo_ar }}</td>
+                <td>{{ data.phone_number or data.default_phone_number }}</td>
                 <td>
                     <div class="d-flex flex-row" > 
                         <a 
