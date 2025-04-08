@@ -17,6 +17,7 @@
 {% block primary_content_inner %}
 <form action="" method="post" class="module-content" data-module="basic-form", enctype="multipart/form-data">
     {{ h.csrf_input() }}
+    {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
     {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder=_('eg. A descriptive title in English'), value=data.title_en, error=errors.title_en, classes=['control-full', 'control-large']) }}
     {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder=_('eg. A descriptive title in Arabic'), value=data.title_ar, error=errors.title_ar, classes=['control-full', 'control-large']) }}

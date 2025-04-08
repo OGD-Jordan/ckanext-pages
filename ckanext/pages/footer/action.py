@@ -67,18 +67,24 @@ def footer_main_show(context, data_dict):
         if not result.get(k, None):
             result[k] = v
 
-
-    if has_request_context:
+    if has_request_context():
         result.update({
             'display_logo': result.get('logo_ar') if h.lang() == 'ar' else  result.get('logo_en')
             })
         image_url = result.get('display_logo')
-        result.update({
-            'display_logo_url': h.url_for_static(
-                'uploads/footer/{}'.format(image_url),
-                qualified=True
-                ) if record and image_url and image_url[0:6] not in {'http:/', 'https:'}  else image_url,
+
+        if record.logo_en and record.logo_ar:
+            result.update({
+                'display_logo_url': h.url_for_static(
+                    'uploads/footer/{}'.format(image_url),
+                    qualified=True
+                    ) if record and image_url and image_url[0:6] not in {'http:/', 'https:'}  else image_url,
+                })
+        else:
+            result.update({
+                'display_logo_url': image_url
             })
+
     return result
 
 

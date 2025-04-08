@@ -19,16 +19,45 @@ def column_link_id_validator(value):
     raise Invalid(_('Invalid Id. Record not found.'))
 
 
+def column_order_validator(key, data, errors, context):
+    id = data.get(('id',),None)
+    column_number_key = ('column_number',)
+    column_number = data.get(column_number_key)
+
+    record = FooterColumnLinks.get(column_number=column_number, order = data[key]) and not FooterColumnLinks.get(column_number=column_number, order = data[key], id=id)
+    if record:
+        raise Invalid(_('Invalid order. Order already taken.'))
+
+
 def social_media_id_validator(value):
     record = FooterSocialMedia.get(id=value)
     if record:  return value
     raise Invalid(_('Invalid Id. Record not found.'))
 
 
+def social_media_order_validator(key, data, errors, context):
+    id = data.get(('id',),None)
+    value = data[key]
+    record = FooterSocialMedia.get(order=value) and not FooterSocialMedia.get(order=value, id=id)
+    if record:  
+        raise Invalid(_('Invalid order. Order already taken.'))
+    return value
+
+
+
 def banner_id_validator(value):
     record = FooterBanner.get(id=value)
     if record:  return value
     raise Invalid(_('Invalid Id. Record not found.'))
+
+
+def banner_order_validator(key, data, errors, context):
+    id = data.get(('id',),None)
+    value = data[key]
+    record = FooterBanner.get(order=value) and not FooterBanner.get(order=value, id=id)
+    if record:  
+        raise Invalid(_('Invalid order. Order already taken.'))
+    return value
 
 
 def link_target_validator(value):

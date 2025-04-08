@@ -13,6 +13,7 @@
 {% block primary_content_inner %}
 <form action="" method="post" class="module-content" data-module="basic-form", enctype="multipart/form-data">
     {{ h.csrf_input() }}
+    {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
     {% set is_upload = data.logo_en and not data.logo_en.startswith('http') %}
     {% set is_url = data.logo_en and data.logo_en.startswith('http') %}
@@ -24,8 +25,8 @@
             is_upload_enabled=h.uploads_enabled(), 
             is_url=is_url, 
             is_upload=is_upload, 
-            url_label=_('Footer Logo En (260 x 110 pixels)'), 
-            upload_label=_('Footer Logo En (260 x 110 pixels)'),
+            url_label=_('* Footer Logo En (260 x 110 pixels)'), 
+            upload_label=_('* Footer Logo En (260 x 110 pixels)'),
             field_url='logo_en', 
             field_upload='logo_en_upload', 
             field_clear='clear_logo_en_upload',
@@ -43,8 +44,8 @@
             is_upload_enabled=h.uploads_enabled(), 
             is_url=is_url, 
             is_upload=is_upload, 
-            url_label=_('Footer Logo Ar (260 x 110 pixels)'), 
-            upload_label=_('Footer Logo Ar (260 x 110 pixels)'),
+            url_label=_('* Footer Logo Ar (260 x 110 pixels)'), 
+            upload_label=_('* Footer Logo Ar (260 x 110 pixels)'),
             field_url='logo_ar', 
             field_upload='logo_ar_upload', 
             field_clear='clear_logo_ar_upload',
@@ -52,7 +53,7 @@
             ) 
     }}
     
-    {{ form.input('phone_number', id='field-phone_number', label=_('Phone Number'), placeholder=_('eg. 962778000004'), value=data.phone_number, error=errors.phone_number, classes=['control-full', 'control-large']) }}
+    {{ form.input('phone_number', id='field-phone_number', label=_('* Phone Number'), placeholder=_('eg. 962778000004'), value=data.phone_number, error=errors.phone_number, classes=['control-full', 'control-large']) }}
 
     <div class="form-actions pull-right">
         <button 

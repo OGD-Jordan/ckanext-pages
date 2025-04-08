@@ -29,11 +29,13 @@ def _base_simple_link_schema():
 def column_link_create_schema():
     schema = _base_simple_link_schema().copy()
     schema['id'] = [empty]
+    schema['order'] = [validators.column_order_validator]
     return schema
 
 def column_link_update_schema():
     schema = _base_simple_link_schema().copy()
     schema['id'].append(validators.column_link_id_validator)
+    schema['order'] = [validators.column_order_validator]
     return schema
 
 
@@ -58,21 +60,25 @@ def _base_image_link_schema():
 def social_media_create_schema():
     schema = _base_image_link_schema().copy()
     schema['id'] = [empty]
+    schema['order'] = [validators.social_media_order_validator]
     return schema
 
 def social_media_update_schema():
     schema = _base_image_link_schema().copy()
     schema['id'].append(validators.social_media_id_validator)
+    schema['order'] = [validators.social_media_order_validator]
     return schema
 
 def banner_create_schema():
     schema = _base_image_link_schema().copy()
     schema['id'] = [empty]
+    schema['order'] = [validators.banner_order_validator]
     return schema
 
 def banner_update_schema():
     schema = _base_image_link_schema().copy()
     schema['id'].append(validators.banner_id_validator)
+    schema['order'] = [validators.banner_order_validator]
     return schema
 
 
@@ -97,9 +103,9 @@ def banner_get_schema():
 
 def column1_update_schema():
     return {
-        'logo_en': [ignore_missing, unicode_safe],
-        'logo_ar': [ignore_missing, unicode_safe],
-        'phone_number': [ignore_missing, unicode_safe],
+        'logo_en': [not_empty, unicode_safe],
+        'logo_ar': [not_empty, unicode_safe],
+        'phone_number': [not_empty, unicode_safe],
     }
 
 
