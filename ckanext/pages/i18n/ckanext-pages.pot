@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-pages 0.5.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-02 15:47+0500\n"
+"POT-Creation-Date: 2025-04-08 07:54+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: ckanext/pages/actions.py:563
+#: ckanext/pages/actions.py:591
 msgid "News item not found."
 msgstr ""
 
@@ -216,12 +216,12 @@ msgid "Not authorized to view menu item details"
 msgstr ""
 
 #: ckanext/pages/helpers.py:60
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:31
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:32
 msgid "Same Tab"
 msgstr ""
 
 #: ckanext/pages/helpers.py:61
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:32
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:33
 msgid "New Tab"
 msgstr ""
 
@@ -240,6 +240,22 @@ msgstr ""
 #: ckanext/pages/utils.py:338
 #, python-format
 msgid "Unauthorized to upload file %s"
+msgstr ""
+
+#: ckanext/pages/utils.py:418
+msgid "Section updated successfully!"
+msgstr ""
+
+#: ckanext/pages/utils.py:423
+msgid "Invalid value"
+msgstr ""
+
+#: ckanext/pages/utils.py:454
+msgid "Not authorized to edit main page sections"
+msgstr ""
+
+#: ckanext/pages/utils.py:456
+msgid "Section not found"
 msgstr ""
 
 #: ckanext/pages/validators.py:17
@@ -270,16 +286,21 @@ msgstr ""
 msgid "Invalid Column Number."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:19 ckanext/pages/footer/validators.py:25
-#: ckanext/pages/footer/validators.py:31
+#: ckanext/pages/footer/validators.py:19 ckanext/pages/footer/validators.py:35
+#: ckanext/pages/footer/validators.py:51
 msgid "Invalid Id. Record not found."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:37
+#: ckanext/pages/footer/validators.py:29 ckanext/pages/footer/validators.py:43
+#: ckanext/pages/footer/validators.py:59
+msgid "Invalid order. Order already taken."
+msgstr ""
+
+#: ckanext/pages/footer/validators.py:66
 msgid "Invalid Target Selected."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:61
+#: ckanext/pages/footer/validators.py:90
 msgid "Invalid name. Name already exists"
 msgstr ""
 
@@ -474,9 +495,9 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:117
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:94
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:58
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:72
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:74
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:80
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:72
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:56
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:55
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:120
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:169
@@ -497,21 +518,21 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:130
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:33
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:27
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:46
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:55
 msgid "Delete"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:134
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:95
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/logo_form.html:60
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:75
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:75
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:77
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:59
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:170
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:85
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:50
-#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:72
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:54
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:50
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:51
+#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:73
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:55
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:51
 msgid "Save"
 msgstr ""
 
@@ -735,9 +756,9 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:13
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:35
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:27
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:21
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:21
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:21
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:22
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:22
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:22
 msgid "Title En"
 msgstr ""
 
@@ -751,9 +772,9 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:20
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:70
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:37
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:22
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:22
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:22
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:23
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:23
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:23
 msgid "Title Ar"
 msgstr ""
 
@@ -810,9 +831,9 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:37
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:14
 #: ckanext/pages/theme/templates_main/ckanext_pages/internal_urls.html:19
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:24
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:24
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:24
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:25
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:25
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:25
 msgid "Link En"
 msgstr ""
 
@@ -820,9 +841,9 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:28
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:28
 #: ckanext/pages/theme/templates_main/ckanext_pages/internal_urls.html:20
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:25
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:25
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:25
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:26
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:26
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:26
 msgid "Link Ar"
 msgstr ""
 
@@ -985,9 +1006,8 @@ msgid "Value"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:31
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:63
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:65
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:32
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:63
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:13
 msgid "Type"
 msgstr ""
@@ -995,7 +1015,6 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/menu_item_details.html:35
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:53
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:33
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:53
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:14
 msgid "Parent"
 msgstr ""
@@ -1006,11 +1025,11 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:45
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:15
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:15
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:27
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:27
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:28
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:28
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:8
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:8
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:27
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:28
 msgid "Order"
 msgstr ""
 
@@ -1085,17 +1104,15 @@ msgstr ""
 msgid "No logo uploaded yet"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:65
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:67
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:18
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:65
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:6
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:6
 msgid "Link"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:66
+#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_form.html:68
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:20
-#: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_form.html:66
 msgid "Menu"
 msgstr ""
 
@@ -1157,48 +1174,48 @@ msgstr ""
 msgid "Footer Banner Edit"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:21
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:21
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:22
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:22
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column2.html:7
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:7
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:21
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:22
 msgid "eg. A descriptive title in English"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:22
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:22
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:23
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:23
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column2.html:10
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column3.html:10
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:22
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:23
 msgid "eg. A descriptive title in Arabic"
-msgstr ""
-
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:24
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:24
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:24
-msgid "eg. https://www.example.com/en"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:25
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:25
 #: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:25
+msgid "eg. https://www.example.com/en"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:26
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:26
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:26
 msgid "eg. https://www.example.com/ar"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:27
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:27
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:27
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:28
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:28
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:28
 msgid "eg. 1 or 2"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:32
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:33
 msgid "Footer Banner Icon (175 x 70 pixels)"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:41
-#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:63
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:45
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:41
+#: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:42
+#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:64
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:46
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:42
 msgid "Back"
 msgstr ""
 
@@ -1210,22 +1227,21 @@ msgstr ""
 msgid "Column 1 Update"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:27
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:28
-msgid "Footer Logo En (260 x 110 pixels)"
+#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:29
+msgid "* Footer Logo En (260 x 110 pixels)"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:46
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:47
-msgid "Footer Logo Ar (260 x 110 pixels)"
+#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:48
+msgid "* Footer Logo Ar (260 x 110 pixels)"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:55
-#: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:7
-msgid "Phone Number"
+#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:56
+msgid "* Phone Number"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:55
+#: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:56
 msgid "eg. 962778000004"
 msgstr ""
 
@@ -1241,11 +1257,11 @@ msgstr ""
 msgid "Column Link Edit"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:30
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:31
 msgid "Select Target"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:36
+#: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:37
 msgid "Link Target"
 msgstr ""
 
@@ -1277,7 +1293,7 @@ msgstr ""
 msgid "Social Media Edit"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:32
+#: ckanext/pages/theme/templates_main/footer-management/social_media_edit.html:33
 msgid "Social Media Icon (42 x 42 pixels)"
 msgstr ""
 
@@ -1287,6 +1303,10 @@ msgstr ""
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:6
 msgid "Logo Ar"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:7
+msgid "Phone Number"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:19
@@ -1345,31 +1365,31 @@ msgstr ""
 msgid "Edit Section"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:31
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:40
 msgid "Main Title 1 AR"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:32
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:41
 msgid "Main Title 1 EN"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:36
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:45
 msgid "Main Title 2 AR"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:37
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:46
 msgid "Main Title 2 EN"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:41
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:50
 msgid "Main Brief EN"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:42
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:51
 msgid "Main Brief AR"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:47
+#: ckanext/pages/theme/templates_main/main_page/main_page_edit.html:56
 msgid "Save Edit"
 msgstr ""
 

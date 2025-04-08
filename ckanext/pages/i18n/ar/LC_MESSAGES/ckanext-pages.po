@@ -1216,15 +1216,19 @@ msgstr "تحديث العمود 1"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:27
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:28
-msgid "Footer Logo En (260 x 110 pixels)"
-msgstr "(260 x 110 pixels) شعار التذييل باللغة الإنجليزية"
+msgid "* Footer Logo En (260 x 110 pixels)"
+msgstr "* (260 × 110 بكسل) شعار التذييل باللغة الإنجليزية"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:46
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:47
-msgid "Footer Logo Ar (260 x 110 pixels)"
-msgstr "(260 x 110 pixels)شعار التذييل باللغة العربية "
+msgid "* Footer Logo Ar (260 x 110 pixels)"
+msgstr "* (260 × 110 بكسل) شعار التذييل باللغة العربية"
 
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:55
+msgid "* Phone Number"
+msgstr "* رقم الهاتف"
+
+
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/column1.html:7
 msgid "Phone Number"
 msgstr "رقم الهاتف"
@@ -1384,3 +1388,19 @@ msgstr "يجب ان يكون تاريخ البدء اقل من تاريخ الن
 #: ckanext-pages/ckanext/pages/logic/schema.py:25
 msgid "Publish date must be today or in the future."
 msgstr "يجب ان يكون تاريخ النشر هو اليوم او في المستقبل."
+
+#: ckanext/pages/utils.py:418
+msgid "Section updated successfully!"
+msgstr "تم تحديث القسم بنجاح!"
+
+#: ckanext/pages/utils.py:423
+msgid "Invalid value"
+msgstr "قيمة غير صالحة"
+
+#: ckanext/pages/utils.py:454
+msgid "Not authorized to edit main page sections"
+msgstr "غير مصرح لك بتحرير أقسام الصفحة الرئيسية"
+
+#: ckanext/pages/utils.py:456
+msgid "Section not found"
+msgstr "لم يتم العثور على القسم"
