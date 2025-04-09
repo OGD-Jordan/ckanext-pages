@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-pages 0.5.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-08 07:54+0500\n"
+"POT-Creation-Date: 2025-04-09 14:45+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,21 +286,21 @@ msgstr ""
 msgid "Invalid Column Number."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:19 ckanext/pages/footer/validators.py:35
-#: ckanext/pages/footer/validators.py:51
+#: ckanext/pages/footer/validators.py:19 ckanext/pages/footer/validators.py:47
+#: ckanext/pages/footer/validators.py:70
 msgid "Invalid Id. Record not found."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:29 ckanext/pages/footer/validators.py:43
-#: ckanext/pages/footer/validators.py:59
+#: ckanext/pages/footer/validators.py:41 ckanext/pages/footer/validators.py:64
+#: ckanext/pages/footer/validators.py:88
 msgid "Invalid order. Order already taken."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:66
+#: ckanext/pages/footer/validators.py:94
 msgid "Invalid Target Selected."
 msgstr ""
 
-#: ckanext/pages/footer/validators.py:90
+#: ckanext/pages/footer/validators.py:118
 msgid "Invalid name. Name already exists"
 msgstr ""
 
@@ -1339,6 +1339,11 @@ msgstr ""
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:7
 msgid "Image"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:30
+#, python-format
+msgid "Are you sure you want to delete this %(type)s?"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:7

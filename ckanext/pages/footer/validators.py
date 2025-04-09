@@ -24,7 +24,6 @@ def column_order_validator(key, data, errors, context):
     column_number = data.get(('column_number',))
     order = data.get(key)
 
-    # Skip if order is not an integer
     try:
         order = int(order)
     except (ValueError, TypeError):
@@ -52,13 +51,11 @@ def social_media_order_validator(key, data, errors, context):
     id = data.get(('id',), None)
     value = data.get(key)
 
-    # Skip validation if value is not a valid integer (let natural_number_validator handle it)
     try:
         value = int(value)
     except (ValueError, TypeError):
         return
 
-    # Query to find a record with the same order, but a different id (i.e. conflict)
     query = FooterSocialMedia.query.filter(FooterSocialMedia.order == value)
     if id:
         query = query.filter(FooterSocialMedia.id != id)
@@ -83,7 +80,6 @@ def banner_order_validator(key, data, errors, context):
     except (ValueError, TypeError):
         return  # Let the natural_number_validator handle invalid input
 
-    # Query to find a conflicting record with the same order but different id
     query = FooterBanner.query.filter(FooterBanner.order == value)
     if id:
         query = query.filter(FooterBanner.id != id)
