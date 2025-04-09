@@ -20,13 +20,26 @@ def column_link_id_validator(value):
 
 
 def column_order_validator(key, data, errors, context):
-    id = data.get(('id',),None)
-    column_number_key = ('column_number',)
-    column_number = data.get(column_number_key)
+    id = data.get(('id',), None)
+    column_number = data.get(('column_number',))
+    order = data.get(key)
 
-    record = FooterColumnLinks.get(column_number=column_number, order = data[key]) and not FooterColumnLinks.get(column_number=column_number, order = data[key], id=id)
-    if record:
-        raise Invalid(_('Invalid order. Order already taken.'))
+    # Skip if order is not an integer
+    try:
+        order = int(order)
+    except (ValueError, TypeError):
+        return  # Let natural_number_validator handle this
+
+    if column_number is None:
+        return
+    
+    query = FooterColumnLinks.filter(column_number=column_number, order=order)
+
+    if id:
+        query = query.filter(FooterColumnLinks.id != id)
+
+    if query.first():
+        errors[key].append(_('Invalid order. Order already taken.'))
 
 
 def social_media_id_validator(value):
@@ -36,13 +49,22 @@ def social_media_id_validator(value):
 
 
 def social_media_order_validator(key, data, errors, context):
-    id = data.get(('id',),None)
-    value = data[key]
-    record = FooterSocialMedia.get(order=value) and not FooterSocialMedia.get(order=value, id=id)
-    if record:  
-        raise Invalid(_('Invalid order. Order already taken.'))
-    return value
+    id = data.get(('id',), None)
+    value = data.get(key)
 
+    # Skip validation if value is not a valid integer (let natural_number_validator handle it)
+    try:
+        value = int(value)
+    except (ValueError, TypeError):
+        return
+
+    # Query to find a record with the same order, but a different id (i.e. conflict)
+    query = FooterSocialMedia.query.filter(FooterSocialMedia.order == value)
+    if id:
+        query = query.filter(FooterSocialMedia.id != id)
+
+    if query.first():
+        errors[key].append(_('Invalid order. Order already taken.'))
 
 
 def banner_id_validator(value):
@@ -52,12 +74,22 @@ def banner_id_validator(value):
 
 
 def banner_order_validator(key, data, errors, context):
-    id = data.get(('id',),None)
-    value = data[key]
-    record = FooterBanner.get(order=value) and not FooterBanner.get(order=value, id=id)
-    if record:  
-        raise Invalid(_('Invalid order. Order already taken.'))
-    return value
+    id = data.get(('id',), None)
+    value = data.get(key)
+
+    # Ensure value is an integer before querying
+    try:
+        value = int(value)
+    except (ValueError, TypeError):
+        return  # Let the natural_number_validator handle invalid input
+
+    # Query to find a conflicting record with the same order but different id
+    query = FooterBanner.query.filter(FooterBanner.order == value)
+    if id:
+        query = query.filter(FooterBanner.id != id)
+
+    if query.first():
+        errors[key].append(_('Invalid order. Order already taken.'))
 
 
 def link_target_validator(value):

@@ -21,21 +21,21 @@ def _base_simple_link_schema():
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
         'target': [not_empty, unicode_safe, validators.link_target_validator],
-        'order': [not_empty, unicode_safe, natural_number_validator],
-        'column_number': [not_empty, natural_number_validator, validators.column_number_validator],
+        'order': [not_empty, natural_number_validator],
+        'column_number': [not_empty, natural_number_validator],
     }
 
 
 def column_link_create_schema():
-    schema = _base_simple_link_schema().copy()
+    schema = _base_simple_link_schema()
     schema['id'] = [empty]
-    schema['order'] = [validators.column_order_validator]
+    schema['order'].append(validators.column_order_validator)
     return schema
 
 def column_link_update_schema():
-    schema = _base_simple_link_schema().copy()
+    schema = _base_simple_link_schema()
     schema['id'].append(validators.column_link_id_validator)
-    schema['order'] = [validators.column_order_validator]
+    schema['order'].append(validators.column_order_validator)
     return schema
 
 
@@ -53,32 +53,32 @@ def _base_image_link_schema():
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
         'image_url': [not_empty, unicode_safe],
-        'order': [not_empty, unicode_safe, natural_number_validator],
+        'order': [not_empty, natural_number_validator],
     }
 
 
 def social_media_create_schema():
     schema = _base_image_link_schema().copy()
     schema['id'] = [empty]
-    schema['order'] = [validators.social_media_order_validator]
+    schema['order'] = [not_empty, natural_number_validator, validators.social_media_order_validator]
     return schema
 
 def social_media_update_schema():
     schema = _base_image_link_schema().copy()
     schema['id'].append(validators.social_media_id_validator)
-    schema['order'] = [validators.social_media_order_validator]
+    schema['order'] = [not_empty, natural_number_validator, validators.social_media_order_validator]
     return schema
 
 def banner_create_schema():
     schema = _base_image_link_schema().copy()
     schema['id'] = [empty]
-    schema['order'] = [validators.banner_order_validator]
+    schema['order'] = [not_empty, natural_number_validator, validators.banner_order_validator]
     return schema
 
 def banner_update_schema():
     schema = _base_image_link_schema().copy()
     schema['id'].append(validators.banner_id_validator)
-    schema['order'] = [validators.banner_order_validator]
+    schema['order'] = [not_empty, natural_number_validator, validators.banner_order_validator]
     return schema
 
 
