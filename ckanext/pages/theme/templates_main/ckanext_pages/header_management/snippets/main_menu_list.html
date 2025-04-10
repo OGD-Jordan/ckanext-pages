@@ -27,8 +27,8 @@
     <table class="table">
         <thead>
         <tr>
-            <th style="font-weight: bold !important;">{{ _('Title En') }}</th>
-            <th style="font-weight: bold !important;">{{ _('Link En') }}</th>
+            <th style="font-weight: bold !important;">{{ _('Title En') if h.lang() == 'en' else _('Title Ar') }}</th>
+            <th style="font-weight: bold !important;">{{ _('Link En' if h.lang() == 'en' else _('Link Ar')) }}</th>
             <th style="font-weight: bold !important;">{{ _('Type') }}</th>
             <th style="font-weight: bold !important;">{{ _('Parent') }}</th>
             <th style="font-weight: bold !important;">{{ _('Order') }}</th>
@@ -40,12 +40,18 @@
             <tr>
                 <th scope="row">
                     <a href="{{ h.url_for('header_management.menu_item_details', id=item.id) }}" class="custom-link">
-                        {{ item.title_en }}
+                        {{ item.title_en if h.lang() == 'en' else item.title_ar }}
                     </a>
                 </th>
-                <td>{{ item.link_en }}</td>
+                <td>{{ item.link_en if h.lang() == 'en' else item.link_ar }}</td>
                 <td>{{ item.menu_type }}</td>
-                <td>{{ item.parent.title_en if item.parent else '-' }}</td>
+                <td>
+                    {% if item.parent %}
+                        {{ item.parent.title_en if  h.lang() == 'en' else item.parent.title_ar }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
                 <td>{{ item.order }}</td>
                 <td>
                     <div class="d-flex flex-row">
