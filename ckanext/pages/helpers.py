@@ -28,29 +28,34 @@ def get_header_data():
         .all()
     )
 
-    def build_menu_tree(menu_items):
-        menu_dict = {item.id: item for item in menu_items}
-        root_items = []
+    def build_tree(items):
+        menu = {item.id: item for item in items}
+        for item in items:
+            setattr(item, 'children', [])
+        for item in items:
+            if item.parent_id and item.parent_id in menu:
+                menu[item.parent_id].children.append(item)
+        return sorted(
+            (item for item in items if not item.parent_id),
+            key=lambda x: (x.order, 0 if getattr(x, 'menu_type', '') == 'link' else 1)
+        )
 
-        for item in menu_items:
-            if item.parent_id:
-                parent = menu_dict.get(item.parent_id)
-                if parent and hasattr(parent, 'children') and item not in parent.children:
-                    parent.children.append(item)
-            else:
-                if item not in root_items:
-                    root_items.append(item)
+    def sort_children(items):
+        for item in items:
+            item.children.sort(key=lambda x: (x.order, 0 if getattr(x, 'menu_type', '') == 'link' else 1))
+            sort_children(item.children)
 
-        return root_items
+    main_menu_tree = build_tree(main_menu_items)
+    secondary_menu_tree = build_tree(secondary_menu_items)
 
-    main_menu_tree = build_menu_tree(main_menu_items)
-    secondary_menu_tree = build_menu_tree(secondary_menu_items)
+    sort_children(main_menu_tree)
+    sort_children(secondary_menu_tree)
 
     return {
         'logo_url': logo.link if logo else '',
         'main_menu_tree': main_menu_tree,
         'secondary_menu_tree': secondary_menu_tree,
-        'lang': lang
+        'lang': lang,
     }
 
 from ckan.common import _
