@@ -56,7 +56,7 @@ def social_media_order_validator(key, data, errors, context):
     except (ValueError, TypeError):
         return
 
-    query = FooterSocialMedia.query.filter(FooterSocialMedia.order == value)
+    query = FooterSocialMedia.filter(order = value)
     if id:
         query = query.filter(FooterSocialMedia.id != id)
 
@@ -80,7 +80,7 @@ def banner_order_validator(key, data, errors, context):
     except (ValueError, TypeError):
         return  # Let the natural_number_validator handle invalid input
 
-    query = FooterBanner.query.filter(FooterBanner.order == value)
+    query = FooterBanner.filter(order = value)
     if id:
         query = query.filter(FooterBanner.id != id)
 

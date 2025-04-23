@@ -5,6 +5,8 @@ from ckanext.pages.interfaces import IPagesSchema
 from ckan.plugins.toolkit import get_validator
 from datetime import datetime
 
+tk = p.toolkit
+
 ignore_empty = p.toolkit.get_validator('ignore_empty')
 ignore_missing = p.toolkit.get_validator('ignore_missing')
 not_empty = p.toolkit.get_validator('not_empty')
@@ -51,12 +53,11 @@ def start_date_less_than_end_date(key, data, errors, context):
 
     if start and end:
         try:
-
-            start_dt = datetime.fromisoformat(start)
-            end_dt = datetime.fromisoformat(end)
+            start_dt = datetime.fromisoformat(start) if isinstance(start, str) else start
+            end_dt = datetime.fromisoformat(end) if isinstance(end, str) else end
 
             if start_dt > end_dt:
-                errors[key].append("Start date must be less than end date.")
+                errors[key].append(tk._("Start date must be less than end date."))
         except ValueError:
             pass
 
@@ -68,13 +69,14 @@ def default_events_schema():
         'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
         'name': [not_empty, name_validator, event_name_validator],
         'start_date': [not_empty, isodate],
-        'end_date': [not_empty, isodate, start_date_less_than_end_date],
+        'end_date': [not_empty, isodate],
         'brief_ar': [ignore_missing, unicode_safe, get_validator('validate_arabic_text')],
         'brief_en': [ignore_missing, unicode_safe, get_validator('validate_english_text')],
         'content_en': [ignore_missing, unicode_safe],
         'content_ar': [ignore_missing, unicode_safe],
         'image_url': [ignore_missing, unicode_safe],
         'lang': [ignore_missing, unicode_safe],
+        '__after': [start_date_less_than_end_date]
 
     }
 

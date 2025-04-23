@@ -6,7 +6,7 @@ def insert_main_page_rows():
     rows = [
         MainPage(
             id=1,
-            main_title_1_en = 'Welcome To The Open Government Data Platform In Jordan',
+            main_title_1_en = 'Welcome To The Open Government Data Portal In Jordan',
             main_title_1_ar = 'مرحباً بكم في منصة البيانات الحكومية المفتوحة في الأردن',
             main_title_2_en = "Let's start!",
             main_title_2_ar = 'لنبدأ !',
