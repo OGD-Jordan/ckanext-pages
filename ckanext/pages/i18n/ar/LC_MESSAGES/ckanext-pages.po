@@ -923,8 +923,8 @@ msgstr "مثال. صفحتي"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:49
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:50
-msgid "Cover Image "
-msgstr "(1200 x 400 pixels) صورة الغلاف"
+msgid "Cover Image (1200 x 400 pixels)"
+msgstr "صورة الغلاف ‎(1200 x 400 pixels)‎"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page_edit.html:78
 msgid "Enter content in English here"
@@ -1197,7 +1197,7 @@ msgstr "مثال. 1 او 2"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:32
 msgid "Footer Banner Icon (175 x 70 pixels)"
-msgstr "(175 x 70 pixels) أيقونة لافتة التذييل "
+msgstr "أيقونة لافتة التذييل (‫٧٠ × ١٧٥‬ بكسل)"
 
 #: ckanext/pages/theme/templates_main/footer-management/banner_edit.html:41
 #: ckanext/pages/theme/templates_main/footer-management/column1_edit.html:63
@@ -1409,3 +1409,39 @@ msgstr "غير مصرح لك بتحرير أقسام الصفحة الرئيسي
 #: ckanext/pages/utils.py:456
 msgid "Section not found"
 msgstr "لم يتم العثور على القسم"
+
+msgid "Link ar"
+msgstr "رابط اللغة العربية"
+
+msgid "Link en"
+msgstr "رابط اللغة الإنجليزية"
+
+msgid "Missing value"
+msgstr "قيمة مفقودة"
+
+msgid "Title en"
+msgstr "العنوان باللغة الإنجليزية"
+
+msgid "Content en"
+msgstr "المحتوى باللغة الإنجليزية"
+
+msgid "Content ar"
+msgstr "المحتوى باللغة العربية"
+
+msgid "Start date"
+msgstr "تاريخ البدء"
+
+msgid "End date"
+msgstr "تاريخ الانتهاء"
+
+msgid "Invalid image url %s ..."
+msgstr "رابط الصورة غير صالح: %s ..."
+
+msgid "social media"
+msgstr "وسائل التواصل الاجتماعي"
+
+msgid "banner"
+msgstr "لافتة"
+
+msgid "Invalid order. Order should be at max 10."
+msgstr "ترتيب غير صالح. يجب ألا يتجاوز الترتيب 10."

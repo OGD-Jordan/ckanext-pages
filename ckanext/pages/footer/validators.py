@@ -5,6 +5,35 @@ Invalid = tk.Invalid
 _ = tk._
 
 
+def is_file_uploaded(file_storage):
+    return hasattr(file_storage, 'filename') and file_storage.filename != ''
+
+
+def is_url(value):
+    return isinstance(value, str) and (value.startswith('http://') or value.startswith('https://'))
+
+
+def image_upload_or_valid_url_logo_en(key, data, errors, context):
+    context['upload_field'] = 'logo_en_upload'
+    image_upload_or_valid_url(key, data, errors, context)
+
+
+def image_upload_or_valid_url_logo_ar(key, data, errors, context):
+    context['upload_field'] = 'logo_ar_upload'
+    image_upload_or_valid_url(key, data, errors, context)
+
+
+def image_upload_or_valid_url(key, data, errors, context):
+    upload_field = context.get('upload_field', 'image_upload')
+    value = data[key]
+
+    extras = data.get(('__extras',), {})
+    image_upload_value = extras.get(upload_field)
+
+    if is_file_uploaded(image_upload_value):
+        return 
+    if not is_url(value):
+        errors.get(key, []).append(_('Invalid image url %s ...' %value[:30]))
 
 
 def column_number_validator(value):
@@ -26,6 +55,8 @@ def column_order_validator(key, data, errors, context):
 
     try:
         order = int(order)
+        if order > 10:
+            errors[key].append(_('Invalid order. Order should be at max 10.'))
     except (ValueError, TypeError):
         return  # Let natural_number_validator handle this
 
@@ -53,6 +84,8 @@ def social_media_order_validator(key, data, errors, context):
 
     try:
         value = int(value)
+        if value > 10:
+            errors[key].append(_('Invalid order. Order should be at max 10.'))
     except (ValueError, TypeError):
         return
 
@@ -77,6 +110,8 @@ def banner_order_validator(key, data, errors, context):
     # Ensure value is an integer before querying
     try:
         value = int(value)
+        if value > 10:
+            errors[key].append(_('Invalid order. Order should be at max 10.'))
     except (ValueError, TypeError):
         return  # Let the natural_number_validator handle invalid input
 

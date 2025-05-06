@@ -160,7 +160,7 @@ def link_required_if_link_type_or_menu_child(key, data, errors, context):
     value = data.get(key)
 
     if (menu_type == 'link' or bool(parent)) and not value:
-        errors[key].append('Missing value')
+        errors[key].append(tk._('Missing value'))
 
 
 def header_menu_schema():
