@@ -408,7 +408,7 @@ def main_page_edit(section_id):
             data_dict = dict(tk.request.form)
             data_dict['id'] = section_id
 
-            if tk.request.form.get('delete'):
+            if tk.request.form.get('back'):
                 return tk.redirect_to('pages.main_page')
 
             try:
