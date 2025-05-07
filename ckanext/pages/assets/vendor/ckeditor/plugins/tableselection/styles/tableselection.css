@@ -34,3 +34,13 @@
 table[data-cke-table-faked-selection-table] {
 	cursor: cell;
 }
+
+
+.bordered-table {
+	border-collapse: collapse;
+  }
+  
+  .bordered-table th,
+  .bordered-table td {
+	border: 1px solid #000;
+  }
