@@ -52,7 +52,7 @@ def _base_image_link_schema():
         'title_ar': [not_empty, unicode_safe, tk.get_validator('validate_arabic_text')],
         'link_en': [not_empty, url_validator],
         'link_ar': [not_empty, url_validator],
-        'image_url': [not_empty, unicode_safe],
+        'image_url': [not_empty, unicode_safe, validators.image_upload_or_valid_url],
         'order': [not_empty, natural_number_validator],
     }
 

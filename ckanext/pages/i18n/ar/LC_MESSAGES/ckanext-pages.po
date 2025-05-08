@@ -1445,3 +1445,9 @@ msgstr "لافتة"
 
 msgid "Invalid order. Order should be at max 10."
 msgstr "ترتيب غير صالح. يجب ألا يتجاوز الترتيب 10."
+
+msgid "Brief en"
+msgstr "موجز اللغة الإنجليزية"
+
+msgid "Brief ar"
+msgstr "موجز باللغة العربية"
