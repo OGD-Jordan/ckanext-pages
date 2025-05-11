@@ -4,13 +4,54 @@ from ckanext.pages.footer.model.footer import FooterBanner, FooterColumnLinks, F
 Invalid = tk.Invalid
 _ = tk._
 
+import glob
+import os
+
+UPLOADS_DIR = '/var/lib/ckan/default/storage/uploads'
+
 
 def is_file_uploaded(file_storage):
-    return hasattr(file_storage, 'filename') and file_storage.filename != ''
+    """Check if a *new* file is uploaded."""
+    return (
+        file_storage is not None
+        and hasattr(file_storage, 'filename')
+        and file_storage.filename.strip() != ''
+    )
+
+
+def is_already_uploaded(filename):
+    pattern = os.path.join(UPLOADS_DIR, '**', filename)
+    return any(glob.iglob(pattern, recursive=True))
 
 
 def is_url(value):
-    return isinstance(value, str) and (value.startswith('http://') or value.startswith('https://'))
+    """Check if the value is a valid URL (not a data URI or base64)."""
+    if isinstance(value, str):
+        return value.startswith('http://') or value.startswith('https://')
+    return False
+
+
+def image_upload_or_valid_url(key, data, errors, context):
+    upload_field = context.get('upload_field', 'image_upload')
+    value = data.get(key)
+    extras = data.get(('__extras',), {})
+    file_storage = extras.get(upload_field)
+
+
+    # Case 1: new file uploaded
+    if is_file_uploaded(file_storage):
+        return
+
+    # Case 2: already uploaded file submitted again
+    if is_already_uploaded(value):
+        return
+    
+    # Case 3: no file uploaded but value is a valid URL
+    if is_url(value):
+        return
+
+    errors[key].append(_('Invalid image url %s ...' %value[:30]))
+
 
 
 def image_upload_or_valid_url_logo_en(key, data, errors, context):
@@ -22,18 +63,6 @@ def image_upload_or_valid_url_logo_ar(key, data, errors, context):
     context['upload_field'] = 'logo_ar_upload'
     image_upload_or_valid_url(key, data, errors, context)
 
-
-def image_upload_or_valid_url(key, data, errors, context):
-    upload_field = context.get('upload_field', 'image_upload')
-    value = data[key]
-
-    extras = data.get(('__extras',), {})
-    image_upload_value = extras.get(upload_field)
-
-    if is_file_uploaded(image_upload_value):
-        return 
-    if not is_url(value):
-        errors.get(key, []).append(_('Invalid image url %s ...' %value[:30]))
 
 
 def column_number_validator(value):
