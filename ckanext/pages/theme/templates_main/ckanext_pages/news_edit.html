@@ -97,13 +97,15 @@
             {# News Date #}
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="news_date" class="boldfont">{{ _('News Date') }}</label>
-                    <input type="date"
-                           class="form-control"
-                           id="news_date"
-                           name="news_date"
-                            value="{{ news_date_formatted }}"
-                           required>
+                    {{ form.input(
+                        'news_date',
+                        id='field-news_date',
+                        label=_('News Date'),
+                        value=news_date_formatted,
+                        error=errors.news_date,
+                        type='date',
+                        is_required=true
+                    ) }}
                 </div>
             </div>
 

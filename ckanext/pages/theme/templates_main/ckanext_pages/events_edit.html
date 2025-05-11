@@ -52,18 +52,34 @@
         upload_label=_('News Image (1200 x 400 pixels)') 
       ) }}
 
-    <!-- Start Date -->
-    <div class="mb-3">
-      {% set start_date_formatted =  h.date_str_to_datetime(data.start_date).strftime('%Y-%m-%d') if data and data.start_date else '' %}
-      <label for="start_date" class="form-label">{{_('Start Date')}}</label>
-      <input type="date" class="form-control form-control-lg" id="start_date" name="start_date" value="{{ start_date_formatted }}">
+    {% set start_date_formatted = h.date_str_to_datetime(data.start_date).strftime('%Y-%m-%d') if data and data.start_date else '' %}
+    <div class="row mb-4">
+        <div class="col-12">
+            {{ form.input(
+                'start_date',
+                id='field-start_date',
+                label=_('Start Date'),
+                value=start_date_formatted,
+                error=errors.start_date,
+                type='date',
+                is_required=true
+            ) }}
+        </div>
     </div>
 
-    <!-- End Date -->
-    <div class="mb-3">
-      {% set end_date_formatted =  h.date_str_to_datetime(data.end_date).strftime('%Y-%m-%d') if data and data.end_date else '' %}
-      <label for="end_date" class="form-label">{{_('End Date')}}</label>
-      <input type="date" class="form-control form-control-lg" id="end_date" name="end_date" value="{{ end_date_formatted }}">
+    {% set end_date_formatted = h.date_str_to_datetime(data.end_date).strftime('%Y-%m-%d') if data and data.end_date else '' %}
+    <div class="row mb-4">
+        <div class="col-12">
+            {{ form.input(
+                'end_date',
+                id='field-end_date',
+                label=_('End Date'),
+                value=end_date_formatted,
+                error=errors.end_date,
+                type='date',
+                is_required=true
+            ) }}
+        </div>
     </div>
 
     {{ form.input('brief_en', id='field-brief_en', label=_('Brief En'), placeholder=_('Enter Brief in English'), value=data.brief_en, error=errors.brief_en)}}
