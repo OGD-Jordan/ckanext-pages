@@ -188,7 +188,9 @@ def new_main_menu():
                             'parent_menus': parent_menus,
                             'data': data_dict,
                             'errors': {'no_parent': True},
-                            'error_summary': tk._('Maximum root items reached')
+                            'error_summary': {
+                                "parent": tk._('Not More Than 6 Items Can Be Added to Main Header Without Any Parent.')
+                            }
                         }
                     )
 
