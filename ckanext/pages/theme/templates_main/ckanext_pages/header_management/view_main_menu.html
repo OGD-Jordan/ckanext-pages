@@ -30,7 +30,7 @@
             <td>{{ _('Yes') if item.is_visible else _('No') }}</td>
             <td>
               <a href="{{ h.url_for('header_management.edit_main_menu', id=item.id) }}" class="btn btn-primary">{{ _('Edit') }}</a>
-              <a href="{{ h.url_for('header_management.delete_main_menu', id=item.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">{{ _('Delete') }}</a>
+              <a href="{{ h.url_for('header_management.delete_main_menu', id=item.id) }}" class="btn btn-danger" onclick="return confirm({{_('Are you sure you want to delete?')}});">{{ _('Delete') }}</a>
             </td>
           </tr>
         {% endfor %}

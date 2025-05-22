@@ -495,8 +495,8 @@ msgid "Add"
 msgstr "اضافة"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:129
-msgid "Are you sure you want to delete this Page?"
-msgstr "هل أنت متأكد أنك تريد حذف هذه الصفحة؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:130
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/view_main_menu.html:33
@@ -694,8 +694,8 @@ msgid "Please Confirm Action"
 msgstr "يرجى تأكيد الإجراء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:114
-msgid "Are you sure you want to delete this event?"
-msgstr "هل أنت متأكد أنك تريد حذف هذه الفعالية؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events.html:120
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:86
@@ -865,8 +865,8 @@ msgid "Hide"
 msgstr "إخفاء"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:117
-msgid "Are you sure you want to delete this new?"
-msgstr "هل أنت متأكد أنك تريد حذف هذا الخبر؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/news.html:135
 msgid "No news found"
@@ -943,8 +943,8 @@ msgid "Page Urls"
 msgstr "اضافة عناوين"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:106
-msgid "Are you sure you want to delete this page?"
-msgstr "هل أنت متأكد أنك تريد حذف هذه الصفحة؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:123
 msgid "No pages found."
@@ -1113,8 +1113,8 @@ msgid "Select Type"
 msgstr "تحديد النوع"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:76
-msgid "Are you sure you want to delete this menu item?"
-msgstr "هل أنت متأكد أنك تريد حذف عنصر القائمة هذا؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/main_menu_list.html:97
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:72
@@ -1126,8 +1126,8 @@ msgid "Secondary Menu"
 msgstr "القائمة الثانوية"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:51
-msgid "Are you sure you want to delete this secondary menu item?"
-msgstr "هل أنت متأكد أنك تريد حذف عنصر القائمة الثانوية هذا؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/header_management/snippets/secondary_menu_list.html:80
 msgid "No secondary menu found."
@@ -1338,13 +1338,12 @@ msgid "Delete Link"
 msgstr "حذف الرابط"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:30
-msgid "Are you sure you want to delete this link?"
-msgstr "هل أنت متأكد أنك تريد حذف هذا الرابط؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/image_links_table.html:30
-#, python-format
-msgid "Are you sure you want to delete this %(type)s?"
-msgstr "هل أنت متأكد أنك تريد حذف هذا %(type)s؟"
+msgid "Are you sure you want to delete?"
+msgstr "هل أنت متأكد أنك تريد الحذف ؟"
 
 #: ckanext/pages/theme/templates_main/main_page/main_page.html:25
 msgid "Section Name"
@@ -1446,8 +1445,15 @@ msgstr "لافتة"
 msgid "Invalid order. Order should be at max 10."
 msgstr "ترتيب غير صالح. يجب ألا يتجاوز الترتيب 10."
 
+msgid "Invalid order. Order already taken."
+msgstr "ترتيب غير صالح. هذا الترتيب مستخدم بالفعل."
+
 msgid "Brief en"
 msgstr "موجز اللغة الإنجليزية"
 
 msgid "Brief ar"
 msgstr "موجز باللغة العربية"
+
+msgid "News date"
+msgstr "تاريخ الخبر"
+
