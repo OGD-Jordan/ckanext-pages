@@ -81,7 +81,7 @@
 
     <!-- Submit Button -->
     <div class="d-flex justify-content-end mt-4">
-      <button type="cancel" class="btn btn-primary btn-lg me-2">{{ _('Cancel')}}</button>
+      <button type="button" onclick="window.location='{{ h.url_for('pages.pages_index') }}'" class="btn btn-primary btn-lg me-2">{{ _('Cancel')}}</button>
       <button type="submit" class="btn btn-secondary btn-lg">{{ _('Save')}}</button>
     </div>
   </form>
