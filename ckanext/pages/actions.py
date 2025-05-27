@@ -675,13 +675,13 @@ def header_main_menu_delete(context, data_dict):
     children = model.Session.query(HeaderMainMenu).filter_by(parent_id=menu_item.id).count()
     if children > 0:
         raise tk.ValidationError(
-            {'id': 'Cannot delete menu item with child items'}
+            {'id': _('Cannot delete menu item with child items')}
         )
 
     menu_item.delete()
     model.Session.commit()
 
-    return {'message': 'Menu item deleted'}
+    return {'message': _('Menu item deleted')}
 
 
 def header_logo_update(context, data_dict):

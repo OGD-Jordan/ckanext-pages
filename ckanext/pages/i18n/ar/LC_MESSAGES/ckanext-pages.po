@@ -1457,3 +1457,8 @@ msgstr "موجز باللغة العربية"
 msgid "News date"
 msgstr "تاريخ الخبر"
 
+msgid "Cannot delete menu item with child items"
+msgstr "لا يمكن حذف عنصر القائمة الذي يحتوي على عناصر فرعية"
+
+msgid "Menu item deleted"
+msgstr "تم حذف عنصر القائمة"
