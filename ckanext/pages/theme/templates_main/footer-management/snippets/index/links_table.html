@@ -2,8 +2,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col" style="font-weight: bold !important;">{{_('Title')}} {{ h.lang() | capitalize }}</th>
-          <th scope="col" style="font-weight: bold !important;">{{_('Link')}} {{ h.lang() | capitalize }}</th>
+          <th scope="col" style="font-weight: bold !important;">{{_('Title'~' '~ h.lang() | capitalize)}}</th>
+          <th scope="col" style="font-weight: bold !important;">{{_('Link'~' '~ h.lang() | capitalize)}}</th>
           <th scope="col" style="font-weight: bold !important;">{{_('Target')}}</th>
           <th scope="col" style="font-weight: bold !important;">{{_('Order')}}</th>
           <th scope="col" style="font-weight: bold !important;">{{_('Actions')}}</th>
@@ -14,7 +14,7 @@
             <tr>
             <td>{{ item.display_title }}</td>
             <td>{{ item.display_link }}</td>
-            <td>{{ h.target_display(item.target) }}</td>
+            <td>{{ _(h.target_display(item.target)) }}</td>
             <td>{{ item.order }}</td>
             <td>
                 <div class="d-flex flex-row" style="gap:2px;"> 

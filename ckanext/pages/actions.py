@@ -473,26 +473,6 @@ def main_page_edit(section_id):
     )
 
 
-def main_page():
-    sections = MainPage.all()
-
-    section_titles = {
-        1: "Title & Brief",
-        2: "Open Data Sector",
-        3: "Indicators",
-        4: "Open Data In Numbers",
-        5: "Also Explore"
-    }
-    data = []
-    for section in sections:
-        data.append({
-            'id': section.id,
-            'name': f"Section {section.id}: {section_titles.get(section.id)}",
-            'last_update': "25/09/2024"
-        })
-
-    return tk.render('main_page/main_page.html', sections=data)
-
 def _main_page_show(context, data_dict):
     section_id = data_dict.get('section_id')
 

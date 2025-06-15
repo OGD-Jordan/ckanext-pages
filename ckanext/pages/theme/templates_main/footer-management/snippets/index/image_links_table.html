@@ -6,8 +6,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col" style="font-weight: bold !important;">{{_('Title')}} {{ h.lang() | capitalize }}</th>
-          <th scope="col" style="font-weight: bold !important;">{{_('Link')}} {{ h.lang() | capitalize }}</th>
+          <th scope="col" style="font-weight: bold !important;">{{_('Title'~' '~ h.lang() | capitalize)}}</th>
+          <th scope="col" style="font-weight: bold !important;">{{_('Link'~' '~ h.lang() | capitalize)}}</th>
           <th scope="col" style="font-weight: bold !important;">{{_('Image')}}</th>
           <th scope="col" style="font-weight: bold !important;">{{_('Order')}}</th>
           <th scope="col" style="font-weight: bold !important;">{{_('Actions')}}</th>

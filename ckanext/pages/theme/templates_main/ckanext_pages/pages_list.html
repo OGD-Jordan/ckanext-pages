@@ -62,7 +62,7 @@
 <table class="table" style="border-collapse: collapse; width: 100%; background-color: white;">
   <thead>
       <tr>
-          <th>{{ _('Title') }} {{lang | capitalize}}</th>
+          <th>{{_('Title'~' '~ h.lang() | capitalize)}}</th>
           <th>{{ _('Date Of Creation') }}</th>
           <th>{{ _('Publish Date') }}</th>
           <th>{{ _('Page Urls') }}</th>

@@ -455,22 +455,16 @@ def main_page_edit(section_id):
     except tk.ObjectNotFound:
         tk.abort(404, tk._('Section not found'))
 
+from ckan.plugins.toolkit import h
 
 def main_page():
     sections = MainPage.all()
 
-    section_titles = {
-        1: "Title & Brief",
-        2: "Open Data Sector",
-        3: "Indicators",
-        4: "Open Data In Numbers",
-        5: "Also Explore"
-    }
     data = []
     for section in sections:
         data.append({
             'id': section.id,
-            'name': f"Section {section.id}: {section_titles.get(section.id)}",
+            'name': getattr(section, 'main_title_1_' + h.lang()),
             'last_update': "25/09/2024"
         })
 

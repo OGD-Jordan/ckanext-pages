@@ -1255,7 +1255,7 @@ msgstr "حدد الهدف"
 
 #: ckanext/pages/theme/templates_main/footer-management/column_link_edit.html:36
 msgid "Link Target"
-msgstr "رابط الهدف"
+msgstr "وجهة الرابط"
 
 #: ckanext/pages/theme/templates_main/footer-management/index.html:5
 msgid "CMS Footer"
