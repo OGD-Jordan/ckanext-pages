@@ -183,6 +183,27 @@ class PagesPlugin(PagesPluginBase):
 
             # Header Management Auth Functions
             'ckanext_header_management_access': auth.is_content_editor,
+            'ckanext_header_secondary_menu_parent_list': auth.is_content_editor,
+            
+            'ckanext_main_page_show': auth.is_content_editor,
+            'ckanext_main_page_edit': auth.is_content_editor,
+            
+            # Header Management Actions
+            'ckanext_header_main_menu_create': auth.is_content_editor,
+            'ckanext_header_secondary_menu_create': auth.is_content_editor,
+            'ckanext_header_main_menu_list': auth.is_content_editor,
+            'ckanext_header_main_menu_parent_list': auth.is_content_editor,
+            'ckanext_header_secondary_menu_list': auth.is_content_editor,
+            'ckanext_header_logo_get': auth.is_content_editor,
+            'ckanext_header_main_menu_show': auth.is_content_editor,
+            'ckanext_header_main_menu_toggle_visibility': auth.is_content_editor,
+            'ckanext_header_main_menu_delete': auth.is_content_editor,
+            'ckanext_header_main_menu_edit': auth.is_content_editor,
+            'ckanext_header_secondary_menu_toggle_visibility': auth.is_content_editor,
+            'ckanext_header_logo_update': auth.is_content_editor,
+            'ckanext_header_secondary_menu_show': auth.is_content_editor,
+            'ckanext_header_secondary_menu_edit': auth.is_content_editor,
+            'ckanext_header_secondary_menu_delete': auth.is_content_editor,
 
             **footer_get_auth_functions(),
         }
