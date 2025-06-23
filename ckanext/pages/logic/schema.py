@@ -4,6 +4,7 @@ from ckanext.pages.validators import page_name_validator, not_empty_if_blog, val
 from ckanext.pages.interfaces import IPagesSchema
 from ckan.plugins.toolkit import get_validator
 from datetime import datetime
+from ckan.common import _
 
 tk = p.toolkit
 
@@ -24,7 +25,7 @@ def publish_date_in_future(key, data, errors, context):
     today = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
 
     if publish_date < today:
-        errors[key].append("Publish date must be today or in the future.")
+        errors[key].append(_("Publish date must be today or in the future"))
 
 def default_pages_schema():
 

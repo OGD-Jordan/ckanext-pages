@@ -1389,8 +1389,11 @@ msgstr "حفظ التعديل"
 msgid "Start date must be less than end date."
 msgstr "يجب ان يكون تاريخ البدء اقل من تاريخ النهاية."
 
+msgid "Publish date"
+msgstr "تاريخ النشر"
+
 #: ckanext-pages/ckanext/pages/logic/schema.py:25
-msgid "Publish date must be today or in the future."
+msgid "Publish date must be today or in the future"
 msgstr "يجب ان يكون تاريخ النشر هو اليوم او في المستقبل."
 
 #: ckanext/pages/utils.py:418
