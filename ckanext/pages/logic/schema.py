@@ -68,7 +68,7 @@ def default_events_schema():
         'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
         'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
         'name': [not_empty, name_validator, event_name_validator],
-        'start_date': [not_empty, isodate, publish_date_in_future],
+        'start_date': [not_empty, isodate, start_date_less_than_end_date],
         'end_date': [not_empty, isodate],
         'brief_ar': [ignore_missing, unicode_safe, get_validator('validate_arabic_text')],
         'brief_en': [ignore_missing, unicode_safe, get_validator('validate_english_text')],
@@ -76,8 +76,6 @@ def default_events_schema():
         'content_ar': [ignore_missing, unicode_safe],
         'image_url': [ignore_missing, unicode_safe],
         'lang': [ignore_missing, unicode_safe],
-        '__after': [start_date_less_than_end_date]
-
     }
 
 def default_news_schema():
