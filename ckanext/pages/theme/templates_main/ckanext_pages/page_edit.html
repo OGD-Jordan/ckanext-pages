@@ -53,8 +53,14 @@
     <!-- Publish Date -->
     <div class="mb-3">
       {% set publish_date_formatted =  h.date_str_to_datetime(data.publish_date).strftime('%Y-%m-%d') if data and data.publish_date else '' %}
-      <label for="publish_date" class="form-label">{{ _('Publish Date') }}</label>
-      <input type="date" class="form-control form-control-lg" id="publish_date" name="publish_date" value="{{ publish_date_formatted }}">
+        {{ form.input(
+            'publish_date',
+            id='field-publish_date',
+            label=_('Publish Date'),
+            value=publish_date_formatted,
+            error=errors.publish_date,
+            type='date'
+        ) }}
     </div>
 
     <!-- Content Editors -->
