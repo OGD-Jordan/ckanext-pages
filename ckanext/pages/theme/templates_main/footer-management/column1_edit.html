@@ -54,7 +54,7 @@
     }}
     
     <input type="hidden" name="country_code" id="field-country_code" value="{{ data.country_code }}">
-    {{ form.input('phone_number', id='field-phone_number', label=_('* Phone Number'), placeholder=_('eg. 962778000004'), value=data.phone_number or data.default_phone_number, error=errors.phone_number, classes=['control-full', 'control-large']) }}
+    {{ form.input('phone_number', id='field-phone_number', label=_('* Phone Number'), placeholder='', value=data.phone_number, error=errors.phone_number, classes=['control-full', 'control-large']) }}
 
     <div class="form-actions pull-right">
         <button 
