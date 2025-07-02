@@ -104,15 +104,20 @@ CKEDITOR.stylesSet.add( 'default', [
 			'border-collapse': 'collapse'
 		}
 	},
-	{
-		name: 'Bordered Table',
-		element: 'table',
+	{ 
+		name: 'Borderless Table',		
+		element: 'table',	
 		attributes: {
-			'class': 'bordered-table'
-		}
+			'class': 'borderless-table'
+		},
+		styles: { 
+			'border-style': 'hidden', 
+			'background-color': '#E6E6FA', 
+			'border-width': '0px', 
+			'width':'500px', 
+			'height':'300px' 
+		} 
 	},
-
-	{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
 	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } }
 ]);
 

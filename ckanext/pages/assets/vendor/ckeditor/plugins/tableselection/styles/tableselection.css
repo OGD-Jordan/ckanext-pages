@@ -42,5 +42,29 @@ table[data-cke-table-faked-selection-table] {
   
   .bordered-table th,
   .bordered-table td {
-	border: 1px solid #000;
-  }
+	border: 1px solid #000 !important;
+}
+
+
+.borderless-table th,
+.borderless-table td {
+	border: 0px solid #000 !important;
+}
+
+.borderless-table {
+	border-style: hidden; 
+	background-color: #E6E6FA; 
+	border-width: 0px; 
+	width: 500px; 
+	height: 300px; 
+}
+
+.compact-table {
+	border-collapse: collapse;
+	border-width: 1px;
+}
+
+.compact-table th,
+.compact-table td {
+	border-width: 1px !important;
+}

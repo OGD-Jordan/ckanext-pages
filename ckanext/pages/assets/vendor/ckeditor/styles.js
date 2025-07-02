@@ -102,8 +102,8 @@ CKEDITOR.stylesSet.add( 'default', [
 			border: '1',
 			bordercolor: '#ccc'
 		},
-		styles: {
-			'border-collapse': 'collapse'
+		attributes: {
+			'class': 'compact-table'
 		}
 	},
 	{
@@ -114,7 +114,12 @@ CKEDITOR.stylesSet.add( 'default', [
 		}
 	},
 
-	{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
+	{ 
+		name: 'Borderless Table',		
+		element: 'table',	
+		attributes: {'class': 'borderless-table'},
+	},
+
 	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } },
 
 	/* Widget styles */

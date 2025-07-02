@@ -1331,7 +1331,7 @@ msgstr "صورة"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:7
 msgid "Target"
-msgstr "هدف"
+msgstr "وجهة الرابط"
 
 #: ckanext/pages/theme/templates_main/footer-management/snippets/index/links_table.html:27
 msgid "Delete Link"
@@ -1465,3 +1465,9 @@ msgstr "لا يمكن حذف عنصر القائمة الذي يحتوي على 
 
 msgid "Menu item deleted"
 msgstr "تم حذف عنصر القائمة"
+
+msgid "Logo en"
+msgstr "شعار اللغة الإنجليزية"
+
+msgid "Logo ar"
+msgstr "شعار اللغة العربية"
