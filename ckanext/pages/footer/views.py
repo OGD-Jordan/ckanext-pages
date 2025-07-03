@@ -182,7 +182,7 @@ class Column1Edit(MethodView):
         error_summary = error_summary or {}
 
         errors_json = h.dump_json(errors)
-        if data and '-' in data.get('phone_number', ''):
+        if data and '-' in str(data.get('phone_number', '')):
             data['country_code'], data['phone_number'] = data['phone_number'].split('-') 
 
 
