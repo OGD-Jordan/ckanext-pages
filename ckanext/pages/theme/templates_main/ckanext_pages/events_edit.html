@@ -88,8 +88,6 @@
     <!-- Content Editors -->
     {% set editor = h.pages_get_wysiwyg_editor() %}
     {% if editor == 'ckeditor' %}
-      {% asset 'pages/main-js' %}
-      {% asset 'pages/main-css' %}
 
       <!-- Content in English -->
       <div class="control-group">
@@ -125,4 +123,14 @@
 {% block scripts %}
   {{ super() }}
   <script src="/vendor/ckeditor/ckeditor.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Initialize CKEditor
+        if (typeof CKEDITOR !== 'undefined') {
+            CKEDITOR.replace('field-content-ck-ar');
+            CKEDITOR.replace('field-content-ck-en');
+        }
+    });
+  </script>
 {% endblock %}
