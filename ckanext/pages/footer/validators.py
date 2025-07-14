@@ -86,6 +86,9 @@ def column_order_validator(key, data, errors, context):
         order = int(order)
         if order > 10:
             errors[key].append(_('Invalid order. Order should be at max 10.'))
+        if order == 0:
+            errors[key].append(_('Invalid order. The order should be greater than zero'))
+
     except (ValueError, TypeError):
         return  # Let natural_number_validator handle this
 
@@ -115,6 +118,9 @@ def social_media_order_validator(key, data, errors, context):
         value = int(value)
         if value > 10:
             errors[key].append(_('Invalid order. Order should be at max 10.'))
+        if value == 0:
+            errors[key].append(_('Invalid order. The order should be greater than zero'))
+
     except (ValueError, TypeError):
         return
 
@@ -141,6 +147,8 @@ def banner_order_validator(key, data, errors, context):
         value = int(value)
         if value > 10:
             errors[key].append(_('Invalid order. Order should be at max 10.'))
+        if value == 0:
+            errors[key].append(_('Invalid order. The order should be greater than zero'))
     except (ValueError, TypeError):
         return  # Let the natural_number_validator handle invalid input
 

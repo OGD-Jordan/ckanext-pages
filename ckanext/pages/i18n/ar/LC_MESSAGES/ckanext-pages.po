@@ -1471,3 +1471,7 @@ msgstr "شعار اللغة الإنجليزية"
 
 msgid "Logo ar"
 msgstr "شعار اللغة العربية"
+
+msgid "Invalid order. The order should be greater than zero"
+msgstr "ترتيب غير صالح. يجب أن يكون الترتيب أكبر من صفر"
+
