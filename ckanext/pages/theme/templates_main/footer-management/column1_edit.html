@@ -53,9 +53,10 @@
             ) 
     }}
     
-    <input type="hidden" name="country_code" id="field-country_code" value="{{ data.country_code }}">
-    {{ form.input('phone_number', id='field-phone_number', label=_('* Phone Number'), placeholder='79XXXXXX', value=data.phone_number, error=errors.phone_number, classes=['control-full', 'control-large']) }}
-
+    {% set phone_number_details = h.parse_country_code_and_national_number(data.phone_number) if data.phone_number else {} %}
+    <input type="hidden" name="country_code" id="field-country_code" value="{{ phone_number_details.country_code }}">
+    {{ form.input('phone_number', id='field-phone_number', label=_('Phone Number'), placeholder=_('079XXXXXX or 79XXXXXX'), value=phone_number_details.national_number, error=errors.phone_number, classes=['control-full', 'control-large'], is_required=true) }}
+    
     <div class="form-actions pull-right">
         <button 
         class="btn btn-secondary mx-2 px-5"

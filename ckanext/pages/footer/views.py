@@ -147,7 +147,7 @@ class Column1Edit(MethodView):
                     )))
 
         try:
-            data_dict['phone_number'] = (data_dict.get('country_code', '+962') or '+962') + '-'+  data_dict.get('phone_number', '')
+            data_dict['phone_number'] = (data_dict.get('country_code', '+962') or '+962') + data_dict.get('phone_number', '')
             column1_data = tk.get_action('footer_main_update')(context, data_dict)
 
         except tk.ValidationError as e:
@@ -182,9 +182,10 @@ class Column1Edit(MethodView):
         error_summary = error_summary or {}
 
         errors_json = h.dump_json(errors)
-        if data and '-' in str(data.get('phone_number', '')):
-            data['country_code'], data['phone_number'] = data['phone_number'].split('-') 
-
+        if data and str(data.get('phone_number', '')):
+            data.update(
+                h.parse_country_code_and_national_number(data.get('phone_number', ''))
+            )
 
         return base.render(
             'footer-management/column1_edit.html', 
