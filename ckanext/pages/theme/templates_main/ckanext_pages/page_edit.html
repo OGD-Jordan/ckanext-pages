@@ -79,8 +79,8 @@
       </div>
       <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" style="height:400px">{{ data.content_ar }}</textarea>
     {% else %}
-      {{ form.markdown('content_en', id='field-content_en', label=_('Content En'), placeholder=_('Enter content in English here'), value=data.content_en, error=errors.content_en, is_required=true) }}
-      {{ form.markdown('content_ar', id='field-content_ar', label=_('Content Ar'), placeholder=_('Enter content in Arabic here'), value=data.content_ar, error=errors.content_ar, is_required=true) }}
+      {{ form.textarea('content_en', id='field-content_en', label=_('Content En'), placeholder=_('Enter content in English here'), value=data.content_en, error=errors.content_en, is_required=true) }}
+      {{ form.textarea('content_ar', id='field-content_ar', label=_('Content Ar'), placeholder=_('Enter content in Arabic here'), value=data.content_ar, error=errors.content_ar, is_required=true) }}
     {% endif %}
 
     <!-- Submit Button -->

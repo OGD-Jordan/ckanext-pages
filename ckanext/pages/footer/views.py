@@ -147,7 +147,7 @@ class Column1Edit(MethodView):
                     )))
 
         try:
-            data_dict['phone_number'] = (data_dict.get('country_code', '+962') or '+962') + data_dict.get('phone_number', '')
+            data_dict['phone_number'] = str(data_dict.get('country_code', '+962') or '+962') + str(data_dict.get('phone_number', ''))
             column1_data = tk.get_action('footer_main_update')(context, data_dict)
 
         except tk.ValidationError as e:
