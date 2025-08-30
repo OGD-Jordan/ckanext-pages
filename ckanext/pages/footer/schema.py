@@ -105,7 +105,9 @@ def column1_update_schema():
     return {
         'logo_en': [not_empty, unicode_safe, validators.image_upload_or_valid_url_logo_en],
         'logo_ar': [not_empty, unicode_safe, validators.image_upload_or_valid_url_logo_ar],
-        'phone_number': [tk.get_validator("phone_number_validator")],
+        'phone_number': [not_empty, unicode_safe],
+        'country_code': [not_empty, unicode_safe],
+        '__after': [tk.get_validator('phone_number_validator')],
     }
 
 
