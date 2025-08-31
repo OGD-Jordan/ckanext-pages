@@ -271,8 +271,50 @@ class HeaderLogo(DomainObject, BaseModel):
         return logo if logo.startswith("/images/") else h.url_for_static(f"uploads/header_logos/{logo}", qualified=True)
 
 
+class HeaderBaseModel:
+    @classmethod
+    def filter(cls, **kwargs):
+        q = Session.query(cls)
+        
+        if kwargs:  
+            q = q.filter_by(**kwargs)
+        
+        return q
+    
+    @classmethod
+    def exists(cls, **kwargs):
+        return bool(cls.get(**kwargs))
 
-class HeaderMainMenu(DomainObject, BaseModel):
+    @classmethod
+    def get(cls, **kwargs):
+        return cls.filter(**kwargs).first()
+    
+
+    @classmethod
+    def patch_record(cls, **kwargs):
+        record_id = kwargs.get('id')
+        
+        record = cls.get(id=record_id)
+        if record:
+            for key, value in kwargs.items():
+                if hasattr(cls, key):
+                    setattr(record, key, value)
+
+            Session.commit()
+
+        return record
+
+    @classmethod
+    def toggle_visibility(cls, id):
+        menu_item = Session.query(cls).get(id)
+        if menu_item:
+            menu_item.is_visible = not menu_item.is_visible
+            menu_item.save()
+            return menu_item
+        return None
+
+
+class HeaderMainMenu(HeaderBaseModel, DomainObject, BaseModel):
     __tablename__ = 'header_main_menu'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
@@ -288,21 +330,13 @@ class HeaderMainMenu(DomainObject, BaseModel):
     modified = Column(types.DateTime, default=datetime.datetime.utcnow)
     parent = relationship("HeaderMainMenu", remote_side=[id], backref="children")
 
+
     @classmethod
     def get_all(cls):
         return Session.query(cls).order_by(cls.order).all()
 
-    @classmethod
-    def toggle_visibility(cls, id):
-        menu_item = Session.query(cls).get(id)
-        if menu_item:
-            menu_item.is_visible = not menu_item.is_visible
-            menu_item.save()
-            return menu_item
-        return None
 
-
-class HeaderSecondaryMenu(DomainObject, BaseModel):
+class HeaderSecondaryMenu(HeaderBaseModel, DomainObject, BaseModel):
     __tablename__ = 'header_secondary_menu'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
@@ -317,14 +351,6 @@ class HeaderSecondaryMenu(DomainObject, BaseModel):
     created = Column(types.DateTime, default=datetime.datetime.utcnow)
     modified = Column(types.DateTime, default=datetime.datetime.utcnow)
 
-    @classmethod
-    def toggle_visibility(cls, id):
-        menu_item = Session.query(cls).get(id)
-        if menu_item:
-            menu_item.is_visible = not menu_item.is_visible
-            menu_item.save()
-            return menu_item
-        return None
 
 def table_dictize(obj, context, **kw):
     '''Get any model object and represent it as a dict'''

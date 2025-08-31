@@ -341,11 +341,9 @@ def footer_column_link_update(context, data_dict):
 def footer_social_media_item_update(context, data_dict):
     tk.check_access('is_content_editor', context)
 
-    print('data_dict1', data_dict)
     record = FooterSocialMedia.get(id=data_dict.get('id'))
     old_filename = None if not record or not record.image_url else record.image_url
     data_dict = single_image_upload(context, {**data_dict, 'old_filename': old_filename})
-    print('data_dict2', data_dict)
 
     record = FooterSocialMedia.patch_record(**data_dict, modified= datetime.datetime.utcnow())
     return tk.get_action('footer_social_media_item_show')(context, {'id': record.id}) 

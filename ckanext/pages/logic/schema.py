@@ -1,10 +1,13 @@
 import ckan.plugins as p
 from ckanext.pages.footer.validators import event_name_validator, news_name_validator, pages_name_validator
-from ckanext.pages.validators import page_name_validator, not_empty_if_blog, validate_image_upload
+from ckanext.pages.validators import validate_image_upload
+from ckanext.pages import validators 
 from ckanext.pages.interfaces import IPagesSchema
 from ckan.plugins.toolkit import get_validator
 from datetime import datetime
 from ckan.common import _
+from ckan.logic.schema import validator_args, ValidatorFactory
+from ckanext.pages import db 
 
 tk = p.toolkit
 
@@ -162,7 +165,8 @@ def link_required_if_link_type_or_menu_child(key, data, errors, context):
         errors[key].append(tk._('Missing value'))
 
 
-def header_menu_schema():
+@validator_args
+def header_menu_schema(default: ValidatorFactory):
     return {
         'id': [ignore_missing, unicode_safe],
         'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
@@ -170,10 +174,46 @@ def header_menu_schema():
         'link_en': [ignore_missing, unicode_safe, link_required_if_link_type_or_menu_child],
         'link_ar': [ignore_missing, unicode_safe, link_required_if_link_type_or_menu_child],
         'menu_type': [not_empty, unicode_safe, p.toolkit.get_validator('one_of')(['link', 'menu'])],
-        'parent_id': [ignore_missing, unicode_safe],
-        'order': [ignore_missing, p.toolkit.get_validator('int_validator')],
-        'is_visible': [ignore_missing, p.toolkit.get_validator('boolean_validator')]
+        'parent_id': [unicode_safe, validators.header_parent_id_validator],
+        'order': [ignore_missing, p.toolkit.get_validator('int_validator'), validators.header_order_validator(db.HeaderMainMenu)],
+        'is_visible': [ignore_missing, p.toolkit.get_validator('boolean_validator'), default(True)],
     }
+
+def header_menu_schema_update_schema():
+    schema = header_menu_schema()
+    schema['id']+=[not_empty, validators.header_menu_id_validator(db.HeaderMainMenu)]
+    return schema
+
+def header_menu_schema_create_schema():
+    schema = header_menu_schema()
+    schema['id'] = [get_validator('ignore')]
+    return schema
+
+
+@validator_args
+def header_secondary_schema(default: ValidatorFactory):
+    return {
+        'id': [ignore_missing, unicode_safe],
+        'title_en': [not_empty, unicode_safe, get_validator('validate_english_text')],
+        'title_ar': [not_empty, unicode_safe, get_validator('validate_arabic_text')],
+        'link_en': [ignore_missing, unicode_safe, link_required_if_link_type_or_menu_child],
+        'link_ar': [ignore_missing, unicode_safe, link_required_if_link_type_or_menu_child],
+        'menu_type': [default('link'), p.toolkit.get_validator('one_of')(['link', 'menu'])],
+        'parent_id': [unicode_safe, default(None)],
+        'order': [ignore_missing, p.toolkit.get_validator('int_validator'), validators.header_order_validator(db.HeaderSecondaryMenu)],
+        'is_visible': [ignore_missing, p.toolkit.get_validator('boolean_validator'), default(True)],
+    }
+
+def header_secondary_schema_update_schema():
+    schema = header_secondary_schema()
+    schema['id']+=[not_empty, validators.header_menu_id_validator(db.HeaderSecondaryMenu)]
+    return schema
+
+
+def header_menu_schema_create_schema():
+    schema = header_secondary_schema()
+    schema['id'] = [get_validator('ignore')]
+    return schema
 
 
 def header_logo_upload_schema():

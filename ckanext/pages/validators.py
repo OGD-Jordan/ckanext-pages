@@ -1,7 +1,8 @@
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions as df
 from ckanext.pages import db
-
+tk = p.toolkit
+_ = tk._
 
 def page_name_validator(key, data, errors, context):
     session = context['session']
@@ -43,3 +44,60 @@ def validate_image_upload(key, data, errors, context, file_size=2):
             'File size must be less than 2MB'
         )
         return
+
+
+from ckanext.pages.db import HeaderMainMenu
+
+def header_parent_id_validator(key, data, errors, context):
+    value = data.get(key)
+    id = data.get(('id',), None)
+
+    if not value:
+        data[key] = None
+        return
+    
+    parent = HeaderMainMenu.get(id=value)
+
+
+    if parent is None:
+        errors[key].append(_('Parent menu item not found'))
+        return
+    
+    if parent.menu_type != 'menu':
+        errors[key].append('Parent must be a menu type item')
+        return
+    
+    if id and parent.id == id:
+        errors[key].append('Cannot set parent to self')
+        return
+    
+
+def header_menu_id_validator(cls):
+    def func(key, data, errors, context):
+        value = data.get(key)
+        menu_item = cls.get(id=value)
+
+        if not menu_item:
+            errors[key].append(_('Menu item not found'))
+            return
+    return func
+
+
+def header_order_validator(header_class):
+    def header_class_order_validator(key, data, errors, context):
+        id = data.get(('id',), None)
+        parent_id = data.get(('parent_id',), None) or None
+        order = data.get(key)
+
+
+        query = header_class.filter(order=order, parent_id= parent_id)
+
+        if id:
+            query = query.filter(header_class.id != id)
+
+
+        if query.first():
+            errors[key].append(_('Invalid order. Order already taken.'))
+
+    
+    return header_class_order_validator

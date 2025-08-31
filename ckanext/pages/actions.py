@@ -13,6 +13,7 @@ from ckanext.comments.model.dictize import get_dictizer
 from ckanext.pages import db
 from ckanext.pages.db import MainPage, Page, Event, News, HeaderMainMenu, HeaderLogo, HeaderSecondaryMenu
 from ckanext.pages.logic.schema import main_page_schema, header_logo_upload_schema
+from ckanext.pages.logic import schema as schema
 from ckanext.pages.logic.schema import (
     default_news_schema,
     update_events_schema,
@@ -793,53 +794,14 @@ def header_logo_upload(context, data_dict):
     return logo.as_dict()
 
 
+@validate_decorator(schema.header_menu_schema_create_schema)
 def header_main_menu_create(context, data_dict):
     """Create a new main menu item with validation."""
     tk.check_access('ckanext_header_management_access', context)
 
-    # Validate the data
-    data, errors = tk.navl_validate(
-        data_dict,
-        header_menu_schema(),
-        context
-    )
-
-    if errors:
-        raise tk.ValidationError(errors)
-
-    if parent_id := data.get('parent_id'):
-        parent = model.Session.query(HeaderMainMenu).get(parent_id)
-        errors = []
-
-        if not parent:
-            errors.append('Parent menu item not found')
-
-        if parent.menu_type != 'menu':
-            errors.append('Parent must be a menu type item')
-
-        if errors:
-            raise tk.ValidationError({'parent_id': errors})
-
-    if (order := data.get('order')) and (menu_type := data.get('menu_type')):
-        if menu_type == 'menu':
-            if model.Session.query(HeaderMainMenu).filter_by(order=order, parent_id=parent_id).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-        elif menu_type == 'link':
-            if model.Session.query(HeaderMainMenu).filter_by(order=order, parent_id=parent_id).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-
-    menu_item = HeaderMainMenu(
-        title_en=data.get('title_en', ''),
-        title_ar=data.get('title_ar', ''),
-        link_en=data.get('link_en', ''),
-        link_ar=data.get('link_ar', ''),
-        menu_type=data.get('menu_type', ''),
-        parent_id=parent_id or None,
-        order=data.get('order', 0),
-        is_visible=data.get('is_visible', True)
-    )
-
+    menu_item = HeaderMainMenu(**data_dict)
     menu_item.save()
+
     return menu_item.as_dict()
 
 def header_main_menu_show(context, data_dict):
@@ -855,173 +817,41 @@ def header_main_menu_show(context, data_dict):
     menu_item_dict['parent'] = menu_item.parent.as_dict() if menu_item.parent else None
     return menu_item_dict
 
+
+@validate_decorator(schema.header_menu_schema_update_schema)
 def header_main_menu_edit(context, data_dict):
-    """Edit a main menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderMainMenu).get(data_dict.get('id', ''))
-
-    if not menu_item:
-        raise tk.ObjectNotFound('Menu item not found')
-
-    data, errors = tk.navl_validate(
-        data_dict,
-        header_menu_schema(),
-        context
-    )
-
-    if errors:
-        raise tk.ValidationError(errors)
-
-    if parent_id := data.get('parent_id'):
-        parent = model.Session.query(HeaderMainMenu).get(parent_id)
-        errors = []
-
-        if not parent:
-            errors.append('Parent menu item not found')
-        if parent_id == menu_item.id:
-            errors.append('Cannot set parent to self')
-        if parent.menu_type != 'menu':
-            errors.append('Parent must be a menu type item')
-
-        if errors:
-            raise tk.ValidationError({'parent_id': errors})
-
-        menu_item.parent_id = parent_id
-
-    if (order := data.get('order')) and (order != menu_item.order):
-        if parent_id:
-            if model.Session.query(HeaderMainMenu).filter_by(order=order, parent_id=parent_id).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-        elif model.Session.query(HeaderMainMenu).filter_by(order=order).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-
-
-    menu_item.title_en = data.get('title_en', '')
-    menu_item.title_ar = data.get('title_ar', '')
-    menu_item.link_en = data.get('link_en', '')
-    menu_item.link_ar = data.get('link_ar', '')
-    menu_item.menu_type = data.get('menu_type', '')
-    menu_item.order = data.get('order', 0)
-    menu_item.is_visible = data.get('is_visible', True)
-
-    model.Session.commit()
+    menu_item = HeaderMainMenu.patch_record(**data_dict, modified= datetime.datetime.utcnow())
     return menu_item.as_dict()
 
+
+@validate_decorator(schema.header_secondary_schema_update_schema)
 def header_secondary_menu_edit(context, data_dict):
     """Edit a secondary menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict.get('id', ''))
-
-    if not menu_item:
-        raise tk.ObjectNotFound('Menu item not found')
-
-    data, errors = tk.navl_validate(
-        data_dict,
-        header_menu_schema(),
-        context
-    )
-
-    if errors:
-        raise tk.ValidationError(errors)
-
-    if parent_id := data.get('parent_id'):
-        parent = model.Session.query(HeaderSecondaryMenu).get(parent_id)
-        errors = []
-
-        if not parent:
-            errors.append('Parent menu item not found')
-        if parent_id == menu_item.id:
-            errors.append('Cannot set parent to self')
-        if parent.menu_type != 'menu':
-            errors.append('Parent must be a menu type item')
-        if parent.parent_id:
-            errors.append('Maximum nesting level exceeded')
-
-        if errors:
-            raise tk.ValidationError({'parent_id': errors})
-
-        menu_item.parent_id = parent_id
-
-    if (order := data.get('order')) and (order != menu_item.order):
-        if parent_id:
-            if model.Session.query(HeaderSecondaryMenu).filter_by(order=order, parent_id=parent_id).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-        elif model.Session.query(HeaderSecondaryMenu).filter_by(order=order).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-
-
-    menu_item.title_en = data.get('title_en', '')
-    menu_item.title_ar = data.get('title_ar', '')
-    menu_item.link_en = data.get('link_en', '')
-    menu_item.link_ar = data.get('link_ar', '')
-    menu_item.menu_type = data.get('menu_type', '')
-    menu_item.order = data.get('order', 0)
-    menu_item.is_visible = data.get('is_visible', True)
-
-    model.Session.commit()
+    menu_item = HeaderSecondaryMenu.patch_record(**data_dict, modified= datetime.datetime.utcnow())
     return menu_item.as_dict()
+
 
 def header_secondary_menu_show(context, data_dict):
     """Show a secondary menu item."""
     tk.check_access('ckanext_header_management_access', context)
 
-    menu_item = model.Session.query(HeaderSecondaryMenu).get(data_dict.get('id', ''))
+    menu_item = HeaderSecondaryMenu.get(id = data_dict.get('id', ''))
 
     if not menu_item:
         raise tk.ObjectNotFound('Menu item not found')
 
     return menu_item.as_dict()
 
+@validate_decorator(schema.header_menu_schema_create_schema)
 def header_secondary_menu_create(context, data_dict):
     """Create a new secondary menu item with validation."""
     tk.check_access('ckanext_header_management_access', context)
 
-    data, errors = tk.navl_validate(
-        data_dict,
-        header_menu_schema(),
-        context
-    )
-
-    if errors:
-        raise tk.ValidationError(errors)
-
-    menu_item = HeaderSecondaryMenu(
-        title_en=data.get('title_en', ''),
-        title_ar=data.get('title_ar', ''),
-        link_en=data.get('link_en', ''),
-        link_ar=data.get('link_ar', ''),
-        menu_type=data.get('menu_type', ''),
-        parent_id=data.get('parent_id') or None,
-        order=data.get('order', 0),
-        is_visible=data.get('is_visible', True)
-    )
-
-    if parent_id := data.get('parent_id'):
-        parent = model.Session.query(HeaderSecondaryMenu).get(parent_id)
-        errors = []
-
-        if not parent:
-            errors.append('Parent menu item not found')
-        if parent_id == menu_item.id:
-            errors.append('Cannot set parent to self')
-        if parent.menu_type != 'menu':
-            errors.append('Parent must be a menu type item')
-        if parent.parent_id:
-            errors.append('Maximum nesting level exceeded')
-
-        if errors:
-            raise tk.ValidationError({'parent_id': errors})
-
-        menu_item.parent_id = parent_id
-
-    if order := data.get('order'):
-        if parent_id:
-            if model.Session.query(HeaderSecondaryMenu).filter_by(order=order, parent_id=parent_id).first():
-                raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
-        elif model.Session.query(HeaderSecondaryMenu).filter_by(order=order).first():
-            raise tk.ValidationError({'order': [_('Invalid order. Order already taken.')]})
+    menu_item = HeaderSecondaryMenu(**data_dict)
 
     menu_item.save()
     return menu_item.as_dict()
