@@ -27,12 +27,12 @@
                 <td>
                     <span>{{ item.link_en }}</span>
                     <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('{{ item.link_en }}', this)"></i>
-                    <span class="copy-message">Copied!</span>
+                    <span class="copy-message">{{ _('Copied!') }}</span>
                 </td>
                 <td>
                     <span>{{ item.link_ar }}</span>
                     <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('{{ item.link_ar }}', this)"></i>
-                    <span class="copy-message">Copied!</span>
+                    <span class="copy-message">{{ _('Copied!') }}</span>
                 </td>
             </tr>
         {% endfor %}

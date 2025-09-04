@@ -24,7 +24,7 @@
     {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
     <!-- Title En -->
-    {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder='Enter title in English', value=data.title_en, error=errors.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
+    {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder=_('Enter title in English'), value=data.title_en, error=errors.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
 
     {% set prefix = h.url_for('pages.show', id='') %}
     {% set domain = h.url_for('pages.show', id='', qualified=true) %}
@@ -34,7 +34,7 @@
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-page'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
     <!-- Title Ar -->
-    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder='Enter title in Arabic', value=data.title_ar, error=errors.title_ar, is_required=true) }}
+    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder=_('Enter title in Arabic'), value=data.title_ar, error=errors.title_ar, is_required=true) }}
 
     <!-- Image Upload -->
     {% set is_upload = data.image_url and not data.image_url.startswith('http') %}

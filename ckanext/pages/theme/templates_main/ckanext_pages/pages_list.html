@@ -26,8 +26,10 @@
 {% block primary_content_inner %}
 
 {% set sorting = sorting if sorting else [
-    (_('Title Ascending'), 'title_en asc'), 
-    (_('Title Descending'), 'title_en desc'), 
+    (_('Title Ascending'), 'title_en asc') if h.lang() != 'ar' else (false, false), 
+    (_('Title Descending'), 'title_en desc') if h.lang() != 'ar' else (false, false), 
+    (_('Title Ascending'), 'title_ar asc') if h.lang() == 'ar' else (false, false), 
+    (_('Title Descending'), 'title_ar desc') if h.lang() == 'ar' else (false, false), 
     (_('Creation Date Ascending'), 'created asc'), 
     (_('Creation Date Descending'), 'created desc'), 
     (_('Publish Date Ascending'), 'publish_date asc'), 
