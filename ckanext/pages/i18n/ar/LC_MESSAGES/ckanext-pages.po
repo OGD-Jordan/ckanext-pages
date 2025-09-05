@@ -1475,3 +1475,16 @@ msgstr "شعار التذييل باللغة العربية"
 msgid "Invalid order. The order should be greater than zero"
 msgstr "ترتيب غير صالح. يجب أن يكون الترتيب أكبر من صفر"
 
+msgid "Footer Banner Icon"
+msgstr "أيقونة لافتة التذييل"
+
+msgid "Social Media Icon"
+msgstr "ايقونة وسائل التواصل الاجتماعي"
+
+#, python-format
+msgid "Value must be at least %s characters long. Current length is %s."
+msgstr "يجب أن تكون القيمة بطول لا يقل عن %s أحرف. الطول الحالي هو %s."
+
+#, python-format
+msgid "Value must be at most %s characters long. Current length is %s."
+msgstr "يجب أن تكون القيمة بطول لا يزيد عن %s أحرف. الطول الحالي هو %s."

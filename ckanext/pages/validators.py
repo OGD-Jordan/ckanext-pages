@@ -101,3 +101,22 @@ def header_order_validator(header_class):
 
     
     return header_class_order_validator
+
+
+def max_length_validator(length):
+    def func(key, data, errors, context):
+        value = data.get(key)
+        if value and len(value) > length:
+            errors[key].append(
+                _('Value must be at most %s characters long. Current length is %s.') % (length, len(value))
+            )
+    return func
+
+def min_length_validator(length):
+    def func(key, data, errors, context):
+        value = data.get(key)
+        if value and len(value) < length:
+            errors[key].append(
+                _('Value must be at least %s characters long. Current length is %s.') % (length, len(value))
+            )
+    return func

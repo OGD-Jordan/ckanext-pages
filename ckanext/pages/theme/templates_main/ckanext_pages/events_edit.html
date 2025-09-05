@@ -23,8 +23,11 @@
         <input type="hidden" name="id" value="{{ data.id }}">
     {% endif %}
 
-    {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
-
+    {% block errors %}
+      {% set error_summary = h.convert_error_keys(error_summary) %}
+      {{ form.errors(error_summary) }}
+    {% endblock %}
+    
     <!-- Title En -->
     {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder='Enter event title in English', value=data.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
 
