@@ -45,7 +45,7 @@ def _get_context():
 
 def news_index():
     data_dict = {
-        'sort': request.args.get('sort', 'title_en asc')  # Default to 'title_en asc'
+        'sort': request.args.get('sort', f'title_{h.lang()} asc')  # Default to 'title_en asc'
     }
 
     news_list = tk.get_action('ckanext_news_list')(
@@ -59,7 +59,13 @@ def news_index():
         items_per_page=20
     )
 
-    return tk.render('ckanext_pages/news.html', extra_vars={"pages": news_list})
+    return tk.render(
+        'ckanext_pages/news.html', 
+        extra_vars={
+            "pages": news_list,
+            'sort_selected': data_dict.get('sort')
+            }
+        )
 
 
 

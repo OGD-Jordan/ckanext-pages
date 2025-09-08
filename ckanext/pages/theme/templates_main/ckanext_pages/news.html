@@ -52,7 +52,12 @@
         <select id="field-order-by" name="sort" class="form-control form-select small-select" onchange="this.form.submit()">
           {% for title, value in sorting %}
           {% if value %}
-              <option value="{{value}}" {% if request.args.get('sort', '') == value %} selected {% endif %}>{{ title }}</option>
+              <option 
+                value="{{value}}" 
+                {% if sort_selected == value %} selected {% endif %}
+                >
+                {{ _(title) }}
+              </option>
           {% endif %}
           {% endfor %}
         </select>

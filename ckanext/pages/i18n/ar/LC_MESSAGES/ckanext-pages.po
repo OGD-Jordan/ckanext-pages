@@ -1488,3 +1488,32 @@ msgstr "يجب أن تكون القيمة بطول لا يقل عن %s أحرف.
 #, python-format
 msgid "Value must be at most %s characters long. Current length is %s."
 msgstr "يجب أن تكون القيمة بطول لا يزيد عن %s أحرف. الطول الحالي هو %s."
+
+#, python-format
+msgid "Value must be at least %s characters long."
+msgstr "يجب أن تكون القيمة بطول لا يقل عن %s أحرف."
+
+#, python-format
+msgid "Current length is %s."
+msgstr "الطول الحالي هو %s."
+
+msgid "Value must be at most characters long. Current length is."
+msgstr "ايقونة وسائل التواصل الاجتماعي"
+
+msgid "Main title 1 ar"
+msgstr "العنوان الرئيسي باللغة العربية 1"
+
+msgid "Main title 1 en"
+msgstr "العنوان الرئيسي باللغة الإنجليزية 1"
+
+msgid "Main title 2 ar"
+msgstr "العنوان الرئيسي باللغة العربية 2"
+
+msgid "Main title 2 en"
+msgstr "العنوان الرئيسي باللغة الإنجليزية 2"
+
+msgid "Main brief en"
+msgstr "الموجز الرئيسي للغة الإنجليزية"
+
+msgid "Main brief ar"
+msgstr "الموجز الرئيسي للغة العربية"

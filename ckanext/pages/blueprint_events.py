@@ -45,7 +45,7 @@ def _get_context():
 
 def events():
     data_dict = {
-        'sort': request.args.get('sort', 'title_en asc')  # Default to 'title_en asc'
+        'sort': request.args.get('sort', f'title_{h.lang()} asc')  # Default to 'title_en asc'
     }
 
     events_list = tk.get_action('ckanext_events_list')(
@@ -59,7 +59,13 @@ def events():
         items_per_page=20
     )
 
-    return tk.render('ckanext_pages/events.html', extra_vars={"pages": events_list})
+    return tk.render(
+        'ckanext_pages/events.html', 
+        extra_vars={
+            "pages": events_list,
+            'sort_selected': data_dict.get('sort')
+            }
+        )
 
 
 

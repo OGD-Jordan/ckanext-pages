@@ -37,8 +37,8 @@
         <input type="hidden" name="id" value="{{ data.id }}">
 
         <!-- Main Title 1 -->
-        {{ form.input('main_title_1_ar', id='field-title-1-ar', label=_('Main Title 1 AR'), placeholder='', value=data.main_title_1_ar, error=errors.main_title_1_ar, classes=['control-full', 'control-large'], attrs={'class': 'form-control'}) }}
-        {{ form.input('main_title_1_en', id='field-title-1-en', label=_('Main Title 1 EN'), placeholder='', value=data.main_title_1_en, error=errors.main_title_1_en, classes=['control-full', 'control-large'], attrs={'class': 'form-control'}) }}
+        {{ form.input('main_title_1_ar', id='field-title-1-ar', label=_('Main Title 1 AR'), placeholder='', value=data.main_title_1_ar, error=errors.main_title_1_ar, classes=['control-full', 'control-large'], attrs={'class': 'form-control'}, is_required=true) }}
+        {{ form.input('main_title_1_en', id='field-title-1-en', label=_('Main Title 1 EN'), placeholder='', value=data.main_title_1_en, error=errors.main_title_1_en, classes=['control-full', 'control-large'], attrs={'class': 'form-control'}, is_required=true) }}
 
         <!-- Conditional Titles for Section 1 -->
         {% if has_two_titles %}

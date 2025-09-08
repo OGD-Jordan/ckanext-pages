@@ -49,7 +49,7 @@ log = logging.getLogger(__name__)
 def index(page_type='page'):
     data_dict = {
         'page_type': page_type,
-        'sort': request.args.get('sort', 'title_en asc')
+        'sort': request.args.get('sort', f'title_{h.lang()} asc')
     }
 
     tk.g.pages_dict = tk.get_action('ckanext_pages_list')(
@@ -63,7 +63,13 @@ def index(page_type='page'):
         items_per_page=20
     )
     
-    return tk.render('ckanext_pages/pages_list.html', extra_vars={"pages": tk.g.pages_dict})
+    return tk.render(
+        'ckanext_pages/pages_list.html', 
+        extra_vars={
+            "pages": tk.g.pages_dict,
+            'sort_selected':data_dict.get('sort')
+            }
+        )
 
 
 def show(id, page_type='page'):
