@@ -92,17 +92,18 @@
     {% set editor = h.pages_get_wysiwyg_editor() %}
     {% if editor == 'ckeditor' %}
 
+      {% asset 'pages/ckedit-js' %}
       <!-- Content in English -->
       <div class="control-group">
         <label for="field-content-ck-en" class="control-label">{{ _('Content En') }}</label>
       </div>
-      <textarea id="field-content-ck-en" name="content_en" placeholder="{{_('Content En')}}" data-module="ckedit" style="height:400px">{{ data.content_en }}</textarea>
+      <textarea id="field-content-ck-en" name="content_en" placeholder="{{_('Content En')}}" data-module="ckedit" data-module-site_url="{{ h.dump_json(h.url_for('/cms/events/edit/', locale='default', qualified=true)) }}" style="height:400px">{{ data.content_en }}</textarea>
 
       <!-- Content in Arabic -->
       <div class="control-group">
         <label for="field-content-ck-ar" class="control-label">{{ _('Content Ar') }}</label>
       </div>
-      <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" style="height:400px">{{ data.content_ar }}</textarea>
+      <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" data-module-site_url="{{ h.dump_json(h.url_for('/cms/events/edit/', locale='default', qualified=true)) }}" style="height:400px">{{ data.content_ar }}</textarea>
     {% else %}
       {{ form.textarea('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content, error=errors.content) }}
     {% endif %}
@@ -126,14 +127,4 @@
 {% block scripts %}
   {{ super() }}
   <script src="/vendor/ckeditor/ckeditor.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        // Initialize CKEditor
-        if (typeof CKEDITOR !== 'undefined') {
-            CKEDITOR.replace('field-content-ck-ar');
-            CKEDITOR.replace('field-content-ck-en');
-        }
-    });
-  </script>
 {% endblock %}

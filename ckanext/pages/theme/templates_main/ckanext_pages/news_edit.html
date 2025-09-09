@@ -140,6 +140,7 @@
             </div>
 
 
+            {% asset 'pages/ckedit-js' %}
 
             {# Content English #}
             <div class="row mb-4">
@@ -149,6 +150,7 @@
                               name="content_en"
                               class="form-control"
                               data-module="ckedit"
+                              data-module-site_url="{{ h.dump_json(h.url_for('/cms/news/edit/', locale='default', qualified=true)) }}"
                               style="height:400px">{{ data.content_en }}</textarea>
                 </div>
             </div>
@@ -162,6 +164,7 @@
                               name="content_ar"
                               class="form-control"
                               data-module="ckedit"
+                              data-module-site_url="{{ h.dump_json(h.url_for('/cms/news/edit/', locale='default', qualified=true)) }}"
                               style="height:400px">{{ data.content_ar }}</textarea>
                 </div>
             </div>
@@ -301,21 +304,5 @@
 {% block scripts %}
     {{ super() }}
     <script src="/vendor/ckeditor/ckeditor.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
 
-            document.querySelectorAll('.hidden-file-input').forEach(input => {
-                input.addEventListener('change', function () {
-                    const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
-                    this.nextElementSibling.textContent = fileName;
-                });
-            });
-
-            // Initialize CKEditor
-            if (typeof CKEDITOR !== 'undefined') {
-                CKEDITOR.replace('field-content-ck-ar');
-                CKEDITOR.replace('field-content-ck-en');
-            }
-        });
-    </script>
 {% endblock %}

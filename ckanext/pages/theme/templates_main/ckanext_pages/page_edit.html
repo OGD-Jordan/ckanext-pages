@@ -70,17 +70,36 @@
     {% set editor = h.pages_get_wysiwyg_editor() %}
     {% if editor == 'ckeditor' %}
 
+      {% asset 'pages/ckedit-js' %}
       <!-- Content in English -->
       <div class="control-group">
         <label for="field-content-ck-en" class="control-label">{{ _('Content En') }}</label>
       </div>
-      <textarea id="field-content-ck-en" name="content_en" placeholder="{{_('Content En')}}" data-module="ckedit" style="height:400px">{{ data.content_en }}</textarea>
+      <textarea 
+        id="field-content-ck-en" 
+        name="content_en" 
+        placeholder="{{_('Content En')}}" 
+        data-module="ckedit" 
+        data-module-site_url="{{ h.dump_json(h.url_for('/cms/pages/edit/', locale='default', qualified=true)) }}" 
+        style="height:400px">
+        {{ data.content_en }}
+      </textarea>
 
       <!-- Content in Arabic -->
       <div class="control-group">
         <label for="field-content-ck-ar" class="control-label">{{ _('Content Ar') }}</label>
       </div>
-      <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" style="height:400px">{{ data.content_ar }}</textarea>
+      
+      <textarea 
+        id="field-content-ck-ar" 
+        name="content_ar" 
+        placeholder="{{_('Content Ar')}}" 
+        data-module="ckedit" 
+        data-module-site_url="{{ h.dump_json(h.url_for('/cms/pages/edit/', locale='default', qualified=true)) }}" 
+        style="height:400px">
+        {{ data.content_ar }}
+      </textarea>
+
     {% else %}
       {{ form.textarea('content_en', id='field-content_en', label=_('Content En'), placeholder=_('Enter content in English here'), value=data.content_en, error=errors.content_en, is_required=true) }}
       {{ form.textarea('content_ar', id='field-content_ar', label=_('Content Ar'), placeholder=_('Enter content in Arabic here'), value=data.content_ar, error=errors.content_ar, is_required=true) }}
@@ -106,14 +125,5 @@
 {% block scripts %}
   {{ super() }}
   <script src="/vendor/ckeditor/ckeditor.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
 
-        // Initialize CKEditor
-        if (typeof CKEDITOR !== 'undefined') {
-            CKEDITOR.replace('field-content-ck-ar');
-            CKEDITOR.replace('field-content-ck-en');
-        }
-    });
-    </script>
 {% endblock %}
