@@ -57,11 +57,10 @@ news-list:
 
 ckedit-js:
   filters: rjsmin
-  output: ckanext-pages/%(version)ckedit.js
+  output: ckanext-pages/%(version)s_ckedit.js
   extra:
     preload:
       - base/main
   contents:
     - vendor/ckeditor/adapters/jquery.js
     - js/ckedit.js
-    - css/ckedit.css
