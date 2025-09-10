@@ -1483,15 +1483,15 @@ msgstr "ايقونة وسائل التواصل الاجتماعي"
 
 #, python-format
 msgid "Value must be at least %s characters long. Current length is %s."
-msgstr "يجب أن تكون القيمة بطول لا يقل عن %s أحرف. الطول الحالي هو %s."
+msgstr "يجب أن تكون القيمة بطول لا يقل عن %s حرف. الطول الحالي هو %s."
 
 #, python-format
 msgid "Value must be at most %s characters long. Current length is %s."
-msgstr "يجب أن تكون القيمة بطول لا يزيد عن %s أحرف. الطول الحالي هو %s."
+msgstr "يجب أن تكون القيمة بطول لا يزيد عن %s حرف. الطول الحالي هو %s."
 
 #, python-format
 msgid "Value must be at least %s characters long."
-msgstr "يجب أن تكون القيمة بطول لا يقل عن %s أحرف."
+msgstr "يجب أن تكون القيمة بطول لا يقل عن %s حرف."
 
 #, python-format
 msgid "Current length is %s."
