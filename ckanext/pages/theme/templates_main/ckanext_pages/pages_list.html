@@ -65,72 +65,74 @@
   </form>
 </div>
 
-<table class="table" style="border-collapse: collapse; width: 100%; background-color: white;">
-  <thead>
-      <tr>
-          <th>{{_('Title'~' '~ h.lang() | capitalize)}}</th>
-          <th>{{ _('Date Of Creation') }}</th>
-          <th>{{ _('Publish Date') }}</th>
-          <th>{{ _('Page Urls') }}</th>
-          <th>{{ _('Actions') }}</th>
-      </tr>
-</thead>
-  <tbody>
-      {% if pages %}
-          {% for page in pages %}
-              <tr>
-                  <td style="width: 25%;"><strong>
-                    {% if lang == 'ar' %}
-                      {{ page.title_ar }}
-                      {% else %}
-                      {{ page.title_en }}
-                    {% endif %}
-                  </strong></td>
-                  <td>{{ h.render_datetime(page.created, date_format='%d/%m/%Y') }}</td>
-                  <td>{{ h.render_datetime(page.publish_date, date_format='%d/%m/%Y') if page.publish_date else '-' }}</td>
-                  <td style="width: 35%;">
-                    {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
-                    <br>
-                    {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
-                  </td>
-                  <td>
-                    <a href="{{ h.url_for('pages.edit', id = page.id) }}">
-                      <img src="/images/edit_icon.png" alt="{{_('Edit')}}" style="width: 32px; height: 32px; cursor: pointer;">
-                    </a>
+<div class="tablebody table-responsive mt-3 mb-3">
+  <table class="table" style="border-collapse: collapse; background-color: white;">
+    <thead>
+        <tr>
+            <th style="width: 25%;">{{_('Title'~' '~ h.lang() | capitalize)}}</th>
+            <th>{{ _('Date Of Creation') }}</th>
+            <th>{{ _('Publish Date') }}</th>
+            <th style="width: 35%;">{{ _('Page Urls') }}</th>
+            <th>{{ _('Actions') }}</th>
+        </tr>
+  </thead>
+    <tbody>
+        {% if pages %}
+            {% for page in pages %}
+                <tr>
+                    <td ><strong>
+                      {% if lang == 'ar' %}
+                        {{ page.title_ar }}
+                        {% else %}
+                        {{ page.title_en }}
+                      {% endif %}
+                    </strong></td>
+                    <td>{{ h.render_datetime(page.created, date_format='%d/%m/%Y') }}</td>
+                    <td>{{ h.render_datetime(page.publish_date, date_format='%d/%m/%Y') if page.publish_date else '-' }}</td>
+                    <td >
+                      {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
+                      <br>
+                      {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.pages_detail', id = page.name).replace('/' + lang + '/', '/') }}
+                    </td>
+                    <td>
+                      <a href="{{ h.url_for('pages.edit', id = page.id) }}">
+                        <img src="/images/edit_icon.png" alt="{{_('Edit')}}" style="width: 32px; height: 32px; cursor: pointer;">
+                      </a>
 
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ page.id }}">
-                        <img src="/images/remove_icon.png" alt="Delete">
-                    </a>
-                      <div class="modal fade" id="deleteModal-{{ page.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title" id="deleteModalLabel">{{ _('Please Confirm Action') }}</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ _('Are you sure you want to delete?') }}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ _('Cancel') }}</button>
-                                    <form action="{{ h.url_for('pages.pages_delete', id=page.id) }}" method="post">
-                                        {{ h.csrf_input() }}
-                                        <button class="btn btn-primary" type="submit" name="confirm">{{ _('Confirm') }}</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </td>
-              </tr>
-          {% endfor %}
-      {% else %}
-          <tr>
-              <td colspan="5">{{ _('No pages found.') }}</td>
-          </tr>
-      {% endif %}
-  </tbody>
-</table>
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ page.id }}">
+                          <img src="/images/remove_icon.png" alt="Delete">
+                      </a>
+                        <div class="modal fade" id="deleteModal-{{ page.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h1 class="modal-title" id="deleteModalLabel">{{ _('Please Confirm Action') }}</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      {{ _('Are you sure you want to delete?') }}
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ _('Cancel') }}</button>
+                                      <form action="{{ h.url_for('pages.pages_delete', id=page.id) }}" method="post">
+                                          {{ h.csrf_input() }}
+                                          <button class="btn btn-primary" type="submit" name="confirm">{{ _('Confirm') }}</button>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">{{ _('No pages found.') }}</td>
+            </tr>
+        {% endif %}
+    </tbody>
+  </table>
+  </div>
 
 {% endblock %}
 

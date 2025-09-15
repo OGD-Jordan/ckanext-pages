@@ -66,82 +66,84 @@
 </div>
 
 {% asset 'pages/news-list' %}
-<table class="table" style="border-collapse: collapse; width: 100%; background-color: white;" data-module="news-actions">
-  <thead>
-      <tr>
-          <th>{{_('News Title')}}</th>
-          <th>{{_('Date Of Creation')}}</th>
-          <th>{{_('Publish Date')}}</th>
-          <th>{{_('Urls')}}</th>
-          <th>{{_('Status')}}</th>
-          <th>{{_('Actions')}}</th>
-      </tr>
-  </thead>
-  <tbody>
-    
-    {% if pages %}
-      {% for item in pages %}
+<div class="tablebody table-responsive mt-3 mb-3">
+  <table class="table" style="border-collapse: collapse; width: 100%; background-color: white;" data-module="news-actions">
+    <thead>
         <tr>
-          <td style="width: 25%;"><strong>{{ item.title_en if h.lang() == 'en' else item.title_ar }}</strong></td>
-          <td>{{ h.render_datetime(item.created, date_format='%d/%m/%Y') }}</td>
-          <td>{{ h.render_datetime(item.news_date, date_format='%d/%m/%Y') }}</td>
-          <td style="width: 35%;">
-            {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
-            <br>
-            {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
-          </td>
-          <td>{{item.status}}</td>
-          <td>
-            <div class="news-actions">
-            {% if item.status in [_('Posted'), _('Disabled')] %}
-            <a href="#" style="border: none; background: none; padding: 0;" data-id="{{ item.id }}" class="news-action news-visibility-toggler">
-                <img src="{{ '/images/EYE3.png' if item.hidden else '/images/hide_icon.png' }}"
-                      alt="{{ _('Unhide') if item.hidden else _('Hide') }}"
-                      title="{{ _('Unhide') if item.hidden else _('Hide') }}"
-                      style="width: 32px; height: 32px; cursor: pointer;">
-            </a>
-            {% endif %}
-            <!-- Edit Button -->
-            <a href="{{ h.url_for('pages.news_edit', id=item.id) }}">
-              <img src="/images/edit_icon.png" alt="Edit" style="width: 32px; height: 32px; cursor: pointer;">
-            </a>
+            <th>{{_('News Title')}}</th>
+            <th>{{_('Date Of Creation')}}</th>
+            <th>{{_('Publish Date')}}</th>
+            <th>{{_('Urls')}}</th>
+            <th>{{_('Status')}}</th>
+            <th>{{_('Actions')}}</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+      {% if pages %}
+        {% for item in pages %}
+          <tr>
+            <td style="width: 25%;"><strong>{{ item.title_en if h.lang() == 'en' else item.title_ar }}</strong></td>
+            <td>{{ h.render_datetime(item.created, date_format='%d/%m/%Y') }}</td>
+            <td>{{ h.render_datetime(item.news_date, date_format='%d/%m/%Y') }}</td>
+            <td style="width: 35%;">
+              {{ config['ckan.site_url'] + '/en' +  h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
+              <br>
+              {{ config['ckan.site_url'] + '/ar' + h.url_for('home_page.news_detail', id = item.name).replace('/' + lang + '/', '/') }}
+            </td>
+            <td>{{item.status}}</td>
+            <td>
+              <div class="news-actions">
+              {% if item.status in [_('Posted'), _('Disabled')] %}
+              <a href="#" style="border: none; background: none; padding: 0;" data-id="{{ item.id }}" class="news-action news-visibility-toggler">
+                  <img src="{{ '/images/EYE3.png' if item.hidden else '/images/hide_icon.png' }}"
+                        alt="{{ _('Unhide') if item.hidden else _('Hide') }}"
+                        title="{{ _('Unhide') if item.hidden else _('Hide') }}"
+                        style="width: 32px; height: 32px; cursor: pointer;">
+              </a>
+              {% endif %}
+              <!-- Edit Button -->
+              <a href="{{ h.url_for('pages.news_edit', id=item.id) }}">
+                <img src="/images/edit_icon.png" alt="Edit" style="width: 32px; height: 32px; cursor: pointer;">
+              </a>
 
-            <!-- Delete Button with Modal Trigger -->
-            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ item.id }}">
-                <img src="/images/remove_icon.png" alt="Delete">
-            </a>
-                <!-- Delete Confirmation Modal -->
-                <div class="modal fade" id="deleteModal-{{ item.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h1 class="modal-title" id="deleteModalLabel">{{ _('Please Confirm Action') }}</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                              {{ _('Are you sure you want to delete?') }}
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ _('Cancel') }}</button>
-                              <form action="{{ h.url_for('pages.news_delete', id=item.id) }}" method="post">
-                                  {{ h.csrf_input() }}
-                                  <button class="btn btn-primary" type="submit" name="confirm">{{ _('Confirm') }}</button>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
+              <!-- Delete Button with Modal Trigger -->
+              <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ item.id }}">
+                  <img src="/images/remove_icon.png" alt="Delete">
+              </a>
+                  <!-- Delete Confirmation Modal -->
+                  <div class="modal fade" id="deleteModal-{{ item.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title" id="deleteModalLabel">{{ _('Please Confirm Action') }}</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {{ _('Are you sure you want to delete?') }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ _('Cancel') }}</button>
+                                <form action="{{ h.url_for('pages.news_delete', id=item.id) }}" method="post">
+                                    {{ h.csrf_input() }}
+                                    <button class="btn btn-primary" type="submit" name="confirm">{{ _('Confirm') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-    {% else %}
-        <tr>
-            <td colspan="6">{{_('No news found')}}.</td>
-        </tr>
-    {% endif %}
-  </tbody>
-</table>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+          <tr>
+              <td colspan="6">{{_('No news found')}}.</td>
+          </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
 
