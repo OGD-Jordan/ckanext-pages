@@ -1517,3 +1517,18 @@ msgstr "الموجز الرئيسي للغة الإنجليزية"
 
 msgid "Main brief ar"
 msgstr "الموجز الرئيسي للغة العربية"
+
+msgid "Main Title & Brief"
+msgstr "العنوان الرئيسي والملخص"
+
+msgid "Open Data Sectors"
+msgstr "قطاعات البيانات المفتوحة"
+
+msgid "Indicators"
+msgstr "المؤشرات"
+
+msgid "Open Data In Numbers"
+msgstr "البيانات المفتوحة بالأرقام"
+
+msgid "Also Explore"
+msgstr "اكتشف أيضًا"

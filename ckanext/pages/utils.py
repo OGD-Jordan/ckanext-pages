@@ -395,11 +395,11 @@ def update_main_page(section_id, data):
 def main_page_edit(section_id):
     context = _get_context()
     section_titles = {
-        1: "Main Title & Brief",
-        2: "Open Data Sector",
-        3: "Indicators",
-        4: "Open Data In Numbers",
-        5: "Also Explore"
+        1: _("Main Title & Brief"),
+        2: _("Open Data Sectors"),
+        3: _("Indicators"),
+        4: _("Open Data In Numbers"),
+        5: _("Also Explore")
     }
 
     try:
@@ -426,7 +426,7 @@ def main_page_edit(section_id):
                     'main_page/main_page_edit.html',
                     extra_vars={
                         'has_two_titles': True if int(section_id) == 1 else False,
-                        'section_title': section_titles.get(int(section_id), "Unknown Section"),
+                        'section_title': _(section_titles.get(int(section_id), "Unknown Section")),
                         'data': data_dict,
                         'errors': errors,
                         'error_summary': error_summary
