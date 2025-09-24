@@ -765,8 +765,8 @@ msgstr "العنوان باللغة العربية"
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:52
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:90
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:91
-msgid "News Image "
-msgstr "(1200 x 400 pixels) صورة الاخبار"
+msgid "News Image (1200 x 400 pixels)"
+msgstr "صورة الأخبار ‎(1200 x 400 pixels)‎"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/events_edit.html:69
 #: ckanext/pages/theme/templates_main/ckanext_pages/news_edit.html:117
@@ -1532,3 +1532,6 @@ msgstr "البيانات المفتوحة بالأرقام"
 
 msgid "Also Explore"
 msgstr "اكتشف أيضًا"
+
+msgid "Event Image (1200 x 400 pixels)"
+msgstr "صورة الحدث ‎(1200 x 400 pixels)‎"

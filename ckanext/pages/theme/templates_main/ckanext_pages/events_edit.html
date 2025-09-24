@@ -51,8 +51,8 @@
         is_upload_enabled=h.uploads_enabled(), 
         is_url=is_url, 
         is_upload=is_upload,
-        url_label=_('News Image (1200 x 400 pixels)'), 
-        upload_label=_('News Image (1200 x 400 pixels)') 
+        url_label=_('Event Image (1200 x 400 pixels)'), 
+        upload_label=_('Event Image (1200 x 400 pixels)') 
       ) }}
 
     {% set start_date_formatted = h.date_str_to_datetime(data.start_date).strftime('%Y-%m-%d') if data and data.start_date else '' %}
