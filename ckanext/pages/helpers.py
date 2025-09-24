@@ -79,6 +79,7 @@ def get_helpers():
         'get_header_data': get_header_data,
         'get_main_page_all_sections': get_main_page_all_sections,
         'get_main_page_section': get_main_page_section,
+        'single_image_upload': single_image_upload,
     }
 
 
@@ -127,3 +128,36 @@ def get_main_page_section(id):
         'title_2': section.main_title_2_ar if lang == 'ar' else section.main_title_2_en,
         'brief': section.main_brief_ar if lang == 'ar' else section.main_brief_en
     }
+
+
+
+from ckan.common import current_user
+import redis
+redis_client = redis.StrictRedis(host=tk.config.get('REDIS_HOST','127.0.0.1'), port=6379, db=0, decode_responses=True)
+import ckan.lib.uploader as uploader
+def single_image_upload(context, data_dict, upload_folder='pages', image_url_field='image_url', image_upload='image_upload', clear_upload='clear_upload'):
+    data_dict = data_dict.copy()
+    
+    data_dict.update(data_dict.get('__extras', {}))
+    image_url = data_dict.get(image_url_field)
+    file_stream = data_dict.get(image_upload)
+
+    old_filename = data_dict.get('old_filename', None)
+    old_filename = old_filename if old_filename and old_filename[0:6] not in {'http:/', 'https:'} else None
+    
+
+    if file_stream and file_stream.filename:
+        upload = uploader.get_uploader(upload_folder, old_filename)
+        upload.update_data_dict(data_dict, image_url_field, image_upload, clear_upload)
+        upload.upload(uploader.get_max_image_size())
+
+        image_url_key = f"{image_url_field}:{current_user.name}:{file_stream.filename}"
+        redis_client.setex(image_url_key, 300, data_dict.get(image_url_field))
+    
+    elif (not file_stream or not file_stream.filename) and data_dict.get(image_url_field):
+        required_key = f"{image_url_field}:{current_user.name}:{data_dict.get(image_url_field)}"
+        if redis_client.exists(required_key):
+            image_url = redis_client.get(required_key)
+
+
+    return {image_url_field: image_url}
