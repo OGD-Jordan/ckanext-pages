@@ -29,7 +29,7 @@
     {% endblock %}
     
     <!-- Title En -->
-    {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder='Enter event title in English', value=data.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
+    {{ form.input('title_en', id='field-title_en', label=_('Title En'), placeholder=_('Enter title in English'), value=data.title_en, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}, is_required=true) }}
 
     {% set prefix = h.url_for('home_page.events_detail', id='') %}
     {% set domain = h.url_for('home_page.events_detail', id='', qualified=true) %}
@@ -39,7 +39,7 @@
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-event'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
     <!-- Title Ar -->
-    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder='Enter event title in Arabic', value=data.title_ar, error=errors.title_ar, is_required=true) }}
+    {{ form.input('title_ar', id='field-title_ar', label=_('Title Ar'), placeholder=_('Enter title in Arabic'), value=data.title_ar, error=errors.title_ar, is_required=true) }}
 
     <!-- Image Upload -->
     {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
@@ -97,17 +97,51 @@
       {% asset 'pages/ckedit-js' %}
       <!-- Content in English -->
       <div class="control-group">
-        <label for="field-content-ck-en" class="control-label">{{ _('Content En') }}</label>
+        <label for="field-content-ck-en" class="control-label">
+          <span style="color: red;">*</span>
+          {{ _('Content En') }}
+        </label>
       </div>
-      <textarea id="field-content-ck-en" name="content_en" placeholder="{{_('Content En')}}" data-module="ckedit" data-module-site_url="{{ h.dump_json(h.url_for('/cms/events/edit/', locale='default', qualified=true)) }}" style="height:400px">{{ data.content_en }}</textarea>
+
+      <textarea 
+        id="field-content-ck-en" 
+        name="content_en" 
+        placeholder="{{_('Content En')}}" 
+        data-module="ckedit" 
+        data-module-site_url="{{ h.dump_json(h.url_for('/cms/events/edit/', locale='default', qualified=true)) }}" 
+        style="height:400px">
+        {{ data.content_en }}
+      </textarea>
+      
+      {% for error in errors.content_ar %}
+        <span class="error-block">{{ error }}</span>
+      {% endfor %}
 
       <!-- Content in Arabic -->
       <div class="control-group">
-        <label for="field-content-ck-ar" class="control-label">{{ _('Content Ar') }}</label>
+        <label for="field-content-ck-ar" class="control-label">
+          <span style="color: red;">*</span>
+          {{ _('Content Ar') }}
+        </label>
       </div>
-      <textarea id="field-content-ck-ar" name="content_ar" placeholder="{{_('Content Ar')}}" data-module="ckedit" data-module-site_url="{{ h.dump_json(h.url_for('/cms/events/edit/', locale='default', qualified=true)) }}" style="height:400px">{{ data.content_ar }}</textarea>
+
+      <textarea 
+        id="field-content-ck-ar" 
+        name="content_ar" 
+        placeholder="{{_('Content Ar')}}" 
+        data-module="ckedit" 
+        data-module-site_url="{{ h.dump_json(h.url_for('/cms/events/edit/', locale='default', qualified=true)) }}" 
+        style="height:400px">
+        {{ data.content_ar }}
+      </textarea>
+
+      {% for error in errors.content_ar %}
+        <span class="error-block">{{ error }}</span>
+      {% endfor %}
+    
     {% else %}
-      {{ form.textarea('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content, error=errors.content) }}
+      {{ form.textarea('content_en', id='field-content_en', label=_('Content En'), placeholder=_('Content En'), value=data.content_en, error=errors.content_en, is_required=true) }}
+      {{ form.textarea('content_ar', id='field-content_ar', label=_('Content Ar'), placeholder=_('Content Ar'), value=data.content_ar, error=errors.content_ar, is_required=true) }}
     {% endif %}
     <!-- Submit Button -->
     <div class="d-flex justify-content-end mt-4">

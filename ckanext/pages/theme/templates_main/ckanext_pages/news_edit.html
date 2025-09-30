@@ -146,13 +146,24 @@
             {# Content English #}
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="field-content-ck-en" class="boldfont">{{ _('Content En') }}</label>
-                    <textarea id="field-content-ck-en"
-                              name="content_en"
-                              class="form-control"
-                              data-module="ckedit"
-                              data-module-site_url="{{ h.dump_json(h.url_for('/cms/news/edit/', locale='default', qualified=true)) }}"
-                              style="height:400px">{{ data.content_en }}</textarea>
+                    <label for="field-content-ck-en" class="boldfont">
+                        <span style="color: red;">*</span>
+                        {{ _('Content En') }}
+                    </label>
+                    <textarea 
+                        id="field-content-ck-en"
+                        name="content_en"
+                        class="form-control"
+                        data-module="ckedit"
+                        data-module-site_url="{{ h.dump_json(h.url_for('/cms/news/edit/', locale='default', qualified=true)) }}"
+                        style="height:400px">
+                        {{ data.content_en }}
+                    </textarea>
+
+                    {% for error in errors.content_en %}
+                        <span class="error-block">{{ error }}</span>
+                    {% endfor %}
+
                 </div>
             </div>
 
@@ -160,13 +171,23 @@
             {# Content Arabic #}
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="field-content-ck-ar" class="boldfont">{{ _('Content Ar') }}</label>
-                    <textarea id="field-content-ck-ar"
-                              name="content_ar"
-                              class="form-control"
-                              data-module="ckedit"
-                              data-module-site_url="{{ h.dump_json(h.url_for('/cms/news/edit/', locale='default', qualified=true)) }}"
-                              style="height:400px">{{ data.content_ar }}</textarea>
+                    <label for="field-content-ck-ar" class="boldfont">
+                        <span style="color: red;">*</span>
+                        {{ _('Content Ar') }}
+                    </label>
+                    <textarea 
+                        id="field-content-ck-ar"
+                        name="content_ar"
+                        class="form-control"
+                        data-module="ckedit"
+                        data-module-site_url="{{ h.dump_json(h.url_for('/cms/news/edit/', locale='default', qualified=true)) }}"
+                        style="height:400px">
+                        {{ data.content_ar }}
+                    </textarea>
+
+                    {% for error in errors.content_ar %}
+                        <span class="error-block">{{ error }}</span>
+                    {% endfor %}
                 </div>
             </div>
 

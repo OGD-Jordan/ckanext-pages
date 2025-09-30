@@ -617,8 +617,17 @@ def header_secondary_menu_list(context, data_dict):
 
     items = model.Session.query(HeaderSecondaryMenu).order_by(HeaderSecondaryMenu.order).all()
 
-    return [item.as_dict() for item in items]
+    items =  [item.as_dict() for item in items]
 
+    for item in items:
+        if h.lang() == 'ar':
+            item['display_title'] = item.get('title_ar') or item.get('title_en')
+            item['display_link'] = item.get('link_ar') or item.get('link_en')
+        else:
+            item['display_title'] = item.get('title_en') or item.get('title_ar')
+            item['display_link'] = item.get('link_en') or item.get('link_ar')
+
+    return items
 
 @tk.side_effect_free
 def header_logo_get(context, data_dict):

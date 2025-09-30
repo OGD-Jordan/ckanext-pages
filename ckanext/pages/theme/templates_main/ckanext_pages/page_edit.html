@@ -74,8 +74,12 @@
       {% asset 'pages/ckedit-js' %}
       <!-- Content in English -->
       <div class="control-group">
-        <label for="field-content-ck-en" class="control-label">{{ _('Content En') }}</label>
+        <label for="field-content-ck-en" class="control-label">
+          <span style="color: red;">*</span>
+          {{ _('Content En') }}
+        </label>
       </div>
+
       <textarea 
         id="field-content-ck-en" 
         name="content_en" 
@@ -86,9 +90,16 @@
         {{ data.content_en }}
       </textarea>
 
+      {% for error in errors.content_en %}
+        <span class="error-block">{{ error }}</span>
+      {% endfor %}
+
       <!-- Content in Arabic -->
       <div class="control-group">
-        <label for="field-content-ck-ar" class="control-label">{{ _('Content Ar') }}</label>
+        <label for="field-content-ck-ar" class="control-label">
+          <span style="color: red;">*</span>
+          {{ _('Content Ar') }}
+        </label>
       </div>
       
       <textarea 
@@ -100,6 +111,10 @@
         style="height:400px">
         {{ data.content_ar }}
       </textarea>
+
+      {% for error in errors.content_ar %}
+        <span class="error-block">{{ error }}</span>
+      {% endfor %}
 
     {% else %}
       {{ form.textarea('content_en', id='field-content_en', label=_('Content En'), placeholder=_('Enter content in English here'), value=data.content_en, error=errors.content_en, is_required=true) }}

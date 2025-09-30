@@ -79,8 +79,8 @@ def default_events_schema():
         'end_date': [not_empty, isodate],
         'brief_ar': [ignore_missing, unicode_safe, get_validator('validate_arabic_text'), validators.max_length_validator(100), validators.min_length_validator(40)],
         'brief_en': [ignore_missing, unicode_safe, get_validator('validate_english_text'), validators.max_length_validator(100), validators.min_length_validator(40)],
-        'content_en': [ignore_missing, unicode_safe],
-        'content_ar': [ignore_missing, unicode_safe],
+        'content_en': [not_empty, unicode_safe],
+        'content_ar': [not_empty, unicode_safe],
         'image_url': [ignore_missing, unicode_safe],
         'lang': [ignore_missing, unicode_safe],
     }
