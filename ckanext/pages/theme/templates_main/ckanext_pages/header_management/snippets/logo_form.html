@@ -4,6 +4,8 @@
       action="{{ h.url_for('header_management.edit_logo', id=data.id) }}"
       enctype="multipart/form-data">
     {{ h.csrf_input() }}
+        {% set error_summary = h.convert_error_keys(error_summary) %}
+      {{ form.errors(error_summary) }}
 
     {# Arabic Logo Section #}
     <p class="boldfont mt-3">

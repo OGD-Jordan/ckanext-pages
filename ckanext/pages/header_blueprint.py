@@ -102,67 +102,96 @@ def toggle_secondary_menu_visibility(id):
     return h.redirect_to('header_management.index')
 
 
-@header_management.route('/logo/edit/<id>', methods=['GET', 'POST'])
-def edit_logo(id):
-    context = {
-        'user': tk.g.user,
-        'auth_user_obj': tk.g.userobj
-    }
 
-    try:
-        tk.check_access('ckanext_header_management_access', context)
 
-        if tk.request.method == 'POST':
-            data_dict = {
-                'id': id,
-                '__extras': {}
-            }
+import ckan.lib.base as base
+from flask.views import MethodView
+from typing import Union, cast
+from ckan.types import Context, Response
+import ckan.lib.navl.dictization_functions as dict_fns
+import ckan.logic as logic
+from flask import Blueprint, request
+from ckan.views.home import CACHE_PARAMETERS
 
-            # Handle file uploads
-            upload_ar = tk.request.files.get('logo_ar')
-            upload_en = tk.request.files.get('logo_en')
+_clean_dict = logic.clean_dict
+_tuplize_dict = logic.tuplize_dict
+_parse_params = logic.parse_params
 
-            if upload_ar:
-                data_dict['logo_ar_upload'] = upload_ar
-                data_dict['clear_logo_ar'] = False
 
-            if upload_en:
-                data_dict['logo_en_upload'] = upload_en
-                data_dict['clear_logo_en'] = False
+class Column1Edit(MethodView):
+    def _prepare(self) -> Context:
+        context = cast(Context, {
+            u'model': model,
+            u'session': model.Session,
+            u'user': current_user.name,
+            u'auth_user_obj': current_user,
+        })
 
-            try:
-                tk.get_action('ckanext_header_logo_update')(context, data_dict)
+        try:
+            tk.check_access(u'is_content_editor', context)
+        except tk.NotAuthorized:
+            return base.abort(403, _(u'Unauthorized to update CMS footer'))
+        return context
 
-                if upload_ar or upload_en:
-                    tk.h.flash_success(tk._('Header logo uploaded successfully'))
 
-                return tk.h.redirect_to('header_management.index')
+    def post(self, id) -> Union[Response, str]:
+        context = self._prepare()
 
-            except tk.ValidationError as e:
-                tk.h.flash_error(e.error_summary)
-                return tk.render(
-                    'ckanext_pages/header_management/edit_header_logo.html',
-                    extra_vars={
-                        'data': data_dict,
-                        'errors': e.error_dict,
-                        'error_summary': e.error_summary
-                    }
+        data_dict = _clean_dict(
+            dict_fns.unflatten(
+                _tuplize_dict(_parse_params(tk.request.form))))
+
+        data_dict.update(
+            _clean_dict(dict_fns.unflatten(
+                    _tuplize_dict(_parse_params(tk.request.files))
+                    )))
+
+        try:
+            logos_data = tk.get_action('ckanext_header_logo_update')(context, data_dict)
+
+        except tk.ValidationError as e:
+            errors = e.error_dict
+            error_summary = e.error_summary
+            return self.get(id, data_dict, errors, error_summary)
+
+        url = 'header_management.index'
+        return h.redirect_to(url)
+
+
+    def get(self, id, data=None, errors=None, error_summary=None) -> str:
+
+        context = self._prepare()
+        
+        data = data or _clean_dict(
+            dict_fns.unflatten(
+                _tuplize_dict(
+                    _parse_params(request.args, ignore_keys=CACHE_PARAMETERS)
                 )
-
-        logo = tk.get_action('ckanext_header_logo_get')(context, {'id': id})
-        return tk.render(
-            'ckanext_pages/header_management/edit_header_logo.html',
-            extra_vars={
-                'data': logo,
-                'errors': {},
-                'error_summary': {}
-            }
+            )
         )
 
-    except tk.NotAuthorized:
-        tk.abort(403, tk._('Not authorized to edit logo'))
-    except tk.ObjectNotFound:
-        tk.abort(404, tk._('Logo not found'))
+        previous_logos_data = tk.get_action('ckanext_header_logo_get')(context, {})
+
+        data = {**previous_logos_data, **data}
+
+
+        errors = errors or {}
+        error_summary = error_summary or {}
+
+        errors_json = h.dump_json(errors)
+
+        return base.render(
+            'ckanext_pages/header_management/edit_header_logo.html', 
+            extra_vars={
+                u'errors_json': errors_json,
+                u'data': data,
+                u'errors': errors,
+                u'error_summary': error_summary,
+            }
+        )
+    
+header_management.add_url_rule('/logo/edit/<id>', view_func=Column1Edit.as_view('edit_logo'), endpoint='edit_logo')
+
 
 @header_management.route('/main-menu/new', methods=['GET', 'POST'])
 def new_main_menu():

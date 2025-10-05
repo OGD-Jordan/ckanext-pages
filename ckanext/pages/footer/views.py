@@ -25,7 +25,6 @@ from functools import partial
 from ckan.lib.helpers import Page
 
 
-_get_action = logic.get_action
 _tuplize_dict = logic.tuplize_dict
 _clean_dict = logic.clean_dict
 _parse_params = logic.parse_params

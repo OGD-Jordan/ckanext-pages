@@ -1535,3 +1535,9 @@ msgstr "اكتشف أيضًا"
 
 msgid "Event Image (1200 x 400 pixels)"
 msgstr "صورة الحدث ‎(1200 x 400 pixels)‎"
+
+msgid "Edit Footer Logo"
+msgstr "تعديل شعار التذييل"
+
+msgid "Edit Header Logo"
+msgstr "تعديل شعار الرأس"

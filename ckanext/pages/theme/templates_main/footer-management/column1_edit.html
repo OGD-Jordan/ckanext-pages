@@ -11,9 +11,14 @@
 {% endblock %}
 
 {% block primary_content_inner %}
+<h1>{{ _('Edit Footer Logo') }}</h1>
 <form action="" method="post" class="module-content" data-module="basic-form", enctype="multipart/form-data">
     {{ h.csrf_input() }}
-    {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
+    
+    {% block errors %}
+      {% set error_summary = h.convert_error_keys(error_summary) %}
+      {{ form.errors(error_summary) }}
+    {% endblock %}
 
     {% set is_upload = data.logo_en and not data.logo_en.startswith('http') %}
     {% set is_url = data.logo_en and data.logo_en.startswith('http') %}

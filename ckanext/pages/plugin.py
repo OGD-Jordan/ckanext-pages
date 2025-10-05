@@ -111,6 +111,7 @@ class PagesPlugin(PagesPluginBase):
 
     def get_actions(self):
         actions_dict = {
+
             # Pages
             'ckanext_pages_edit': actions.pages_edit_action,
             'ckanext_pages_show': actions.pages_show,
@@ -119,6 +120,7 @@ class PagesPlugin(PagesPluginBase):
 
             'ckanext_pages_upload': actions.pages_upload,
 
+
             # News
             'ckanext_news_edit':actions.news_edit,
             'ckanext_news_list': actions.news_list,
@@ -126,6 +128,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_news_toggle_visibility': actions.news_toggle_visibility,
             'ckanext_news_delete':actions.news_delete,
             
+
             # Events
             'ckanext_event_edit':actions.event_edit,
             'ckanext_events_list': actions.events_list,
@@ -137,6 +140,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_main_page_show': actions.main_page_show,
             'ckanext_main_page_edit': actions.ckanext_main_page_edit,
             
+
             # Header Management Actions
 
             'ckanext_header_main_menu_create': actions.header_main_menu_create,

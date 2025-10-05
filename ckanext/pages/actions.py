@@ -629,11 +629,13 @@ def header_secondary_menu_list(context, data_dict):
 
     return items
 
+
 @tk.side_effect_free
 def header_logo_get(context, data_dict):
     """Get header logo."""
     tk.check_access('ckanext_header_management_access', context)
-    return HeaderLogo.get(model.Session)
+    header_logo = HeaderLogo.get(context['model'].Session)
+    return header_logo.as_dict() or None
 
 
 # Update Actions - Header Management
@@ -674,45 +676,49 @@ def header_main_menu_delete(context, data_dict):
     return {'message': _('Menu item deleted')}
 
 
+@validate_decorator(schema.header_logo_update_schema)
 def header_logo_update(context, data_dict):
     """Update a header logo."""
     tk.check_access('ckanext_header_management_access', context)
 
     model = context['model']
-    logo = model.Session.query(HeaderLogo).get(data_dict.get('id', ''))
 
-    if not logo:
-        raise tk.ObjectNotFound('Header logo not found')
+    data_dict1 = data_dict.copy()
+    data_dict2 = data_dict.copy()
 
-    if data_dict.get('logo_ar_upload'):
-        upload_ar = uploader.get_uploader('header_logos')
+    previous_record = model.Session.query(HeaderLogo).get(data_dict.get('id', ''))
 
-        upload_ar.update_data_dict(
-            data_dict,
-            'logo_ar_url',
-            'logo_ar_upload',
-            'clear_logo_ar'
-        )
-        upload_ar.upload(uploader.get_max_image_size())
-        logo.logo_ar = data_dict.get('logo_ar_url')
 
-    if data_dict.get('logo_en_upload'):
-        upload_en = uploader.get_uploader('header_logos')
+    # LOGO EN
+    upload = uploader.get_uploader('header_logos', previous_record.logo_en if previous_record and previous_record.logo_en else None)
+    data_dict1.update(data_dict1.get('__extras', {}))
 
-        upload_en.update_data_dict(
-            data_dict,
-            'logo_en_url',
-            'logo_en_upload',
-            'clear_logo_en'
-        )
+    upload.update_data_dict(data_dict1, 'logo_en', 'logo_en_upload', 'clear_logo_en_upload')
+    upload.upload(uploader.get_max_image_size())
 
-        upload_en.upload(uploader.get_max_image_size())
-        logo.logo_en = data_dict.get('logo_en_url')
+    # LOGO AR
+    upload = uploader.get_uploader('header_logos', previous_record.logo_ar if previous_record and previous_record.logo_ar else None)
+    data_dict2.update(data_dict2.get('__extras', {}))
 
-    logo.modified = datetime.datetime.utcnow()
+    upload.update_data_dict(data_dict2, 'logo_ar', 'logo_ar_upload', 'clear_logo_ar_upload')
+    upload.upload(uploader.get_max_image_size())
+
+
+    data_dict.update({k:v for k,v in data_dict1.items() if 'logo_en' in k})
+    data_dict.update({k:v for k,v in data_dict2.items() if 'logo_ar' in k})
+
+
+    if data_dict.get('logo_en'):
+        previous_record.logo_en = data_dict['logo_en']
+
+    if data_dict.get('logo_ar'):
+        previous_record.logo_ar = data_dict['logo_ar']
+
+
+    previous_record.modified = datetime.datetime.utcnow()
     model.Session.commit()
 
-    return logo.as_dict()
+    return previous_record.as_dict()
 
 
 def header_secondary_menu_delete(context, data_dict):

@@ -1,5 +1,5 @@
 import ckan.plugins as p
-from ckanext.pages.footer.validators import event_name_validator, news_name_validator, pages_name_validator
+from ckanext.pages.footer.validators import event_name_validator, image_upload_or_valid_url_logo_ar, image_upload_or_valid_url_logo_en, news_name_validator, pages_name_validator
 from ckanext.pages.validators import validate_image_upload
 from ckanext.pages import validators 
 from ckanext.pages.interfaces import IPagesSchema
@@ -232,4 +232,11 @@ def header_logo_upload_schema():
         'logo_en_upload': [ignore_missing, unicode_safe, validate_image_upload],
         'logo_ar_upload': [ignore_missing, unicode_safe, validate_image_upload],
         'clear_upload': [ignore_missing, p.toolkit.get_validator('boolean_validator')]
+    }
+
+
+def header_logo_update_schema():
+    return {
+        'logo_en': [not_empty, unicode_safe, image_upload_or_valid_url_logo_en],
+        'logo_ar': [not_empty, unicode_safe, image_upload_or_valid_url_logo_ar],
     }
