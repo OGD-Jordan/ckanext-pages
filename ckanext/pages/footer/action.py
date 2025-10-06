@@ -300,18 +300,29 @@ def footer_main_update(context, data_dict):
 
     previous_record = FooterMain.get()
 
+    errors = {}
 
-    upload = uploader.get_uploader('footer', previous_record.logo_en if previous_record and previous_record.logo_en else None)
-    data_dict1.update(data_dict1.get('__extras', {}))
+    # LOGO EN
+    try:
+        upload = uploader.get_uploader('footer', previous_record.logo_en if previous_record and previous_record.logo_en else None)
+        data_dict1.update(data_dict1.get('__extras', {}))
 
-    upload.update_data_dict(data_dict1, 'logo_en', 'logo_en_upload', 'clear_logo_en_upload')
-    upload.upload(uploader.get_max_image_size())
+        upload.update_data_dict(data_dict1, 'logo_en', 'logo_en_upload', 'clear_logo_en_upload')
+        upload.upload(uploader.get_max_image_size())
+    except tk.ValidationError as e:
+        errors.update(e.error_dict)
 
-    upload = uploader.get_uploader('footer', previous_record.logo_ar if previous_record and previous_record.logo_ar else None)
-    data_dict2.update(data_dict2.get('__extras', {}))
-    upload.update_data_dict(data_dict2, 'logo_ar', 'logo_ar_upload', 'clear_logo_ar_upload')
-    upload.upload(uploader.get_max_image_size())
-
+    # LOGO AR
+    try:
+        upload = uploader.get_uploader('footer', previous_record.logo_ar if previous_record and previous_record.logo_ar else None)
+        data_dict2.update(data_dict2.get('__extras', {}))
+        upload.update_data_dict(data_dict2, 'logo_ar', 'logo_ar_upload', 'clear_logo_ar_upload')
+        upload.upload(uploader.get_max_image_size())
+    except tk.ValidationError as e:
+        errors.update(e.error_dict)
+    
+    if errors:
+        raise ValidationError(errors)
 
     data_dict.update({k:v for k,v in data_dict1.items() if 'logo_en' in k})
     data_dict.update({k:v for k,v in data_dict2.items() if 'logo_ar' in k})
