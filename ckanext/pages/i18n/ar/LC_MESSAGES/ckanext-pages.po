@@ -1467,10 +1467,10 @@ msgid "Menu item deleted"
 msgstr "تم حذف عنصر القائمة"
 
 msgid "Logo en"
-msgstr "شعار باللغة الانجليزية"
-
+msgstr "الشعار باللغة الانجليزية"
+ 
 msgid "Logo ar"
-msgstr "شعار باللغة العربية"
+msgstr "الشعار باللغة العربية"
 
 msgid "Invalid order. The order should be greater than zero"
 msgstr "ترتيب غير صالح. يجب أن يكون الترتيب أكبر من صفر"
