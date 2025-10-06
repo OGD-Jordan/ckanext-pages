@@ -1540,4 +1540,10 @@ msgid "Edit Footer Logo"
 msgstr "تعديل شعار التذييل"
 
 msgid "Edit Header Logo"
-msgstr "تعديل شعار الرأس"
+msgstr "تعديل شعار الترويسة"
+
+msgid "* Header Logo En (250 x 110 pixels)"
+msgstr "* (250 × 110 بكسل) شعار الترويسة باللغة الإنجليزية"
+ 
+msgid "* Header Logo Ar (250 x 110 pixels)"
+msgstr "* (250 × 110 بكسل) شعار الترويسة باللغة العربية"

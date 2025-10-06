@@ -686,7 +686,7 @@ def header_logo_update(context, data_dict):
     data_dict1 = data_dict.copy()
     data_dict2 = data_dict.copy()
 
-    previous_record = model.Session.query(HeaderLogo).get(data_dict.get('id', ''))
+    previous_record = HeaderLogo.get(model.Session)
 
     errors = {}
 
