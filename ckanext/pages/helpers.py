@@ -133,7 +133,7 @@ def get_main_page_section(id):
 
 from ckan.common import current_user
 import redis
-redis_client = redis.StrictRedis(host=tk.config.get('REDIS_HOST','127.0.0.1'), port=6379, db=0, decode_responses=True)
+redis_client = redis.StrictRedis.from_url(tk.config.get('ckan.redis.url', 'redis://localhost:6379/0'), decode_responses=True)
 import ckan.lib.uploader as uploader
 def single_image_upload(context, data_dict, upload_folder='pages', image_url_field='image_url', image_upload='image_upload', clear_upload='clear_upload'):
     data_dict = data_dict.copy()

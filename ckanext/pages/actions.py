@@ -170,12 +170,9 @@ def pages_upload(context, data_dict):
 
     try:
         upload.upload(max_image_size)
-    except p.toolkit.ValidationError:
-        message = (
-            "Can't upload the file, size is too large. "
-            "(Max allowed is {0}mb)".format(max_image_size)
-        )
-        return {'uploaded': 0, 'error': {'message': message}}
+    except p.toolkit.ValidationError as e:
+        message = e.error_dict.get('upload', ['File upload error'])[0]
+        return {'uploaded': 0, 'error': {'message': _(message)}}
 
     image_url = data_dict.get('image_url')
     if image_url and image_url[0:6] not in {'http:/', 'https:'}:
